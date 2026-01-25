@@ -3,6 +3,9 @@ from typing import Dict
 import numpy as np
 from matplotlib import pyplot as plt
 
+from metrics_toolbox.metrics.enums import MetricNameEnum
+from metrics_toolbox.plots import plot_auc_curves
+
 from .metrics.base import MetricResult
 from .reducers.registry import REDUCER_REGISTRY
 
@@ -72,7 +75,7 @@ class MetricEvaluator:
                 args = {}
                 if spec.metric_cls.requires_classes:
                     args["classes"] = classes
-                if spec.class_name:
+                if spec.class_name is not None:
                     args["class_name"] = spec.class_name
                 result = spec.metric_cls.compute(y_true, y_pred, **args)
                 self._history.setdefault(spec.id, []).append(result)
@@ -96,7 +99,7 @@ class MetricEvaluator:
                 args = {}
                 if spec.metric_cls.requires_classes:
                     args["classes"] = classes
-                if spec.class_name:
+                if spec.class_name is not None:
                     args["class_name"] = spec.class_name
                 result = spec.metric_cls.compute(y_true, y_pred, **args)
                 self._history.setdefault(spec.id, []).append(result)
@@ -116,6 +119,9 @@ class MetricEvaluator:
             "history": {},
             "figures": {},
         }
+
+        roc_auc_metrics: Dict[str, list[MetricResult]] = {}
+
         for spec in self._metric_specs:
 
             # Metric values over time
@@ -125,13 +131,31 @@ class MetricEvaluator:
             if spec.class_name:
                 base_name += f"_{spec.class_name}"
 
-            # 1. Add the reduced metric to summary. LATEST is the default (not reduced) and does not need suffix.
+            # 1. Add the reduced metric to summary.
             for reducer in spec.reducers:
                 summary_key = f"{base_name}_{reducer.value}"
                 summary["reduced"][summary_key] = REDUCER_REGISTRY[reducer](values)
 
-            # 2. Add the full history as well
+            # 2. Add the full history as well.
             summary["history"][f"{base_name}_steps"] = values
+
+            # 3. Collect ROC AUC metrics for plotting
+            if spec.metric_cls.name in {
+                MetricNameEnum.ROC_AUC_BINARY,
+                MetricNameEnum.ROC_AUC_MACRO,
+                MetricNameEnum.ROC_AUC_CLASS,
+                MetricNameEnum.ROC_AUC_MICRO,
+            }:
+                roc_auc_metrics[spec.id] = self._history.get(spec.id, [])
+
+        # 4. Generate and add ROC AUC plots if any
+        if roc_auc_metrics:
+            fig = plot_auc_curves(
+                auc_metrics=roc_auc_metrics,
+                is_roc=True,
+            )
+            summary["figures"]["roc_auc_curves"] = fig
+
         return summary
 
     def __validate_metric_specs(self):

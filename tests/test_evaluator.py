@@ -1,9 +1,8 @@
-import pytest
 from metrics_toolbox.evaluator import MetricEvaluator
-from metrics_toolbox.spec import MetricSpec
 from metrics_toolbox.metrics.base import Metric, MetricResult, MetricScopeEnum
 from metrics_toolbox.metrics.enums import MetricNameEnum
 from metrics_toolbox.reducers.enums import MetricReducerEnum
+from metrics_toolbox.spec import MetricSpec
 
 
 # ------------------------- Configurable Mock Metrics -------------------------
@@ -43,7 +42,7 @@ class ConfigurableMockMetric(Metric):
         return MetricResult(
             name=self.name,
             value=value,
-            metadata={"call_count": self._call_count},
+            metadata={"fpr": [], "tpr": []},
             scope=self.scope,
         )
 

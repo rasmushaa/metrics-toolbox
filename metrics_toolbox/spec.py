@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Optional, Sequence, Type
+from typing import Optional, Sequence
+
 from .metrics.base import Metric
 from .reducers.enums import MetricReducerEnum
 
@@ -44,6 +45,6 @@ class MetricSpec:
             The unique identifier.
         """
         base = self.metric_cls.name.value
-        if self.class_name:
-            return f"{base}[{self.class_name}]"
+        if self.class_name is not None:
+            return f"{base}_{self.class_name}"
         return base

@@ -1,15 +1,17 @@
-from sklearn.metrics import roc_curve, auc
-from sklearn.preprocessing import label_binarize
 import numpy as np
+from sklearn.metrics import auc, roc_curve
+from sklearn.preprocessing import label_binarize
+
 from .base import Metric
-from .results import MetricResult
 from .enums import MetricNameEnum, MetricScopeEnum
+from .results import MetricResult
 
 
 class RocAucMacro(Metric):
     _name = MetricNameEnum.ROC_AUC_MACRO
     _scope = MetricScopeEnum.MACRO
     _requires_probs = True
+    _requires_classes = True
 
     def compute(self, y_true, y_pred, classes):
 
