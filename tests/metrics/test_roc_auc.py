@@ -1,9 +1,11 @@
 import numpy as np
 import pytest
+
+from metrics_toolbox.metrics.enums import MetricNameEnum, MetricScopeEnum
+from metrics_toolbox.metrics.roc_auc_binary import RocAucBinary
+from metrics_toolbox.metrics.roc_auc_class import RocAucClass
 from metrics_toolbox.metrics.roc_auc_macro import RocAucMacro
 from metrics_toolbox.metrics.roc_auc_micro import RocAucMicro
-from metrics_toolbox.metrics.roc_auc_class import RocAucClass
-from metrics_toolbox.metrics.roc_auc_binary import RocAucBinary
 
 
 def test_roc_auc_binary_compute():
@@ -17,8 +19,8 @@ def test_roc_auc_binary_compute():
     metric = RocAucBinary()
     result = metric.compute(y_true, y_pred)
 
-    assert result.name == "roc_auc_binary"
-    assert result.scope == "binary"
+    assert result.name == MetricNameEnum.ROC_AUC_BINARY
+    assert result.scope == MetricScopeEnum.BINARY
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
     assert result.value == pytest.approx(0.9166, abs=0.0001)
@@ -48,8 +50,8 @@ def test_roc_auc_macro_compute():
     metric = RocAucMacro()
     result = metric.compute(y_true, y_prob, classes=classes)
 
-    assert result.name == "roc_auc_macro"
-    assert result.scope == "macro"
+    assert result.name == MetricNameEnum.ROC_AUC_MACRO
+    assert result.scope == MetricScopeEnum.MACRO
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
     assert result.value == pytest.approx(0.9666, abs=0.0001)
@@ -79,8 +81,8 @@ def test_roc_auc_micro_compute():
     metric = RocAucMicro()
     result = metric.compute(y_true, y_prob, classes=classes)
 
-    assert result.name == "roc_auc_micro"
-    assert result.scope == "micro"
+    assert result.name == MetricNameEnum.ROC_AUC_MICRO
+    assert result.scope == MetricScopeEnum.MICRO
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
     assert result.value == pytest.approx(0.9687, abs=0.0001)
@@ -120,8 +122,8 @@ def test_roc_auc_class_compute():
         (y_true == target_class).astype(int), y_prob[:, target_class]
     )
 
-    assert result.name == "roc_auc_class"
-    assert result.scope == "class"
+    assert result.name == MetricNameEnum.ROC_AUC_CLASS
+    assert result.scope == MetricScopeEnum.CLASS
     assert result.class_name == target_class
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata

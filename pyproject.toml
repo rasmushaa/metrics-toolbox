@@ -9,6 +9,7 @@ description = "A toolbox for various ML metrics calculations, and visualizations
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "matplotlib>=3.10.8",
     "numpy>=2.4.1",
     "scikit-learn>=1.8.0",
 ]

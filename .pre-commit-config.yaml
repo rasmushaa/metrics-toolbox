@@ -37,6 +37,34 @@ repos:
       - id: mixed-line-ending
         args: ['--fix=lf']
 
+
+  # Autoflake - Removes unused imports and variables
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.2.1
+    hooks:
+      # Automatically removes unused imports and unused variables
+      # Helps keep code clean by removing unnecessary imports
+      # Also removes duplicate keys in dictionaries
+      - id: autoflake
+        args:
+          - --in-place
+          - --remove-all-unused-imports
+          - --remove-unused-variables
+          - --remove-duplicate-keys
+          - --ignore-init-module-imports
+
+
+  # isort - Sorts and organizes Python imports
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      # Automatically sorts imports into sections and alphabetically
+      # Groups imports: standard library, third-party, first-party
+      # Ensures consistent import ordering across the codebase
+      - id: isort
+        args: [--profile, black, --line-length, "88"]
+
+
   # Black - The uncompromising Python code formatter
   - repo: https://github.com/psf/black
     rev: 24.1.1
@@ -44,6 +72,7 @@ repos:
       # Formats Python code to maintain consistent style
       - id: black
         language_version: python3
+
 
   # MyPy - Static type checker for Python
   - repo: https://github.com/pre-commit/mirrors-mypy
@@ -53,6 +82,7 @@ repos:
       # Helps ensure type safety in your codebase
       - id: mypy
         args: [--ignore-missing-imports, --no-strict-optional]
+
 
   # Bandit - Security linter for Python
   - repo: https://github.com/PyCQA/bandit
@@ -75,6 +105,7 @@ repos:
       - id: pyupgrade
         args: [--py38-plus]
 
+
   # Docformatter - Formats Python docstrings
   - repo: https://github.com/PyCQA/docformatter
     rev: v1.7.6
@@ -84,15 +115,6 @@ repos:
       - id: docformatter
         args: [--in-place, --wrap-summaries=88, --wrap-descriptions=88]
 
-  # Prettier is commented out as it can hang on some files
-  # You can format YAML/JSON/Markdown manually if needed
-  # - repo: https://github.com/pre-commit/mirrors-prettier
-  #   rev: v4.0.0-alpha.8
-  #   hooks:
-  #     # Formats YAML, JSON, Markdown files consistently
-  #     # Ensures non-Python files also have consistent formatting
-  #     - id: prettier
-  #       types_or: [yaml, json, markdown]
 
   # Local custom hooks
   - repo: local
