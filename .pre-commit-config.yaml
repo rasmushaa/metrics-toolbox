@@ -1,0 +1,95 @@
+# Pre-commit hooks configuration
+# Run 'pre-commit install' to set up the git hook scripts
+
+repos:
+  # General file quality checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # Removes trailing whitespace from lines
+      - id: trailing-whitespace
+
+      # Ensures files end with a single newline character
+      - id: end-of-file-fixer
+
+      # Prevents committing large files (default: 500kB)
+      - id: check-added-large-files
+
+      # Validates YAML file syntax
+      - id: check-yaml
+
+      # Validates TOML file syntax (for pyproject.toml)
+      - id: check-toml
+
+      # Checks for files that would conflict on case-insensitive filesystems
+      - id: check-case-conflict
+
+      # Validates JSON file syntax
+      - id: check-json
+
+      # Ensures executable shell scripts have a shebang
+      - id: check-executables-have-shebangs
+
+      # Detects private keys committed by mistake
+      - id: detect-private-key
+
+      # Replaces or checks mixed line endings
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+
+  # Black - The uncompromising Python code formatter
+  - repo: https://github.com/psf/black
+    rev: 24.1.1
+    hooks:
+      # Formats Python code to maintain consistent style
+      - id: black
+        language_version: python3
+
+  # MyPy - Static type checker for Python
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      # Checks Python type hints to catch type-related bugs
+      # Helps ensure type safety in your codebase
+      - id: mypy
+        args: [--ignore-missing-imports, --no-strict-optional]
+
+  # Bandit - Security linter for Python
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.7
+    hooks:
+      # Scans Python code for common security issues
+      # Detects: SQL injection risks, hardcoded passwords, insecure functions, etc.
+      - id: bandit
+        args: [-c, pyproject.toml]
+        additional_dependencies: ["bandit[toml]"]
+        exclude: ^tests/
+
+
+  # PyUpgrade - Automatically upgrade Python syntax for newer versions
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.0
+    hooks:
+      # Updates Python code to use newer syntax features
+      # Example: converts old string formatting to f-strings
+      - id: pyupgrade
+        args: [--py38-plus]
+
+  # Docformatter - Formats Python docstrings
+  - repo: https://github.com/PyCQA/docformatter
+    rev: v1.7.6
+    hooks:
+      # Formats docstrings to follow PEP 257 conventions
+      # Ensures consistent documentation style
+      - id: docformatter
+        args: [--in-place, --wrap-summaries=88, --wrap-descriptions=88]
+
+  # Prettier is commented out as it can hang on some files
+  # You can format YAML/JSON/Markdown manually if needed
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: v4.0.0-alpha.8
+  #   hooks:
+  #     # Formats YAML, JSON, Markdown files consistently
+  #     # Ensures non-Python files also have consistent formatting
+  #     - id: prettier
+  #       types_or: [yaml, json, markdown]
