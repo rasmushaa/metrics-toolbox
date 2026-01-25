@@ -93,3 +93,16 @@ repos:
   #     # Ensures non-Python files also have consistent formatting
   #     - id: prettier
   #       types_or: [yaml, json, markdown]
+
+  # Local custom hooks
+  - repo: local
+    hooks:
+      # Runs all unit tests before committing
+      # Ensures all tests pass to prevent breaking changes from being committed
+      - id: run-unit-tests
+        name: Run Unit Tests
+        entry: scripts/run_tests.sh
+        language: system
+        pass_filenames: false
+        # Only run when Python files in metrics_toolbox or tests directories change
+        files: ^(metrics_toolbox|tests)/.*\.py$
