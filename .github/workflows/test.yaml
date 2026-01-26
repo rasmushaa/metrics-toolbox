@@ -78,13 +78,14 @@ jobs:
         if: matrix.deps == 'latest'
         run: |
           echo "Installing with latest dependencies"
-          uv sync --dev
+          uv pip install -e .[test]
 
       - name: Install dependencies (lowest)
         if: matrix.deps == 'lowest'
         run: |
           echo "Installing with lowest-direct resolution"
-          uv sync --dev --resolution=lowest-direct
+          uv pip compile pyproject.toml --resolution lowest -o constraints.txt
+          uv pip install -r constraints.txt -e .[test]
 
       - name: Show environment info
         run: |
