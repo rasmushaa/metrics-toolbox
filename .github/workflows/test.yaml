@@ -86,7 +86,7 @@ jobs:
         run: |
           echo "Installing with lowest-direct resolution"
           uv pip compile pyproject.toml --resolution lowest -o constraints.txt
-          uv pip install -r constraints.txt -e .[test]
+          uv pip install -r constraints.txt -e .[test] --prefer-binary
 
       - name: Show environment info
         run: |
