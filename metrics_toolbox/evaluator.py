@@ -120,7 +120,7 @@ class MetricEvaluator:
             "figures": {},
         }
 
-        roc_auc_metrics: Dict[str, list[MetricResult]] = {}
+        roc_auc_metrics: Dict[str, list[MetricResult]] = {}  # For plotting later
 
         for spec in self._metric_specs:
 

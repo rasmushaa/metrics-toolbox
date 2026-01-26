@@ -1,0 +1,104 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify-classifiers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Verify Python classifiers match test matrix
+        run: |
+          python - <<'EOF'
+          import tomllib
+          import yaml
+
+          # Read test matrix from workflow
+          with open(".github/workflows/test.yaml") as f:
+              workflow = yaml.safe_load(f)
+          matrix_versions = set(workflow["jobs"]["test"]["strategy"]["matrix"]["python-version"])
+
+          # Read classifiers from pyproject.toml
+          with open("pyproject.toml", "rb") as f:
+              data = tomllib.load(f)
+          classifier_versions = set()
+          for c in data["project"]["classifiers"]:
+              if c.startswith("Programming Language :: Python :: 3."):
+                  version = c.split("::")[-1].strip()
+                  classifier_versions.add(version)
+
+          # Compare
+          if matrix_versions != classifier_versions:
+              missing_in_classifiers = matrix_versions - classifier_versions
+              missing_in_matrix = classifier_versions - matrix_versions
+              if missing_in_classifiers:
+                  print(f"❌ Missing toml classifiers for: {missing_in_classifiers}")
+              if missing_in_matrix:
+                  print(f"❌ Missing in test matrix: {missing_in_matrix}")
+              exit(1)
+
+          print(f"✓ Python versions match: {sorted(matrix_versions)}")
+          EOF
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+        deps: [latest, lowest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Install dependencies (latest)
+        if: matrix.deps == 'latest'
+        run: |
+          echo "Installing with latest dependencies"
+          uv sync --dev
+
+      - name: Install dependencies (lowest)
+        if: matrix.deps == 'lowest'
+        run: |
+          echo "Installing with lowest-direct resolution"
+          uv sync --dev --resolution=lowest-direct
+
+      - name: Show environment info
+        run: |
+          python --version
+          uv pip list
+
+      - name: Run tests
+        run: |
+          uv run pytest
+
+      - name: Upload coverage to Codecov with latest Python and deps
+        if: matrix.python-version == '3.12' && matrix.deps == 'latest'
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          fail_ci_if_error: false

@@ -8,19 +8,41 @@ version = "0.1.0"
 description = "A toolbox for various ML metrics calculations, and visualizations."
 readme = "README.md"
 requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [
+  { name = "Rasmus Haapaniemi" }
+]
+keywords = ["machine learning", "metrics", "classification", "evaluation", "visualization"]
+classifiers = [
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
 dependencies = [
     "matplotlib>=3.10.8",
     "numpy>=2.4.1",
     "scikit-learn>=1.8.0",
 ]
 
+[project.urls]
+Repository = "https://github.com/rasmushaa/metrics-toolbox"
+Changelog = "https://github.com/rasmushaa/metrics-toolbox/blob/main/CHANGELOG.md"
+
 [dependency-groups]
 dev = [
     "ipykernel>=7.1.0",
     "pre-commit>=4.5.1",
     "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
 ]
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["metrics_toolbox*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "--cov=metrics_toolbox",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+]
