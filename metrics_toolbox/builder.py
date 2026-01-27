@@ -1,11 +1,9 @@
-from enum import Enum
-from typing import Type, List
+from typing import List
 
-from .spec import MetricSpec
-from .metrics.base import Metric
-from .reducers.registry import MetricReducerEnum
-from .metrics.registry import METRIC_REGISTRY, MetricNameEnum
 from .evaluator import MetricEvaluator
+from .metrics.registry import METRIC_REGISTRY, MetricNameEnum
+from .reducers.registry import MetricReducerEnum
+from .spec import MetricSpec
 from .utils import value_to_enum
 
 
@@ -71,22 +69,23 @@ class EvaluatorBuilder:
             The configuration dictionary.
             Must contain a "metrics" key with a list of metric specifications.
 
-        Example
-        -------
-        {
-            "metrics": [
-                {
-                    "name": "MetricClassName",
-                    "reducers": ["mean", "min"],    # Optional
-                    "class_name": "A"               # Optional
-                },
-            ]
-        }
-
         Returns
         -------
         EvaluatorBuilder
             The builder instance for chaining.
+
+        Examples
+        --------
+        >>> cfg = {
+        ...     "metrics": [
+        ...         {
+        ...             "name": "roc_auc_binary",
+        ...             "reducers": ["mean", "min"],
+        ...             "class_name": "A"
+        ...         },
+        ...     ]
+        ... }
+        >>> builder = EvaluatorBuilder().from_dict(cfg)
         """
         for args in cfg["metrics"]:
             metric_name = args["name"]

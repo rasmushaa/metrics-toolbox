@@ -1,20 +1,21 @@
-"""
-This module contains the:
-- REDUCER_REGISTRY: A registry mapping metric reducer type strings to their corresponding functions.
+"""Reducer registry for available metric reducers.
 
-To add new reducers, update the REDUCER_REGISTRY with the new reducer type and class name.
+This module contains the REDUCER_REGISTRY which maps reducer type enums to their
+corresponding reducer implementations.
+
+To add new reducers, update the REDUCER_REGISTRY with the new reducer type and class
+name.
 """
 
 from .enums import MetricReducerEnum
 from .reducers import (
     LatestReducer,
-    MeanReducer,
-    StdReducer,
     MaxReducer,
-    MinReducer,
+    MeanReducer,
     MinMaxReducer,
+    MinReducer,
+    StdReducer,
 )
-
 
 REDUCER_REGISTRY = {
     MetricReducerEnum.LATEST: LatestReducer(),
