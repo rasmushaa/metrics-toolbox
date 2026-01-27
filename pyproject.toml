@@ -39,6 +39,7 @@ dev = [
     "pytest-cov>=7.0.0",
     "mkdocs-autoapi>=0.4.1",
     "mkdocstrings-python>=2.0.1",
+    "papermill>=2.6.0",
 ]
 
 [tool.setuptools.packages.find]
