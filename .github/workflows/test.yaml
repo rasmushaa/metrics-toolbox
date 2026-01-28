@@ -114,6 +114,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Update Home, and Changes files
+        run: |
+          cp README.md docs/index.md
+          cp CHANGELOG.md docs/changes.md
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:

@@ -18,8 +18,10 @@ plugins:
   - mkdocs-autoapi:
       autoapi_dir: ./metrics_toolbox
 
+# These files are copied in test-pipeline
 nav:
   - Home: index.md
+  - Changes: changes.md
 
 markdown_extensions:
   - admonition
