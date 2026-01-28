@@ -2,18 +2,25 @@ import numpy as np
 from sklearn.metrics import auc, roc_curve
 from sklearn.preprocessing import label_binarize
 
-from .base import Metric
+from .base_metric import Metric
 from .enums import MetricNameEnum, MetricScopeEnum
 from .results import MetricResult
 
 
 class RocAucMacro(Metric):
-    _name = MetricNameEnum.ROC_AUC_MACRO
+    _name = MetricNameEnum.ROC_AUC
     _scope = MetricScopeEnum.MACRO
     _requires_probs = True
     _requires_classes = True
 
     def compute(self, y_true, y_pred, classes):
+        """Compute macro-averaged ROC AUC for multi-class classification.
+
+        Returns
+        -------
+        MetricResult
+            The computed macro-averaged ROC AUC metric result, including averaged FPR and TPR curves in metadata.
+        """
 
         # Binarize labels in a one-vs-all fashion -> shape (n_samples, n_classes).
         # Classes of [A,B,C] and 3 rows -> [[1,0,0],[0,1,0],[0,0,1]]

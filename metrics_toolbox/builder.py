@@ -1,8 +1,8 @@
 from typing import List
 
 from .evaluator import MetricEvaluator
-from .metrics.registry import METRIC_REGISTRY, MetricNameEnum
-from .reducers.registry import MetricReducerEnum
+from .metrics.registry import METRIC_REGISTRY, MetricEnum
+from .reducers.registry import ReducerEnum
 from .spec import MetricSpec
 from .utils import value_to_enum
 
@@ -26,7 +26,7 @@ class EvaluatorBuilder:
         val += "\n])"
         return val
 
-    def add_metric(self, metric: str | MetricNameEnum, **kwargs):
+    def add_metric(self, metric: str | MetricEnum, **kwargs):
         """Add a Metric to the evaluator.
 
         Metric can be specified by name or enum.
@@ -35,11 +35,11 @@ class EvaluatorBuilder:
         -------
         By default, the metric is added with the LATEST reducer and no class_name.
         Reducers and class_name can be specified via kwargs.
-        Reducers can be provided as strings or MetricReducerEnum values.
+        Reducers can be provided as strings or ReducerEnum values.
 
         Parameters
         ----------
-        metric : str|MetricNameEnum
+        metric : str|MetricEnum
             The Metric name or enum to add.
         **kwargs : dict, optional
             Additional parameters for the MetricSpec, by default {}
@@ -52,11 +52,11 @@ class EvaluatorBuilder:
         """
         if kwargs.get("reducers") is not None:
             kwargs["reducers"] = tuple(
-                value_to_enum(r, MetricReducerEnum) for r in kwargs["reducers"]
+                value_to_enum(r, ReducerEnum) for r in kwargs["reducers"]
             )
-        metric_name = value_to_enum(metric, MetricNameEnum)
+        metric_name = value_to_enum(metric, MetricEnum)
         self._metric_specs.append(
-            MetricSpec(metric_cls=METRIC_REGISTRY[metric_name.value](), **kwargs)
+            MetricSpec(metric_cls=METRIC_REGISTRY[metric_name](), **kwargs)
         )
         return self
 

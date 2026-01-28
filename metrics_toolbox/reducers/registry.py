@@ -7,7 +7,7 @@ To add new reducers, update the REDUCER_REGISTRY with the new reducer type and c
 name.
 """
 
-from .enums import MetricReducerEnum
+from .enums import ReducerEnum
 from .reducers import (
     LatestReducer,
     MaxReducer,
@@ -18,10 +18,10 @@ from .reducers import (
 )
 
 REDUCER_REGISTRY = {
-    MetricReducerEnum.LATEST: LatestReducer(),
-    MetricReducerEnum.MEAN: MeanReducer(),
-    MetricReducerEnum.STD: StdReducer(),
-    MetricReducerEnum.MAX: MaxReducer(),
-    MetricReducerEnum.MIN: MinReducer(),
-    MetricReducerEnum.MINMAX: MinMaxReducer(),
+    ReducerEnum.LATEST: LatestReducer(),
+    ReducerEnum.MEAN: MeanReducer(),
+    ReducerEnum.STD: StdReducer(),
+    ReducerEnum.MAX: MaxReducer(),
+    ReducerEnum.MIN: MinReducer(),
+    ReducerEnum.MINMAX: MinMaxReducer(),
 }

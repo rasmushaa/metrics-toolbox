@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 from metrics_toolbox.metrics.enums import MetricNameEnum
 from metrics_toolbox.plots import plot_auc_curves
 
-from .metrics.base import MetricResult
+from .metrics.base_metric import MetricResult
 from .reducers.registry import REDUCER_REGISTRY
 
 
@@ -20,7 +20,7 @@ class MetricEvaluator:
     def __init__(self, metric_specs):
         """Initialize the MetricEvaluator with a list of MetricSpecs.
 
-        Duplicate MetricSpecs (same metric and class_name) are not allowed,
+        Duplicate MetricSpecs (same metric, scope, and class_name) are not allowed,
         and will raise a ValueError.
 
         Parameters
@@ -39,8 +39,8 @@ class MetricEvaluator:
         val += "])"
         return val
 
-    def update_model_evaluation(self, model, X, y_true):
-        """Update the evaluation based on model predictions.
+    def add_model_evaluation(self, model, X, y_true):
+        """Add to the evaluation based on model predictions.
 
         Parameters
         ----------
@@ -52,14 +52,14 @@ class MetricEvaluator:
             True labels. Ints or strings.
         """
         y_pred = model.predict(X)
-        self.update_labels_evaluation(y_true, y_pred, classes=model.classes)
+        self.add_labels_evaluation(y_true, y_pred, classes=model.classes)
         y_pred_probs = model.predict_proba(X)
-        self.update_probs_evaluation(y_true, y_pred_probs, classes=model.classes)
+        self.add_probs_evaluation(y_true, y_pred_probs, classes=model.classes)
 
-    def update_labels_evaluation(
+    def add_labels_evaluation(
         self, y_true: np.ndarray, y_pred: np.ndarray[np.integer | np.str_], classes=None
     ):
-        """Update the evaluation for metrics that require labels.
+        """Add to the evaluation for metrics that require labels.
 
         Parameters
         ----------
@@ -80,10 +80,10 @@ class MetricEvaluator:
                 result = spec.metric_cls.compute(y_true, y_pred, **args)
                 self._history.setdefault(spec.id, []).append(result)
 
-    def update_probs_evaluation(
+    def add_probs_evaluation(
         self, y_true: np.ndarray, y_pred: np.ndarray[np.float64], classes=None
     ):
-        """Update the evaluation for metrics that require probabilities.
+        """Add to the evaluation for metrics that require probabilities.
 
         Parameters
         ----------
@@ -127,9 +127,7 @@ class MetricEvaluator:
             # Metric values over time
             values = [r.value for r in self._history.get(spec.id, [])]
 
-            base_name = spec.metric_cls.name.value
-            if spec.class_name:
-                base_name += f"_{spec.class_name}"
+            base_name = spec.id
 
             # 1. Add the reduced metric to summary.
             for reducer in spec.reducers:
@@ -140,12 +138,7 @@ class MetricEvaluator:
             summary["history"][f"{base_name}_steps"] = values
 
             # 3. Collect ROC AUC metrics for plotting
-            if spec.metric_cls.name in {
-                MetricNameEnum.ROC_AUC_BINARY,
-                MetricNameEnum.ROC_AUC_MACRO,
-                MetricNameEnum.ROC_AUC_CLASS,
-                MetricNameEnum.ROC_AUC_MICRO,
-            }:
+            if spec.metric_cls.name == MetricNameEnum.ROC_AUC:
                 roc_auc_metrics[spec.id] = self._history.get(spec.id, [])
 
         # 4. Generate and add ROC AUC plots if any

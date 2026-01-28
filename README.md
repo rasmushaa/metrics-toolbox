@@ -67,14 +67,14 @@ evaluator.plot_auc_curves(X_test, y_test)
 ```python
 from metrics_toolbox.builder import EvaluatorBuilder
 from metrics_toolbox.metrics.enums import MetricNameEnum
-from metrics_toolbox.reducers.enums import MetricReducerEnum
+from metrics_toolbox.reducers.enums import ReducerEnum
 
 evaluator = (
     EvaluatorBuilder()
     .add_metric(MetricNameEnum.ROC_AUC_BINARY)
     .add_metric(
         MetricNameEnum.ROC_AUC_MACRO,
-        reducers=[MetricReducerEnum.MEAN, MetricReducerEnum.STD]
+        reducers=[ReducerEnum.MEAN, ReducerEnum.STD]
     )
     .build()
 )

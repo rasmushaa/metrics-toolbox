@@ -17,6 +17,7 @@ plugins:
             docstring_style: numpy
   - mkdocs-autoapi:
       autoapi_dir: ./metrics_toolbox
+      autoapi_python_docstring_style: markdown
 
 # These files are copied in test-pipeline
 nav:

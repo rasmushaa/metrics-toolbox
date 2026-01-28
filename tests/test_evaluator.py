@@ -1,7 +1,7 @@
 from metrics_toolbox.evaluator import MetricEvaluator
-from metrics_toolbox.metrics.base import Metric, MetricResult, MetricScopeEnum
+from metrics_toolbox.metrics.base_metric import Metric, MetricResult, MetricScopeEnum
 from metrics_toolbox.metrics.enums import MetricNameEnum
-from metrics_toolbox.reducers.enums import MetricReducerEnum
+from metrics_toolbox.reducers.enums import ReducerEnum
 from metrics_toolbox.spec import MetricSpec
 
 
@@ -52,19 +52,19 @@ class ConfigurableMockMetric(Metric):
 
 
 class ConfigurableMockMetricBinary(ConfigurableMockMetric):
-    _name = MetricNameEnum.ROC_AUC_BINARY
+    _name = MetricNameEnum.ROC_AUC
     _scope = MetricScopeEnum.BINARY
     _requires_probs = True
 
 
 class ConfigurableMockMetricMacro(ConfigurableMockMetric):
-    _name = MetricNameEnum.ROC_AUC_MACRO
+    _name = MetricNameEnum.ROC_AUC
     _scope = MetricScopeEnum.MACRO
     _requires_probs = True
 
 
 class ConfigurableMockMetricClass(ConfigurableMockMetric):
-    _name = MetricNameEnum.ROC_AUC_CLASS
+    _name = MetricNameEnum.ROC_AUC
     _scope = MetricScopeEnum.CLASS
     _requires_probs = True
 
@@ -74,7 +74,7 @@ binary_metric_spec = MetricSpec(metric_cls=ConfigurableMockMetricBinary([1, 2, 3
 
 macro_metric_spec_params = MetricSpec(
     metric_cls=ConfigurableMockMetricMacro([1, 2, 3]),
-    reducers=(MetricReducerEnum.MEAN, MetricReducerEnum.MIN),
+    reducers=(ReducerEnum.MEAN, ReducerEnum.MIN),
 )
 
 class_metric_spec = MetricSpec(
@@ -98,9 +98,9 @@ def test_metric_evaluator_probabilities():
     y_pred = [0, 1, 0, 0]
 
     # Update evaluation for all 3 mock values
-    evaluator.update_probs_evaluation(y_true, y_pred, classes=[0, 1])
-    evaluator.update_probs_evaluation(y_true, y_pred, classes=[0, 1])
-    evaluator.update_probs_evaluation(y_true, y_pred, classes=[0, 1])
+    evaluator.add_probs_evaluation(y_true, y_pred, classes=[0, 1])
+    evaluator.add_probs_evaluation(y_true, y_pred, classes=[0, 1])
+    evaluator.add_probs_evaluation(y_true, y_pred, classes=[0, 1])
     print(evaluator)
 
     results = evaluator.results()

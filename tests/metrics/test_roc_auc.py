@@ -19,7 +19,7 @@ def test_roc_auc_binary_compute():
     metric = RocAucBinary()
     result = metric.compute(y_true, y_pred)
 
-    assert result.name == MetricNameEnum.ROC_AUC_BINARY
+    assert result.name == MetricNameEnum.ROC_AUC
     assert result.scope == MetricScopeEnum.BINARY
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
@@ -50,7 +50,7 @@ def test_roc_auc_macro_compute():
     metric = RocAucMacro()
     result = metric.compute(y_true, y_prob, classes=classes)
 
-    assert result.name == MetricNameEnum.ROC_AUC_MACRO
+    assert result.name == MetricNameEnum.ROC_AUC
     assert result.scope == MetricScopeEnum.MACRO
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
@@ -81,7 +81,7 @@ def test_roc_auc_micro_compute():
     metric = RocAucMicro()
     result = metric.compute(y_true, y_prob, classes=classes)
 
-    assert result.name == MetricNameEnum.ROC_AUC_MICRO
+    assert result.name == MetricNameEnum.ROC_AUC
     assert result.scope == MetricScopeEnum.MICRO
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
@@ -122,7 +122,7 @@ def test_roc_auc_class_compute():
         (y_true == target_class).astype(int), y_prob[:, target_class]
     )
 
-    assert result.name == MetricNameEnum.ROC_AUC_CLASS
+    assert result.name == MetricNameEnum.ROC_AUC
     assert result.scope == MetricScopeEnum.CLASS
     assert result.class_name == target_class
     assert "fpr" in result.metadata

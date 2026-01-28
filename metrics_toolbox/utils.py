@@ -1,9 +1,12 @@
 """This module contains utility functions for the metric toolbox."""
 
 from enum import Enum
+from typing import TypeVar
+
+E = TypeVar("E", bound=Enum)
 
 
-def value_to_enum(value: str | Enum, enum_class: type[Enum]) -> Enum:
+def value_to_enum(value: str | Enum, enum_class: type[E]) -> E:
     """Convert a string values to Enum.
 
     If the value is already an enum, it is returned as is.
@@ -33,7 +36,7 @@ def value_to_enum(value: str | Enum, enum_class: type[Enum]) -> Enum:
     value = str(value).upper().strip()
     try:
         return enum_class[value]
-    except Exception as e:
+    except Exception:
         raise ValueError(
             f'Cannot convert "{value}" to {enum_class}.\nSupported values: {[e.name for e in enum_class]}'
         )

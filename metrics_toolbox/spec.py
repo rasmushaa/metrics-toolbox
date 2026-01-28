@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 from typing import Optional, Sequence
 
-from .metrics.base import Metric
-from .reducers.enums import MetricReducerEnum
+from .metrics.base_metric import Metric
+from .reducers.enums import ReducerEnum
 
 
 @dataclass(frozen=True)
@@ -16,15 +16,15 @@ class MetricSpec:
     ----------
     metric_cls : Type[Metric]
         The Metric class to compute.
-    reducers : Sequence[MetricReducerEnum], optional
-        The reducers to apply to the metric results, by default (MetricReducerEnum.LATEST,)
+    reducers : Sequence[ReducerEnum], optional
+        The reducers to apply to the metric results, by default (ReducerEnum.LATEST,)
     class_name : Optional[str], optional
         The class name for class-specific metrics, by default None.
     """
 
     metric_cls: Metric
-    reducers: Sequence[MetricReducerEnum] = field(
-        default_factory=lambda: (MetricReducerEnum.LATEST,)
+    reducers: Sequence[ReducerEnum] = field(
+        default_factory=lambda: (ReducerEnum.LATEST,)
     )
     class_name: Optional[str] = None
 
@@ -44,7 +44,7 @@ class MetricSpec:
         str
             The unique identifier.
         """
-        base = self.metric_cls.name.value
+        base = self.metric_cls.id
         if self.class_name is not None:
             return f"{base}_{self.class_name}"
         return base
