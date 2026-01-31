@@ -1,13 +1,18 @@
-from .enums import MetricNameEnum, MetricScopeEnum
+from .enums import MetricNameEnum, MetricScopeEnum, MetricTypeEnum
 from .results import MetricResult
 
 
 class Metric:
     """The base class for all metrics.
 
-    Each Metric subclass must implement the compute method,
-    and define the class attributes to specify what kind of
-    metric it is.
+    Details
+    -------
+
+    - Each Metric subclass must implement the compute method
+
+    - Define the class private attributes to specify what kind of metric it is
+
+    - Allow to pass possible options during initialization.
 
     Attributes
     ----------
@@ -15,22 +20,19 @@ class Metric:
         The name of the metric.
     _scope: MetricScopeEnum
         The scope of the metric (binary, micro, macro, class for logging).
-    _requires_probs: bool
-        Whether the metric uses probability predictions (floats).
-    _requires_labels: bool
-        Whether the metric uses label predictions (integers/strings).
-    _requires_classes: bool
-        Whether the metric requires class information (multi-class metrics).
+    _type: MetricTypeEnum
+        The type of data the metric operates on (probabilities or labels).
     """
 
     _name: MetricNameEnum = None
     _scope: MetricScopeEnum = None
-    _requires_probs: bool = False
-    _requires_labels: bool = False
-    _requires_classes: bool = False
+    _type: MetricTypeEnum = None
+
+    def __init__(self, **kwargs):
+        pass
 
     def __repr__(self) -> str:
-        return f"Metric(name={self.name}, scope={self.scope}, requires_probs={self.requires_probs}, requires_labels={self.requires_labels}, requires_classes={self.requires_classes})"
+        return f"Metric(name={self.name.value}, scope={self.scope.value}, type={self.type.value})"
 
     @property
     def name(self) -> MetricNameEnum:
@@ -69,47 +71,20 @@ class Metric:
         return f"{self.name.value}_{self.scope.value}"
 
     @property
-    def requires_probs(self) -> bool:
-        """Whether the metric requires probability predictions.
-
-        Intended to be used in the evaluator to determine
-        if probability predictions need to be computed.
+    def type(self) -> MetricTypeEnum:
+        """The type of data the metric operates on.
 
         Returns
         -------
-        bool
-            True if the metric requires probability predictions.
+        MetricTypeEnum
+            The type of data the metric operates on.
         """
-        return self._requires_probs
+        return self._type
 
-    @property
-    def requires_labels(self) -> bool:
-        """Whether the metric requires label predictions.
+    def compute(self, *args, **kwargs) -> MetricResult:
+        """A method to compute the metric.
 
-        Intended to be used in the evaluator to determine
-        if label predictions need to be computed.
-
-        Returns
-        -------
-        bool
-            True if the metric requires label predictions.
+        Different metrics will have different implementations of this method, and may
+        accept different options via *args and **kwargs.
         """
-        return self._requires_labels
-
-    @property
-    def requires_classes(self) -> bool:
-        """Whether the metric requires class information.
-
-        Intended to be used in the evaluator to determine
-        if class information needs to be provided by the user.
-
-        Returns
-        -------
-        bool
-            True if the metric requires class information.
-        """
-        return self._requires_classes
-
-    def compute(self, y_true, y_pred, classes=None, class_name=None) -> MetricResult:
-        """A method to compute the metric."""
         raise NotImplementedError

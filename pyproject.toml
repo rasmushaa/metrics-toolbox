@@ -30,6 +30,7 @@ dependencies = [
 [project.urls]
 Repository = "https://github.com/rasmushaa/metrics-toolbox"
 Changelog = "https://github.com/rasmushaa/metrics-toolbox/blob/main/CHANGELOG.md"
+Documentation = "https://rasmushaa.github.io/metrics-toolbox/"
 
 [dependency-groups]
 dev = [

@@ -1,16 +1,19 @@
 from sklearn.metrics import auc, roc_curve
 
 from .base_metric import Metric
-from .enums import MetricNameEnum, MetricScopeEnum
+from .enums import MetricNameEnum, MetricScopeEnum, MetricTypeEnum
 from .results import MetricResult
 
 
 class RocAucBinary(Metric):
     _name = MetricNameEnum.ROC_AUC
     _scope = MetricScopeEnum.BINARY
-    _requires_probs = True
+    _type = MetricTypeEnum.PROBS
 
-    def compute(self, y_true, y_pred, classes=None):
+    def __init__(self):
+        pass
+
+    def compute(self, y_true, y_pred) -> MetricResult:
         """Compute ROC AUC for binary classification.
 
         Returns
@@ -22,7 +25,8 @@ class RocAucBinary(Metric):
         value = auc(fpr, tpr)
         return MetricResult(
             name=self.name,
-            value=value,
-            metadata={"fpr": fpr, "tpr": tpr},
             scope=self.scope,
+            type=self.type,
+            value=value,
+            metadata={"fpr": fpr.tolist(), "tpr": tpr.tolist()},
         )

@@ -113,8 +113,8 @@ def test_roc_auc_class_compute():
     target_class = 1
 
     # Class 1 specific ROC AUC
-    metric = RocAucClass()
-    result = metric.compute(y_true, y_prob, classes=classes, class_name=target_class)
+    metric = RocAucClass(class_name=target_class)
+    result = metric.compute(y_true, y_prob, classes=classes)
 
     # The Binary ROC AUC for class 1
     metric_binary = RocAucBinary()
@@ -124,7 +124,7 @@ def test_roc_auc_class_compute():
 
     assert result.name == MetricNameEnum.ROC_AUC
     assert result.scope == MetricScopeEnum.CLASS
-    assert result.class_name == target_class
+    assert result.options["class_name"] == target_class
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
     assert result.value == pytest.approx(

@@ -1,20 +1,22 @@
-"""Metric registry for available metrics.
+"""
+This module contains the:
 
-This module contains the METRIC_REGISTRY which maps metric type strings to their
-corresponding class implementations.
+- **MetricEnum:** The main end user enumeration for metrics.
 
-To add new metrics, update the METRIC_REGISTRY with the new metric type and class name.
+To build a MetricEvaluator from a configuration,
+you have to use the Enumerator values as keys.
 """
 
-from .enums import MetricEnum
+from enum import Enum
+
 from .roc_auc_binary import RocAucBinary
 from .roc_auc_class import RocAucClass
 from .roc_auc_macro import RocAucMacro
 from .roc_auc_micro import RocAucMicro
 
-METRIC_REGISTRY = {
-    MetricEnum.ROC_AUC_BINARY: RocAucBinary,
-    MetricEnum.ROC_AUC_MACRO: RocAucMacro,
-    MetricEnum.ROC_AUC_MICRO: RocAucMicro,
-    MetricEnum.ROC_AUC_CLASS: RocAucClass,
-}
+
+class MetricEnum(Enum):
+    ROC_AUC_BINARY = RocAucBinary
+    ROC_AUC_MICRO = RocAucMicro
+    ROC_AUC_MACRO = RocAucMacro
+    ROC_AUC_CLASS = RocAucClass

@@ -3,17 +3,19 @@ from sklearn.metrics import auc, roc_curve
 from sklearn.preprocessing import label_binarize
 
 from .base_metric import Metric
-from .enums import MetricNameEnum, MetricScopeEnum
+from .enums import MetricNameEnum, MetricScopeEnum, MetricTypeEnum
 from .results import MetricResult
 
 
 class RocAucMacro(Metric):
     _name = MetricNameEnum.ROC_AUC
     _scope = MetricScopeEnum.MACRO
-    _requires_probs = True
-    _requires_classes = True
+    _type = MetricTypeEnum.PROBS
 
-    def compute(self, y_true, y_pred, classes):
+    def __init__(self):
+        pass
+
+    def compute(self, y_true, y_pred, classes) -> MetricResult:
         """Compute macro-averaged ROC AUC for multi-class classification.
 
         Returns
@@ -45,7 +47,8 @@ class RocAucMacro(Metric):
 
         return MetricResult(
             name=self.name,
+            scope=self.scope,
+            type=self.type,
             value=macro_auc,
             metadata={"fpr": all_fpr.tolist(), "tpr": mean_tpr.tolist()},
-            scope=self.scope,
         )

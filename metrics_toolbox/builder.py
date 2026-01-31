@@ -1,7 +1,7 @@
-from typing import List
+from typing import List, Optional, Sequence
 
 from .evaluator import MetricEvaluator
-from .metrics.registry import METRIC_REGISTRY, MetricEnum
+from .metrics.registry import MetricEnum
 from .reducers.registry import ReducerEnum
 from .spec import MetricSpec
 from .utils import value_to_enum
@@ -11,12 +11,11 @@ class EvaluatorBuilder:
     """A builder for constructing MetricEvaluator instances.
 
     This builder allows for step-by-step configuration of the MetricEvaluator, including
-    adding metrics with specific reducers and class names.
-
-    Or, alternatively, loading configuration from a dictionary.
+    adding metrics with specific reducers and options. Or, alternatively, loading
+    configuration from a dictionary.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._metric_specs: List[MetricSpec] = []
 
     def __repr__(self) -> str:
@@ -26,41 +25,48 @@ class EvaluatorBuilder:
         val += "\n])"
         return val
 
-    def add_metric(self, metric: str | MetricEnum, **kwargs):
+    def add_metric(
+        self,
+        metric: str | MetricEnum,
+        reducers: Sequence[ReducerEnum] = (ReducerEnum.LATEST,),
+        **kwargs,
+    ) -> "EvaluatorBuilder":
         """Add a Metric to the evaluator.
 
         Metric can be specified by name or enum.
 
         Details
         -------
-        By default, the metric is added with the LATEST reducer and no class_name.
-        Reducers and class_name can be specified via kwargs.
+        By default, the metric is added with the LATEST reducer and no options.
+        Reducers and options can be specified via kwargs.
         Reducers can be provided as strings or ReducerEnum values.
 
         Parameters
         ----------
         metric : str|MetricEnum
             The Metric name or enum to add.
+        reducers : Sequence[ReducerEnum], optional
+            The reducers to apply to the metric results, by default (ReducerEnum.LATEST,)
         **kwargs : dict, optional
-            Additional parameters for the MetricSpec, by default {}
-            Supported parameters are listed in MetricSpec.
+            Supported options are metrics dependent.
+            See individual Metric documentation for details.
 
         Returns
         -------
         EvaluatorBuilder
             The builder instance for chaining.
         """
-        if kwargs.get("reducers") is not None:
-            kwargs["reducers"] = tuple(
-                value_to_enum(r, ReducerEnum) for r in kwargs["reducers"]
-            )
-        metric_name = value_to_enum(metric, MetricEnum)
+        reducers = tuple(
+            value_to_enum(r, ReducerEnum) for r in reducers  # Reducer enums are classes
+        )
+        metric_enum = value_to_enum(metric, MetricEnum)  # Metric enums are classes
+        metric_cls = metric_enum.value
         self._metric_specs.append(
-            MetricSpec(metric_cls=METRIC_REGISTRY[metric_name](), **kwargs)
+            MetricSpec(metric_cls_instantiated=metric_cls(**kwargs), reducers=reducers)
         )
         return self
 
-    def from_dict(self, cfg: dict):
+    def from_dict(self, cfg: dict) -> "EvaluatorBuilder":
         """Configure the builder from a dictionary.
 
         Parameters
@@ -79,7 +85,7 @@ class EvaluatorBuilder:
         >>> cfg = {
         ...     "metrics": [
         ...         {
-        ...             "name": "roc_auc_binary",
+        ...             "name": "roc_auc_class",
         ...             "reducers": ["mean", "min"],
         ...             "class_name": "A"
         ...         },
@@ -93,12 +99,21 @@ class EvaluatorBuilder:
             self.add_metric(metric_name, **kwargs)
         return self
 
-    def build(self):
+    def build(
+        self, class_to_instantiate: Optional[type[MetricEvaluator]] = None
+    ) -> MetricEvaluator:
         """Execute the builder and produce a MetricEvaluator.
+
+        Parameters
+        ----------
+        class_to_instantiate : Optional[type[MetricEvaluator]], optional
+            The MetricEvaluator class to instantiate, by default MetricEvaluator
 
         Returns
         -------
         MetricEvaluator
             The constructed MetricEvaluator instance with the specified metrics.
         """
-        return MetricEvaluator(metric_specs=self._metric_specs)
+        if class_to_instantiate is None:
+            class_to_instantiate = MetricEvaluator
+        return class_to_instantiate(metric_specs=self._metric_specs)

@@ -2,14 +2,14 @@ import pytest
 
 from metrics_toolbox.builder import EvaluatorBuilder
 from metrics_toolbox.metrics.base_metric import Metric, MetricResult, MetricScopeEnum
-from metrics_toolbox.metrics.enums import MetricEnum, MetricNameEnum
-from metrics_toolbox.reducers.enums import ReducerEnum
+from metrics_toolbox.metrics.enums import MetricNameEnum
+from metrics_toolbox.metrics.registry import MetricEnum
+from metrics_toolbox.reducers.registry import ReducerEnum
 
 
 # ------------------------- Mock Metric -------------------------
 class MockMetric(Metric):
     _name = MetricNameEnum.ROC_AUC
-    _requires_probabilities = False
     _scope = MetricScopeEnum.BINARY
 
     def compute(self, y_true, y_pred, **kwargs):
@@ -27,11 +27,10 @@ def test_evaluator_builder_add_metric_default():
     builder = EvaluatorBuilder().add_metric(MetricEnum.ROC_AUC_BINARY)
 
     spec = builder._metric_specs[0]
-    assert spec.id == MetricEnum.ROC_AUC_BINARY.value
+    assert spec.id == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.BINARY.value
     assert spec.reducers == (
         ReducerEnum.LATEST,
     ), "Default spec reducer should be LATEST"
-    assert spec.class_name is None, "Default spec class_name should be None"
 
 
 def test_evaluator_builder_add_metric_with_params():
@@ -51,17 +50,18 @@ def test_evaluator_builder_add_metric_with_params():
     print(builder)
 
     spec = builder._metric_specs[0]
-    assert spec.id == MetricEnum.ROC_AUC_CLASS.value + "_A"
+    assert (
+        spec.id
+        == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.CLASS.value + "_A"
+    )
     assert spec.reducers == (ReducerEnum.MEAN, ReducerEnum.MIN)
-    assert spec.class_name == "A"
 
     spec = builder._metric_specs[1]
-    assert spec.id == MetricEnum.ROC_AUC_BINARY.value
+    assert spec.id == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.BINARY.value
     assert spec.reducers == (
         ReducerEnum.MINMAX,
         ReducerEnum.LATEST,
     ), "String reducers should be converted to Enum"
-    assert spec.class_name is None
 
 
 def test_evaluator_builder_from_dict():
@@ -85,30 +85,30 @@ def test_evaluator_builder_from_dict():
     print(builder)
 
     spec = builder._metric_specs[0]
-    assert spec.id == MetricEnum.ROC_AUC_BINARY.value
+    assert spec.id == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.BINARY.value
     assert spec.reducers == (
         ReducerEnum.LATEST,
     ), "Default spec reducer should be LATEST"
-    assert spec.class_name is None, "Default spec class_name should be None"
 
     spec = builder._metric_specs[1]
-    assert spec.id == MetricEnum.ROC_AUC_MACRO.value
+    assert spec.id == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.MACRO.value
     assert spec.reducers == (ReducerEnum.MIN, ReducerEnum.MINMAX)
-    assert spec.class_name is None, "Default spec class_name should be None"
 
     spec = builder._metric_specs[2]
-    assert spec.id == MetricEnum.ROC_AUC_CLASS.value + "_B"
+    assert (
+        spec.id
+        == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.CLASS.value + "_B"
+    )
     assert spec.reducers == (
         ReducerEnum.LATEST,
     ), "Default spec reducer should be LATEST"
-    assert spec.class_name == "B"
+    assert spec.metric.class_name == "B"
 
     spec = builder._metric_specs[3]
-    assert spec.id == MetricEnum.ROC_AUC_MICRO.value
+    assert spec.id == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.MICRO.value
     assert spec.reducers == (
         ReducerEnum.LATEST,
     ), "Default spec reducer should be LATEST"
-    assert spec.class_name is None, "Default spec class_name should be None"
 
 
 def test_evaluator_builder_add_metric_with_unsuported_params():

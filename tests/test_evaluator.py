@@ -1,7 +1,12 @@
 from metrics_toolbox.evaluator import MetricEvaluator
-from metrics_toolbox.metrics.base_metric import Metric, MetricResult, MetricScopeEnum
+from metrics_toolbox.metrics.base_metric import (
+    Metric,
+    MetricResult,
+    MetricScopeEnum,
+    MetricTypeEnum,
+)
 from metrics_toolbox.metrics.enums import MetricNameEnum
-from metrics_toolbox.reducers.enums import ReducerEnum
+from metrics_toolbox.reducers.registry import ReducerEnum
 from metrics_toolbox.spec import MetricSpec
 
 
@@ -41,6 +46,7 @@ class ConfigurableMockMetric(Metric):
 
         return MetricResult(
             name=self.name,
+            type=self.type,
             value=value,
             metadata={"fpr": [], "tpr": []},
             scope=self.scope,
@@ -54,65 +60,51 @@ class ConfigurableMockMetric(Metric):
 class ConfigurableMockMetricBinary(ConfigurableMockMetric):
     _name = MetricNameEnum.ROC_AUC
     _scope = MetricScopeEnum.BINARY
-    _requires_probs = True
+    _type = MetricTypeEnum.PROBS
 
 
 class ConfigurableMockMetricMacro(ConfigurableMockMetric):
     _name = MetricNameEnum.ROC_AUC
     _scope = MetricScopeEnum.MACRO
-    _requires_probs = True
+    _type = MetricTypeEnum.PROBS
 
 
-class ConfigurableMockMetricClass(ConfigurableMockMetric):
-    _name = MetricNameEnum.ROC_AUC
-    _scope = MetricScopeEnum.CLASS
-    _requires_probs = True
-
-
-# ------------------------- Mock Specs -------------------------
-binary_metric_spec = MetricSpec(metric_cls=ConfigurableMockMetricBinary([1, 2, 3]))
-
-macro_metric_spec_params = MetricSpec(
-    metric_cls=ConfigurableMockMetricMacro([1, 2, 3]),
-    reducers=(ReducerEnum.MEAN, ReducerEnum.MIN),
-)
-
-class_metric_spec = MetricSpec(
-    metric_cls=ConfigurableMockMetricClass([1, 2, 3]), class_name="A"
-)
-
-
-def test_metric_evaluator_probabilities():
+def test_evaluator_add_prob_evaluation():
     """Test that MetricEvaluator correctly updates Probabilistic metrics based on
     requirements."""
     evaluator = MetricEvaluator(
         metric_specs=[
-            binary_metric_spec,
-            macro_metric_spec_params,
-            class_metric_spec,
+            MetricSpec(
+                ConfigurableMockMetricBinary([1, 2, 3]),
+            ),
+            MetricSpec(
+                ConfigurableMockMetricMacro([1, 2, 3]),
+                reducers=(ReducerEnum.MEAN, ReducerEnum.MIN),
+            ),
         ]
     )
 
     # Mock data (Does not matter for mock metrics)
     y_true = [0, 1, 0, 1]
-    y_pred = [0, 1, 0, 0]
+    y_pred = [0, 1.0, 0, 0]
 
     # Update evaluation for all 3 mock values
-    evaluator.add_probs_evaluation(y_true, y_pred, classes=[0, 1])
-    evaluator.add_probs_evaluation(y_true, y_pred, classes=[0, 1])
-    evaluator.add_probs_evaluation(y_true, y_pred, classes=[0, 1])
-    print(evaluator)
+    evaluator.add_prob_evaluation(y_true, y_pred, classes=[0, 1])
+    evaluator.add_prob_evaluation(y_true, y_pred, classes=[0, 1])
+    evaluator.add_prob_evaluation(y_true, y_pred, classes=[0, 1])
 
-    results = evaluator.results()
+    # Get results
+    results = evaluator.get_results()
     print(results)
 
-    # Check metric values
-    assert results["reduced"]["roc_auc_binary_latest"] == 3
-    assert results["reduced"]["roc_auc_macro_mean"] == 2.0
-    assert results["reduced"]["roc_auc_macro_min"] == 1
-    assert results["reduced"]["roc_auc_class_A_latest"] == 3
+    # Reducers should have been applied correctly
+    assert results["values"]["roc_auc_binary_latest"] == 3
+    assert results["values"]["roc_auc_macro_mean"] == 2
+    assert results["values"]["roc_auc_macro_min"] == 1
 
-    # Check history values
-    assert results["history"]["roc_auc_binary_steps"] == [1, 2, 3]
-    assert results["history"]["roc_auc_macro_steps"] == [1, 2, 3]
-    assert results["history"]["roc_auc_class_A_steps"] == [1, 2, 3]
+    # Steps should be tracked correctly
+    assert results["steps"]["roc_auc_binary_steps"] == [1, 2, 3]
+    assert results["steps"]["roc_auc_macro_steps"] == [1, 2, 3]
+
+    # There should be plots
+    assert "roc_auc_curves" in results["figures"]

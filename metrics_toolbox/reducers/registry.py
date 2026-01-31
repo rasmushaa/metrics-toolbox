@@ -1,13 +1,14 @@
-"""Reducer registry for available metric reducers.
+"""
+This module contains the:
 
-This module contains the REDUCER_REGISTRY which maps reducer type enums to their
-corresponding reducer implementations.
+- **ReducerEnum:** The main end user enumeration of available metric reducer types.
 
-To add new reducers, update the REDUCER_REGISTRY with the new reducer type and class
-name.
+To build a MetricEvaluator from a configuration,
+you have to use the Enumerator values as keys.
 """
 
-from .enums import ReducerEnum
+from enum import Enum
+
 from .reducers import (
     LatestReducer,
     MaxReducer,
@@ -17,11 +18,11 @@ from .reducers import (
     StdReducer,
 )
 
-REDUCER_REGISTRY = {
-    ReducerEnum.LATEST: LatestReducer(),
-    ReducerEnum.MEAN: MeanReducer(),
-    ReducerEnum.STD: StdReducer(),
-    ReducerEnum.MAX: MaxReducer(),
-    ReducerEnum.MIN: MinReducer(),
-    ReducerEnum.MINMAX: MinMaxReducer(),
-}
+
+class ReducerEnum(Enum):
+    LATEST = LatestReducer()
+    MEAN = MeanReducer()
+    STD = StdReducer()
+    MAX = MaxReducer()
+    MIN = MinReducer()
+    MINMAX = MinMaxReducer()

@@ -2,69 +2,58 @@ from abc import ABC, abstractmethod
 
 import numpy as np
 
-from .enums import ReducerEnum
-
 
 # --------------------------- Base MetricReducer --------------------------- #
 class MetricReducer(ABC):
     """A common interface for metric reducers.
 
     Reducers take a list of float values and reduce them to a single float value, by
-    calling the __call__ method.
+    calling the apply method.
     """
 
-    _name: ReducerEnum
-
-    def __repr__(self):
-        return f"MetricReducer(name={self._name})"
-
-    @property
-    def name(self) -> ReducerEnum:
-        return self._name
-
     @abstractmethod
-    def __call__(self, values: list[float]) -> float:
+    def apply(self, values: list[float]) -> float:
         pass
 
 
 # --------------------------- Implementations --------------------------- #
 class LatestReducer(MetricReducer):
-    _name = ReducerEnum.LATEST
+    """Reducer that returns the latest value from the list."""
 
-    def __call__(self, values: list[float]) -> float:
+    def apply(self, values: list[float]) -> float:
         return values[-1]
 
 
 class MeanReducer(MetricReducer):
-    _name = ReducerEnum.MEAN
+    """Reducer that returns the mean of the values."""
 
-    def __call__(self, values: list[float]) -> float:
+    def apply(self, values: list[float]) -> float:
         return float(np.mean(values))
 
 
 class StdReducer(MetricReducer):
-    _name = ReducerEnum.STD
+    """Reducer that returns the standard deviation of the values."""
 
-    def __call__(self, values: list[float]) -> float:
+    def apply(self, values: list[float]) -> float:
         return float(np.std(values))
 
 
 class MaxReducer(MetricReducer):
-    _name = ReducerEnum.MAX
+    """Reducer that returns the maximum value from the list."""
 
-    def __call__(self, values: list[float]) -> float:
+    def apply(self, values: list[float]) -> float:
         return float(np.max(values))
 
 
 class MinReducer(MetricReducer):
-    _name = ReducerEnum.MIN
+    """Reducer that returns the minimum value from the list."""
 
-    def __call__(self, values: list[float]) -> float:
+    def apply(self, values: list[float]) -> float:
         return float(np.min(values))
 
 
 class MinMaxReducer(MetricReducer):
-    _name = ReducerEnum.MINMAX
+    """Reducer that returns the difference between the maximum and minimum values."""
 
-    def __call__(self, values: list[float]) -> float:
+    def apply(self, values: list[float]) -> float:
         return float(np.max(values) - np.min(values))
