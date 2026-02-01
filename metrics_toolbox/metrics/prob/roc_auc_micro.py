@@ -1,9 +1,13 @@
+import numpy as np
 from sklearn.metrics import auc, roc_curve
-from sklearn.preprocessing import label_binarize
 
-from .base_metric import Metric
-from .enums import MetricNameEnum, MetricScopeEnum, MetricTypeEnum
-from .results import MetricResult
+from metrics_toolbox.metrics.base_metric import Metric
+from metrics_toolbox.metrics.enums import (
+    MetricNameEnum,
+    MetricScopeEnum,
+    MetricTypeEnum,
+)
+from metrics_toolbox.metrics.results import MetricResult
 
 
 class RocAucMicro(Metric):
@@ -14,8 +18,19 @@ class RocAucMicro(Metric):
     def __init__(self):
         pass
 
-    def compute(self, y_true, y_pred, classes) -> MetricResult:
+    def compute(
+        self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str] = None
+    ) -> MetricResult:
         """Compute the ROC AUC for micro-averaged multiclass classification.
+
+        Parameters
+        ----------
+        y_true : np.ndarray
+            True class labels binarized in one-vs-all fashion.
+        y_pred : np.ndarray
+            Predicted probabilities for each class.
+        column_names : list[str], optional
+            List of class names from model.classes_.
 
         Returns
         -------
@@ -24,11 +39,7 @@ class RocAucMicro(Metric):
             including the tpr and fpr values for plotting the ROC curve.
         """
 
-        # Binarize labels in a one-vs-all fashion -> shape (n_samples, n_classes).
-        # Classes of [A,B,C] and 3 rows -> [[1,0,0],[0,1,0],[0,0,1]]
-        y_true_binarized = label_binarize(y_true, classes=classes)
-
-        fpr, tpr, _ = roc_curve(y_true_binarized.ravel(), y_pred.ravel())
+        fpr, tpr, _ = roc_curve(y_true.ravel(), y_pred.ravel())
         value = auc(fpr, tpr)
 
         return MetricResult(

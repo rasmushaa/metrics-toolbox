@@ -20,6 +20,8 @@ from .reducers import (
 
 
 class ReducerEnum(Enum):
+    """Enumeration of available MetricReducer types."""
+
     LATEST = LatestReducer()
     MEAN = MeanReducer()
     STD = StdReducer()

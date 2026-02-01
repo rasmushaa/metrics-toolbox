@@ -16,8 +16,8 @@ or using the __docs_url__ variable.
 Example
 -------
 >>> import metrics_toolbox
->>> from metrics_toolbox import MetricEnum, ReducerEnum, EvaluatorBuilder
->>> url = metrics_toolbox.__docs_url__
+... from metrics_toolbox import MetricEnum, ReducerEnum, EvaluatorBuilder
+... url = metrics_toolbox.__docs_url__
 """
 
 __docs_url__ = "https://rasmushaa.github.io/metrics-toolbox/"

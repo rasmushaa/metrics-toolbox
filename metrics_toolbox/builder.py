@@ -1,3 +1,4 @@
+import inspect
 from typing import List, Optional, Sequence
 
 from .evaluator import MetricEvaluator
@@ -48,8 +49,8 @@ class EvaluatorBuilder:
         reducers : Sequence[ReducerEnum], optional
             The reducers to apply to the metric results, by default (ReducerEnum.LATEST,)
         **kwargs : dict, optional
-            Supported options are metrics dependent.
-            See individual Metric documentation for details.
+            Supported options are metrics dependent, and raise TypeError if unsupported options
+            are provided. See individual Metric documentation or the error message for details.
 
         Returns
         -------
@@ -59,8 +60,19 @@ class EvaluatorBuilder:
         reducers = tuple(
             value_to_enum(r, ReducerEnum) for r in reducers  # Reducer enums are classes
         )
-        metric_enum = value_to_enum(metric, MetricEnum)  # Metric enums are classes
-        metric_cls = metric_enum.value
+        metric_cls = value_to_enum(metric, MetricEnum).value  # Metric enums are classes
+
+        # Validate kwargs against metric class __init__ parameters
+        sig = inspect.signature(metric_cls.__init__)
+        valid_params = set(sig.parameters.keys()) - {"self"}
+        invalid_params = set(kwargs.keys()) - valid_params
+
+        if invalid_params:
+            raise TypeError(
+                f"Metric '{metric_cls.__name__}' got unexpected keyword argument(s): {', '.join(sorted(invalid_params))}. "
+                f"Valid parameters are: {', '.join(sorted(valid_params))}"
+            )
+
         self._metric_specs.append(
             MetricSpec(metric_cls_instantiated=metric_cls(**kwargs), reducers=reducers)
         )

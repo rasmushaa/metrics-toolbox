@@ -1,3 +1,5 @@
+import numpy as np
+
 from .enums import MetricNameEnum, MetricScopeEnum, MetricTypeEnum
 from .results import MetricResult
 
@@ -8,7 +10,7 @@ class Metric:
     Details
     -------
 
-    - Each Metric subclass must implement the compute method
+    - Each Metric subclass must implement the compute method.
 
     - Define the class private attributes to specify what kind of metric it is
 
@@ -19,7 +21,7 @@ class Metric:
     _name: MetricNameEnum
         The name of the metric.
     _scope: MetricScopeEnum
-        The scope of the metric (binary, micro, macro, class for logging).
+        The scope of the metric (micro, macro, class).
     _type: MetricTypeEnum
         The type of data the metric operates on (probabilities or labels).
     """
@@ -57,20 +59,6 @@ class Metric:
         return self._scope
 
     @property
-    def id(self) -> str:
-        """Unique identifier for the metric instance.
-
-        Combines the metric name and scope to create a unique ID,
-        matching the MetricEnum naming convention.
-
-        Returns
-        -------
-        str
-            The unique identifier for the metric instance.
-        """
-        return f"{self.name.value}_{self.scope.value}"
-
-    @property
     def type(self) -> MetricTypeEnum:
         """The type of data the metric operates on.
 
@@ -81,10 +69,41 @@ class Metric:
         """
         return self._type
 
-    def compute(self, *args, **kwargs) -> MetricResult:
+    @property
+    def id(self) -> str:
+        """Unique identifier for the metric instance.
+
+        Child classes can override this to make more specific ids if needed.
+
+        Returns
+        -------
+        str
+            The unique identifier for the metric instance.
+        """
+        return f"{self.name.value}_{self.scope.value}"
+
+    def compute(
+        self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str]
+    ) -> MetricResult:
         """A method to compute the metric.
 
-        Different metrics will have different implementations of this method, and may
-        accept different options via *args and **kwargs.
+        Different metrics will have different implementations of this method,
+        but they all share the same signature.
+
+        y_true and y_pred are always 2D arrays with the same shape,
+        where each column corresponds to a different prediction value,
+        and column_names specify the names of these columns.
+
+        It is possible to use Metrics directly, but the assumed way is to use them
+        via a Evaluator class, and thus, all input validation is done there.
+
+        Parameters
+        ----------
+        y_true : np.ndarray
+            The ground truth target values.
+        y_pred : np.ndarray
+            The predicted target values.
+        column_names : list[str]
+            The names of the columns the input arrays correspond to.
         """
         raise NotImplementedError

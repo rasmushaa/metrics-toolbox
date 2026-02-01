@@ -1,8 +1,12 @@
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 import numpy as np
 from matplotlib import pyplot as plt
 
+from metrics_toolbox.encoding import (
+    toolbox_binarize_predictions,
+    toolbox_binarize_targets,
+)
 from metrics_toolbox.metrics.enums import MetricNameEnum, MetricTypeEnum
 from metrics_toolbox.plots import plot_auc_curves
 from metrics_toolbox.spec import MetricSpec
@@ -52,7 +56,7 @@ class MetricEvaluator:
         self,
         y_true: np.ndarray,
         y_pred: np.ndarray,
-        classes: Optional[List[str]] = None,
+        column_names: List[str],
     ):
         """Evaluate PROB metrics and add new step to history.
 
@@ -62,12 +66,19 @@ class MetricEvaluator:
             True labels. Ints or strings.
         y_pred : np.ndarray
             Predicted probabilities. Shape (n_samples, n_classes).
-        classes : Optional[List[str]], optional
-            List of class labels. Needed for some metrics, by default None.
+        column_names : List[str],
+            The names of the columns/classes the input arrays correspond to.
         """
         y_true = np.asarray(y_true)  # Ensure numpy array, if not already
         y_pred = np.asarray(y_pred)
 
+        self.__validate_common_inputs(
+            y_true=y_true,
+            y_pred=y_pred,
+            column_names=column_names,
+        )
+
+        # Type checks
         if not (
             np.issubdtype(y_true.dtype, np.integer)
             or np.issubdtype(y_true.dtype, np.str_)
@@ -82,19 +93,20 @@ class MetricEvaluator:
                 "y_pred must contain probabilities in the range [0.0, 1.0]"
             )
 
+        # Get PROB metric specs and compute
         prob_specs = self.__get_prob_specs()
         for spec in prob_specs:
             spec.compute(
                 y_true=y_true,
                 y_pred=y_pred,
-                classes=classes,
+                column_names=column_names,
             )
 
     def add_label_evaluation(
         self,
         y_true: np.ndarray,
         y_pred: np.ndarray,
-        classes: Optional[List[str]] = None,
+        column_names: List[str],
     ):
         """Evaluate LABEL metrics and add new step to history.
 
@@ -104,12 +116,18 @@ class MetricEvaluator:
             True labels. Ints or strings.
         y_pred : np.ndarray
             Predicted labels. Ints or strings.
-        classes : Optional[List[str]], optional
-            List of class labels. Needed for some metrics, by default None.
+        column_names : List[str],
+            The names of the columns/classes the input arrays correspond to.
         """
         y_true = np.asarray(y_true)  # Ensure numpy array, if not already
         y_pred = np.asarray(y_pred)
 
+        self.__validate_common_inputs(
+            y_true=y_true,
+            y_pred=y_pred,
+            column_names=column_names,
+        )
+        # Type checks
         if not (
             np.issubdtype(y_true.dtype, np.integer)
             or np.issubdtype(y_true.dtype, np.str_)
@@ -121,12 +139,13 @@ class MetricEvaluator:
         ):
             raise ValueError("y_pred must contain integers or strings for labels")
 
+        # Get LABEL metric specs and compute
         label_specs = self.__get_label_specs()
         for spec in label_specs:
             spec.compute(
                 y_true=y_true,
                 y_pred=y_pred,
-                classes=classes,
+                column_names=column_names,
             )
 
     def add_model_evaluation(self, model, X: np.ndarray, y_true: np.ndarray):
@@ -147,16 +166,6 @@ class MetricEvaluator:
         You can build custom evaluators using the **EvaluatorBuilder**,
         by passing your custom evaluator class to the **build()** method.
 
-        Details
-        -------
-        This method performs the following steps:
-        1. If there are **LABEL metrics** to evaluate,
-           it uses model.predict(X) to get predicted labels
-           and calls **add_label_evaluation()**.
-        2. If there are **PROB metrics** to evaluate,
-           it uses model.predict_proba(X) to get predicted probabilities
-           and calls **add_prob_evaluation()**.
-
         Parameters
         ----------
         model : Any
@@ -170,18 +179,22 @@ class MetricEvaluator:
 
         if self.__get_label_specs():  # If there are LABEL metrics to evaluate
             y_pred = model.predict(X)
+            # y_pred = toolbox_binarize_predictions(y_pred)
+            # y_true = toolbox_binarize_targets(y_true, classes)
             self.add_label_evaluation(
                 y_true=y_true,
                 y_pred=y_pred,
-                classes=classes,
+                column_names=classes,
             )
 
         if self.__get_prob_specs():  # If there are PROB metrics to evaluate
             y_pred = model.predict_proba(X)
+            y_pred = toolbox_binarize_predictions(y_pred)
+            y_true = toolbox_binarize_targets(y_true, classes)
             self.add_prob_evaluation(
                 y_true=y_true,
                 y_pred=y_pred,
-                classes=classes,
+                column_names=classes,
             )
 
     def get_results(self) -> Dict[str, Dict[str, float | list[float] | plt.Figure]]:
@@ -192,11 +205,11 @@ class MetricEvaluator:
         Dict[str, Dict[str, float | list[float] | plt.Figure]]
             A dictionary with keys 'values', 'steps', and 'figures'.
 
-            - 'values': Reduced metric values (e.g., mean, max).
+            - **values**: Reduced metric values (e.g., mean, max).
 
-            - 'steps': Full history of metric values over evaluation steps.
+            - **steps**: Full history of metric values over evaluation steps.
 
-            - 'figures': Plots for applicable metrics (e.g., ROC AUC curves).
+            - **figures**: Plots for applicable metrics (e.g., ROC AUC curves).
         """
 
         summary: Dict[str, Dict[str, float | list[float] | plt.Figure]] = {
@@ -249,6 +262,36 @@ class MetricEvaluator:
                 raise ValueError(f"Duplicate MetricSpec id found: {spec.id}")
             seen_ids.add(spec.id)
 
+    def __validate_common_inputs(
+        self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str]
+    ):
+        """Validate common inputs for both PROB and LABEL evaluations."""
+        # Dimension checks - must be 2D
+        if y_true.ndim != 2:
+            raise ValueError(
+                f"y_true must be a 2D array with shape (n_samples, n_classes). "
+                f"Got shape: {y_true.shape}"
+            )
+        if y_pred.ndim != 2:
+            raise ValueError(
+                f"y_pred must be a 2D array with shape (n_samples, n_classes). "
+                f"Got shape: {y_pred.shape}"
+            )
+        # Shape checks - must match
+        if y_true.shape != y_pred.shape:
+            raise ValueError(
+                f"y_true and y_pred must have the same shape. "
+                f"Got y_true: {y_true.shape}, y_pred: {y_pred.shape}"
+            )
+
+        # Column names check
+        n_columns = y_pred.shape[1]
+        if len(column_names) != n_columns:
+            raise ValueError(
+                f"column_names length must match number of columns in y_pred. "
+                f"Got column_names: {len(column_names)}, y_pred columns: {n_columns}"
+            )
+
     def __get_model_classes(self, model) -> List[str]:
         """Get class labels from the model if available.
 
@@ -266,7 +309,7 @@ class MetricEvaluator:
             raise ValueError(
                 "Model does not have 'classes' or 'classes_' attribute required for some metrics."
             )
-        return classes
+        return classes.tolist()
 
     def __get_prob_specs(self) -> List[MetricSpec]:
         """Get the list of metric IDs that require probabilities.

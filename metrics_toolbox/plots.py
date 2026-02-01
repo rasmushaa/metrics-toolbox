@@ -58,7 +58,10 @@ def plot_auc_curves(
                 tpr,
                 label=label,
                 color="darkgreen",
-                alpha=max(0.5, (1.0 - len(values) * 0.1)),  # More folds -> less alpha
+                ls="--",
+                alpha=max(
+                    0.4, (1.0 - (len(values) - 1) * 0.2)
+                ),  # More folds -> less alpha
             )
 
         # Figure settings

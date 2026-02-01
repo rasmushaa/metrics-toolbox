@@ -59,7 +59,7 @@ class ConfigurableMockMetric(Metric):
 
 class ConfigurableMockMetricBinary(ConfigurableMockMetric):
     _name = MetricNameEnum.ROC_AUC
-    _scope = MetricScopeEnum.BINARY
+    _scope = MetricScopeEnum.TARGET
     _type = MetricTypeEnum.PROBS
 
 
@@ -85,25 +85,25 @@ def test_evaluator_add_prob_evaluation():
     )
 
     # Mock data (Does not matter for mock metrics)
-    y_true = [0, 1, 0, 1]
-    y_pred = [0, 1.0, 0, 0]
+    y_true = [[0], [1], [0], [1]]
+    y_pred = [[0], [1.0], [0], [0]]
 
     # Update evaluation for all 3 mock values
-    evaluator.add_prob_evaluation(y_true, y_pred, classes=[0, 1])
-    evaluator.add_prob_evaluation(y_true, y_pred, classes=[0, 1])
-    evaluator.add_prob_evaluation(y_true, y_pred, classes=[0, 1])
+    evaluator.add_prob_evaluation(y_true, y_pred, column_names=[1])
+    evaluator.add_prob_evaluation(y_true, y_pred, column_names=[1])
+    evaluator.add_prob_evaluation(y_true, y_pred, column_names=[1])
 
     # Get results
     results = evaluator.get_results()
     print(results)
 
     # Reducers should have been applied correctly
-    assert results["values"]["roc_auc_binary_latest"] == 3
+    assert results["values"]["roc_auc_target_latest"] == 3
     assert results["values"]["roc_auc_macro_mean"] == 2
     assert results["values"]["roc_auc_macro_min"] == 1
 
     # Steps should be tracked correctly
-    assert results["steps"]["roc_auc_binary_steps"] == [1, 2, 3]
+    assert results["steps"]["roc_auc_target_steps"] == [1, 2, 3]
     assert results["steps"]["roc_auc_macro_steps"] == [1, 2, 3]
 
     # There should be plots
