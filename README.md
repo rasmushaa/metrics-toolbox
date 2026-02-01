@@ -135,7 +135,8 @@ uv run pre-commit run
 ### Deployment
 
 The project uses automated CI/CD:
-- **Continuous Testing**: Merges to the main remote trigger automated tests via GitHub Actions
+- **Continuous Testing**: All branches trigger the matrix testing of supported Python version on commit via GitHub Actions
+- **Continuous Documentation**: Pushes to the main branch automatically updates the mkdocs API refence, and uses the Readme as the landing page.
 - **PyPI Deployment**: Create and push a version tag to main to trigger automated deployment to PyPI
 
 ```bash
