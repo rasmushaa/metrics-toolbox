@@ -1,10 +1,7 @@
 import numpy as np
 import pytest
 
-from metrics_toolbox.encoding import (
-    toolbox_binarize_predictions,
-    toolbox_binarize_targets,
-)
+from metrics_toolbox.encoding import toolbox_binarize_labels, toolbox_binarize_probs
 from metrics_toolbox.metrics.enums import MetricNameEnum, MetricScopeEnum
 from metrics_toolbox.metrics.prob.roc_auc_macro import RocAucMacro
 from metrics_toolbox.metrics.prob.roc_auc_micro import RocAucMicro
@@ -20,8 +17,8 @@ def test_roc_auc_target_compute():
     y_pred = np.array([0.1, 0.9, 0.4, 0.8, 0.35, 0.6, 0.7, 0.2, 0.55, 0.05])
 
     # The MetricsToolbox requires binarized inputs for all inputs
-    y_true_bin = toolbox_binarize_targets(y_true, classes=[0, 1])
-    y_pred_bin = toolbox_binarize_predictions(y_pred)
+    y_true_bin = toolbox_binarize_labels(y_true, classes=[0, 1])
+    y_pred_bin = toolbox_binarize_probs(y_pred)
     print(y_true_bin)
     print(y_pred_bin)
 
@@ -60,7 +57,7 @@ def test_roc_auc_macro_compute():
     )
     classes = [0, 1, 2]
 
-    y_true_bin = toolbox_binarize_targets(y_true, classes=classes)
+    y_true_bin = toolbox_binarize_labels(y_true, classes=classes)
 
     metric = RocAucMacro()
     result = metric.compute(y_true_bin, y_prob, column_names=classes)
@@ -93,7 +90,7 @@ def test_roc_auc_micro_compute():
     )
     classes = [0, 1, 2]
 
-    y_true_bin = toolbox_binarize_targets(y_true, classes=classes)
+    y_true_bin = toolbox_binarize_labels(y_true, classes=classes)
 
     metric = RocAucMicro()
     result = metric.compute(y_true_bin, y_prob, column_names=classes)

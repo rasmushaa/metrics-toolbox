@@ -11,11 +11,38 @@ A flexible toolbox for evaluating machine learning models with customizable metr
 ## Features
 
 - **Flexible Metric Configuration**: Add and configure metrics using enums, strings, or dictionaries
+- **Type-Safe**: Leverage enums for type safety while maintaining flexibility with string names
 - **Multiple Reducers**: Track metrics over time with various aggregation strategies (mean, min, max, std, etc.)
-- **Built-in Metrics**: Pre-configured ROC AUC metrics (binary, macro, micro, per-class)
+- **Built-in Metrics**: Pre-configured metrics for propability, label, and regression tasks on target, micro, and macro scopes
 - **Chainable Builder Pattern**: Intuitive API for constructing metric evaluators
 - **Visualization Support**: Generate ROC curves and other visualizations
-- **Type-Safe**: Leverage enums for type safety while maintaining flexibility with string names
+
+## Available Metrics
+
+- `roc_auc_micro`
+- `roc_auc_macro`
+- `roc_auc_target`
+- `accuracy`
+
+## Available Reducers
+
+- `latest`
+- `mean`
+- `std`
+- `max`
+- `min`
+- `minmax`
+
+## Requirements
+
+- Python >= 3.11
+- matplotlib >= 3.10.0
+- numpy > 2.0.0
+- pillow >= 10.0.0
+- scikit-learn >= 1.4.0
+- setuptools >= 60.0.0
+- kiwisolver >= 1.4.6
+- scipy >= 1.7.0
 
 ## Installation
 
@@ -26,133 +53,95 @@ pip install metrics-toolbox
 ## Quick Start
 
 ```python
-from metrics_toolbox.builder import EvaluatorBuilder
-from sklearn.datasets import make_classification
-from sklearn.linear_model import LogisticRegression
+from metrics_toolbox import EvaluatorBuilder
+from sklearn.datasets import load_breast_cancer, load_iris
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
 
-# Create sample data
-X, y = make_classification(n_samples=1000, n_classes=3, n_informative=10, random_state=42)
+# Train a model with predict, and predict_proba methods
+X, y = load_breast_cancer(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Train a model
-model = LogisticRegression()
+model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-# Build an evaluator
+# 2. Build evaluator with multiple metrics and reducers
 evaluator = (
     EvaluatorBuilder()
-    .add_metric("roc_auc_binary")
-    .add_metric("roc_auc_macro", reducers=["mean", "min", "max"])
-    .add_metric("roc_auc_class", reducers=["latest"], class_name=1)
-    .build()
-)
+    .add_metric("roc_auc_target", target_name=1, reducers=["mean", "std"])
+    .add_metric("accuracy", reducers=["mean", "std"])
+).build()
 
-# Evaluate your model
-evaluator.update_model_evaluation(model, X_test, y_test)
+# 3. Evaluate model directly using multiple folds
+evaluator.add_model_evaluation(model, X_test, y_test)
+evaluator.add_model_evaluation(model, X_train, y_train)
 
-# Get results
-results = evaluator.get_results()
-print(results)
+# 4. Get aggregated results, history, and plots
+result = evaluator.get_results()
+display(result)
 
-# Visualize
-evaluator.plot_auc_curves(X_test, y_test)
+# 5. View figures
+display(result['figures']['roc_auc_curves'])
+display(result['figures']['confusion_matrices'])
 ```
 
 ## Usage
-
-### Building an Evaluator
-
-**Using enums:**
-```python
-from metrics_toolbox.builder import EvaluatorBuilder
-from metrics_toolbox.metrics.enums import MetricNameEnum
-from metrics_toolbox.reducers.enums import ReducerEnum
-
-evaluator = (
-    EvaluatorBuilder()
-    .add_metric(MetricNameEnum.ROC_AUC_BINARY)
-    .add_metric(
-        MetricNameEnum.ROC_AUC_MACRO,
-        reducers=[ReducerEnum.MEAN, ReducerEnum.STD]
-    )
-    .build()
-)
-```
-
-**Using strings:**
-```python
-evaluator = (
-    EvaluatorBuilder()
-    .add_metric("roc_auc_binary")
-    .add_metric("roc_auc_macro", reducers=["mean", "std"])
-    .build()
-)
-```
-
-**From configuration dictionary:**
-```python
-config = {
-    "metrics": [
-        {"name": "roc_auc_binary"},
-        {"name": "roc_auc_macro", "reducers": ["mean", "min"]},
-        {"name": "roc_auc_class", "reducers": ["std"], "class_name": "A"}
-    ]
-}
-
-evaluator = EvaluatorBuilder().from_dict(config).build()
-```
-
-### Tracking Metrics Over Time
-
-```python
-# Update evaluator multiple times (e.g., during training epochs)
-for epoch in range(10):
-    model.fit(X_train, y_train)
-    evaluator.update_model_evaluation(model, X_val, y_val)
-
-# Get aggregated results using configured reducers
-results = evaluator.get_results()
-```
-
-## Available Metrics
-
-- `roc_auc_binary` - ROC AUC for binary classification
-- `roc_auc_macro` - Macro-averaged ROC AUC for multiclass
-- `roc_auc_micro` - Micro-averaged ROC AUC for multiclass
-- `roc_auc_class` - Per-class ROC AUC (specify `class_name`)
-
-## Available Reducers
-
-- `latest` - Most recent value
-- `mean` - Average across all updates
-- `min` - Minimum value
-- `max` - Maximum value
-- `std` - Standard deviation
-- `minmax` - Difference between min and max
-
-## Requirements
-
-- Python >= 3.11
-- NumPy >= 2.4.1
-- scikit-learn >= 1.8.0
-- matplotlib >= 3.10.8
+To see examples how to
+- Use the builder pattern, see [builder examples notebook](examples/builder.ipynb)
+- Get help, see the [help notebook](examples/help.ipynb)
+- Use cases for model evaluation, see the [usecases notebook](examples/usecases.ipynb)
+- Custome model evaluaton <TODO>
 
 ## Development
 
+### Setup
+
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/metrics-toolbox.git
+git clone https://github.com/rasmushaa/metrics-toolbox.git
 cd metrics-toolbox
 
-# Install dependencies
-pip install -e ".[dev]"
+# Install dependencies with uv
+uv pip install -e ".[dev]"
 
-# Run tests
-pytest
+# Install pre-commit hooks
+uv run pre-commit install
+```
 
-# Run pre-commit hooks
-pre-commit run --all-files
+### Testing
+
+```bash
+# Run tests with coverage, coverage is included in toml
+uv run pytest
+
+# Run tests with minimum dependency versions (Included in devops also)
+./scripts/run_tests_lowest.sh
+
+# Run standard tests
+./scripts/run_tests.sh
+```
+
+### Code Quality
+
+```bash
+# Run pre-commit hooks on all files
+uv run pre-commit run --all-files
+
+# Run pre-commit on staged files only
+uv run pre-commit run
+```
+
+### Deployment
+
+The project uses automated CI/CD:
+- **Continuous Testing**: Merges to the main remote trigger automated tests via GitHub Actions
+- **PyPI Deployment**: Create and push a version tag to main to trigger automated deployment to PyPI
+
+```bash
+# Deploy new version to PyPI
+git tag v0.1.0
+git push origin v0.1.0
 ```
 
 ## License

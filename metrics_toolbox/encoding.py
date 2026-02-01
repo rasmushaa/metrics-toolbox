@@ -10,7 +10,7 @@ import numpy as np
 from sklearn.preprocessing import label_binarize
 
 
-def toolbox_binarize_targets(y: np.ndarray, classes: np.ndarray) -> np.ndarray:
+def toolbox_binarize_labels(y: np.ndarray, classes: np.ndarray) -> np.ndarray:
     """Binarize target labels.
 
     Uses sklearn's label_binarize under the hood,
@@ -41,7 +41,7 @@ def toolbox_binarize_targets(y: np.ndarray, classes: np.ndarray) -> np.ndarray:
     return Y
 
 
-def toolbox_binarize_predictions(y_pred: np.ndarray) -> np.ndarray:
+def toolbox_binarize_probs(y_pred: np.ndarray) -> np.ndarray:
     """Binarize predicted probabilities for binary classification.
 
     Ensures that predicted probabilities are in 2D array format.

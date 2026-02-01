@@ -3,12 +3,9 @@ from typing import Dict, List
 import numpy as np
 from matplotlib import pyplot as plt
 
-from metrics_toolbox.encoding import (
-    toolbox_binarize_predictions,
-    toolbox_binarize_targets,
-)
+from metrics_toolbox.encoding import toolbox_binarize_labels, toolbox_binarize_probs
 from metrics_toolbox.metrics.enums import MetricNameEnum, MetricTypeEnum
-from metrics_toolbox.plots import plot_auc_curves
+from metrics_toolbox.plots import plot_auc_curves, plot_confusion_matrix
 from metrics_toolbox.spec import MetricSpec
 
 
@@ -179,8 +176,8 @@ class MetricEvaluator:
 
         if self.__get_label_specs():  # If there are LABEL metrics to evaluate
             y_pred = model.predict(X)
-            # y_pred = toolbox_binarize_predictions(y_pred)
-            # y_true = toolbox_binarize_targets(y_true, classes)
+            y_pred = toolbox_binarize_labels(y_pred, classes)
+            y_true = toolbox_binarize_labels(y_true, classes)
             self.add_label_evaluation(
                 y_true=y_true,
                 y_pred=y_pred,
@@ -189,8 +186,8 @@ class MetricEvaluator:
 
         if self.__get_prob_specs():  # If there are PROB metrics to evaluate
             y_pred = model.predict_proba(X)
-            y_pred = toolbox_binarize_predictions(y_pred)
-            y_true = toolbox_binarize_targets(y_true, classes)
+            y_pred = toolbox_binarize_probs(y_pred)
+            y_true = toolbox_binarize_labels(y_true, classes)
             self.add_prob_evaluation(
                 y_true=y_true,
                 y_pred=y_pred,
@@ -249,9 +246,25 @@ class MetricEvaluator:
                 return {"roc_auc_curves": fig}
             return {}
 
+        def get_confusion_matrix_plots(specs) -> Dict[str, plt.Figure]:
+            """Generate Confusion Matrix plots for given specs."""
+            cm_results = []
+            for spec in specs:
+                if (
+                    spec.metric.name == MetricNameEnum.ACCURACY
+                ):  # All accuracy metrics have cf in metadata
+                    cm_results = spec.get_results_history()
+            if cm_results:
+                fig = plot_confusion_matrix(
+                    accuracy_results=cm_results,
+                )
+                return {"confusion_matrices": fig}
+            return {}
+
         summary["values"].update(get_reduced_values(self._metric_specs))
         summary["steps"].update(get_full_history(self._metric_specs))
         summary["figures"].update(get_roc_auc_plots(self._metric_specs))
+        summary["figures"].update(get_confusion_matrix_plots(self._metric_specs))
         return summary
 
     def __validate_metric_specs(self):
@@ -309,7 +322,10 @@ class MetricEvaluator:
             raise ValueError(
                 "Model does not have 'classes' or 'classes_' attribute required for some metrics."
             )
-        return classes.tolist()
+        if isinstance(classes, np.ndarray):
+            return classes.tolist()
+        else:
+            return list(classes)
 
     def __get_prob_specs(self) -> List[MetricSpec]:
         """Get the list of metric IDs that require probabilities.

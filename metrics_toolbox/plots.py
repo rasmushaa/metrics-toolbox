@@ -5,8 +5,63 @@ from typing import Dict, List
 
 import numpy as np
 from matplotlib import pyplot as plt
+from sklearn.metrics import ConfusionMatrixDisplay
 
 from .metrics.results import MetricResult
+
+
+def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
+    """Plot confusion matrices from accuracy metrics metadata.
+
+    Parameters
+    ----------
+    accuracy_results : List[MetricResult]
+        A list of MetricResult objects containing confusion matrix data in their metadata.
+
+    Returns
+    -------
+    plt.Figure
+        The matplotlib Figure object containing the plotted confusion matrices. Closed to prevent display upon creation.
+    """
+    MAX_COLUMNS = 3
+    n_matrices = len(accuracy_results)
+    n_cols = max(
+        1, min(n_matrices, MAX_COLUMNS)
+    )  # From 1 to <max> columns, depending on number of matrices
+    n_rows = (n_matrices + n_cols - 1) // n_cols  # Rows as needed to fit all matrices
+
+    fig, ax = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows), dpi=120)
+
+    # Flatten ax array for easy indexing, even if there's only one subplot
+    if n_matrices == 1:
+        ax = [ax]
+    else:
+        ax = ax.flatten()
+
+    for i, result in enumerate(accuracy_results):
+        cm = result.metadata["confusion_matrix"]
+        classes = result.metadata.get("class_names", np.arange(len(cm)))
+        normalize = result.metadata.get("confusion_normalization", None)
+
+        # Set colorbar limits if normalized
+        im_kw = {}
+        if normalize is not None:
+            im_kw = {"vmin": 0.0, "vmax": 1.0}
+
+        # Use ConfusionMatrixDisplay for sklearn-like appearance
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=classes)
+        disp.plot(
+            ax=ax[i], cmap="Greens", colorbar=True, im_kw=im_kw, values_format=".2f"
+        )
+        disp.ax_.set_title(f"Confusion Matrix (Normalize on {normalize})")
+
+    # Hide extra subplots if any
+    for j in range(n_matrices, len(ax)):
+        ax[j].set_visible(False)
+
+    plt.tight_layout()
+    plt.close(fig)
+    return fig
 
 
 def plot_auc_curves(
@@ -71,6 +126,10 @@ def plot_auc_curves(
         ax[i].set_title(metric_name)
         ax[i].grid(ls="--", alpha=0.7, color="gray")
         ax[i].legend()
+
+    # Hide extra subplots if any
+    for j in range(n_metrics, len(ax)):
+        ax[j].set_visible(False)
 
     plt.tight_layout()
     plt.close(fig)

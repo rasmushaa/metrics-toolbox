@@ -9,6 +9,7 @@ you have to use the Enumerator values as keys.
 
 from enum import Enum
 
+from .label.accuracy import Accuracy
 from .prob.roc_auc_macro import RocAucMacro
 from .prob.roc_auc_micro import RocAucMicro
 from .prob.roc_auc_target import RocAucTarget
@@ -20,3 +21,5 @@ class MetricEnum(Enum):
     ROC_AUC_MICRO = RocAucMicro
     ROC_AUC_MACRO = RocAucMacro
     ROC_AUC_TARGET = RocAucTarget
+
+    ACCURACY = Accuracy
