@@ -118,25 +118,13 @@ repos:
   # Local custom hooks
   - repo: local
     hooks:
-      # Updates README.md with current metrics, reducers, and requirements
-      # Ensures documentation stays in sync with code
-      - id: update-readme
-        name: Update README
-        entry: uv run python scripts/update_readme.py
+      # Updates Python version badge in README based on pyproject.toml
+      - id: update-python-badge
+        name: Update Python Version Badge
+        entry: python scripts/update_python_badge.py
         language: system
         pass_filenames: false
-        # Run when registry files, pyproject.toml, or README.md change
-        files: ^(metrics_toolbox/(metrics|reducers)/registry\.py|pyproject\.toml|README\.md)$
-
-      # Runs all unit tests before committing
-      # Ensures all tests pass to prevent breaking changes from being committed
-      - id: run-unit-tests
-        name: Run Unit Tests
-        entry: scripts/run_tests.sh
-        language: system
-        pass_filenames: false
-        # Only run when Python files in metrics_toolbox or tests directories change
-        files: ^(metrics_toolbox|tests)/.*\.py$
+        files: ^(pyproject\.toml|README\.md)$
 
       # Executes all example notebooks before committing
       # Ensures all example notebooks run successfully
