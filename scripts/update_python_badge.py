@@ -3,7 +3,12 @@
 
 import re
 import sys
-import tomllib
+
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib  # type: ignore[no-redef]
+
 from pathlib import Path
 
 

@@ -27,10 +27,7 @@ def test_roc_auc_target_compute():
 
     assert result.name == MetricNameEnum.ROC_AUC
     assert result.scope == MetricScopeEnum.TARGET
-    assert (
-        metric.id
-        == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.TARGET.value + "_1"
-    )
+    assert metric.id == MetricNameEnum.ROC_AUC.value + "_1"
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
     assert result.value == pytest.approx(0.9166, abs=0.0001)

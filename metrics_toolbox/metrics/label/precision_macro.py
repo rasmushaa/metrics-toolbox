@@ -10,31 +10,13 @@ from metrics_toolbox.metrics.enums import (
 from metrics_toolbox.metrics.results import MetricResult
 
 
-class PrecisionTarget(Metric):
+class PrecisionMacro(Metric):
     _name = MetricNameEnum.PRECISION
     _type = MetricTypeEnum.LABELS
-    _scope = MetricScopeEnum.TARGET
+    _scope = MetricScopeEnum.MACRO
 
-    def __init__(self, target_name: str):
-        """Initialize Precision metric for binary classification.
-
-        Parameters
-        ----------
-        target_name : str
-            Name of the target variable.
-        """
-        self.target_name = target_name
-
-    @property
-    def id(self) -> str:
-        """Get the unique identifier for the metric.
-
-        Returns
-        -------
-        str
-            Unique identifier combining name, scope, and target name.
-        """
-        return self.name.value + "_" + str(self.target_name)
+    def __init__(self):
+        """Initialize Precision metric for binary classification."""
 
     def compute(
         self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str] = None
@@ -63,10 +45,7 @@ class PrecisionTarget(Metric):
         value = precision_score(
             y_true_label,
             y_pred_label,
-            average=None,
-            labels=[
-                self.target_name
-            ],  # Computes precision for all labels, and returns an array
+            average="macro",
             zero_division=0,
         )
 
@@ -74,5 +53,5 @@ class PrecisionTarget(Metric):
             name=self.name,
             scope=self.scope,
             type=self.type,
-            value=float(value[0]),  # Convert numpy float to Python float
+            value=value,
         )

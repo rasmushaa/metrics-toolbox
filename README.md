@@ -19,30 +19,27 @@ A flexible toolbox for evaluating machine learning models with customizable metr
 
 ## Available Metrics
 
-- `roc_auc_micro`
-- `roc_auc_macro`
-- `roc_auc_target`
-- `accuracy`
+| Name | Figures | Settings |
+|------|---------|----------|
+| `accuracy`        | Confusion matrix  | confusion_normalization |
+| `precision_micro` | -                 | - |
+| `precision_macro` | -                 | - |
+| `precision_target`| -                 | target_name |
+| `roc_auc_micro`   | Traces            | - |
+| `roc_auc_macro`   | Traces            | - |
+| `roc_auc_target`  | Traces            | target_name |
 
 ## Available Reducers
 
-- `latest`
-- `mean`
-- `std`
-- `max`
-- `min`
-- `minmax`
+| Name | Explanation |
+|------|-------------|
+| `latest` | Returns the most recent metric value |
+| `mean` | Calculates the average of all metric values |
+| `std` | Computes the standard deviation of metric values |
+| `max` | Returns the maximum metric value |
+| `min` | Returns the minimum metric value |
+| `minmax` | Returns both minimum and maximum metric values |
 
-## Requirements
-
-- Python >= 3.11
-- matplotlib >= 3.10.0
-- numpy > 2.0.0
-- pillow >= 10.0.0
-- scikit-learn >= 1.4.0
-- setuptools >= 60.0.0
-- kiwisolver >= 1.4.6
-- scipy >= 1.7.0
 
 ## Installation
 
@@ -114,12 +111,6 @@ uv run pre-commit install
 ```bash
 # Run tests with coverage, coverage is included in toml
 uv run pytest
-
-# Run tests with minimum dependency versions (Included in devops also)
-./scripts/run_tests_lowest.sh
-
-# Run standard tests
-./scripts/run_tests.sh
 ```
 
 ### Code Quality
@@ -135,8 +126,9 @@ uv run pre-commit run
 ### Deployment
 
 The project uses automated CI/CD:
-- **Continuous Testing**: All branches trigger the matrix testing of supported Python version on commit via GitHub Actions
-- **Continuous Documentation**: Pushes to the main branch automatically updates the mkdocs API refence, and uses the Readme as the landing page.
+- **Continuous Testing**: `main` and `feature/**` branches trigger the matrix testing of supported Python version
+- **Continuous Requirements** `main` and `feature/**` branches trigger a job verifying test pipeline contains all python version listed on `pyproject.toml` *classifiers*
+- **Continuous Documentation**: Pushes to the `main` branch automatically updates the **mkdocs API** refence, and uses the Readme as the landing page.
 - **PyPI Deployment**: Create and push a version tag to main to trigger automated deployment to PyPI
 
 ```bash

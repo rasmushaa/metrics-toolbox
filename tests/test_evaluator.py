@@ -214,7 +214,5 @@ def test_evaluator_add_model_evaluation():
     print(results)
 
     assert results["values"]["accuracy_latest"] == pytest.approx(0.7, abs=0.0001)
-    assert results["values"]["roc_auc_target_1_latest"] == pytest.approx(
-        0.9166, abs=0.0001
-    )
+    assert results["values"]["roc_auc_1_latest"] == pytest.approx(0.9166, abs=0.0001)
     assert "roc_auc_curves" in results["figures"]
