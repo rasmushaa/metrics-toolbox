@@ -76,10 +76,8 @@ jobs:
       - name: Create virtual environment
         run: uv venv
 
-      - name: Install dependencies (latest)
-        if: matrix.deps == 'latest'
+      - name: Install dependencies
         run: |
-          echo "Installing with latest dependencies"
           uv pip install -e .[test]
 
       - name: Show environment info
@@ -91,8 +89,8 @@ jobs:
         run: |
           uv run pytest
 
-      - name: Upload coverage to Codecov with latest Python and deps
-        if: matrix.python-version == '3.12' && matrix.deps == 'latest'
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.12'
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
