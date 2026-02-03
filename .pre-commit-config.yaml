@@ -121,7 +121,7 @@ repos:
       # Updates Python version badge in README based on pyproject.toml
       - id: update-python-badge
         name: Update Python Version Badge
-        entry: python scripts/update_python_badge.py
+        entry: uv run python scripts/update_python_badge.py
         language: system
         pass_filenames: false
         files: ^(pyproject\.toml|README\.md)$
