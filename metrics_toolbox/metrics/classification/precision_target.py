@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.metrics import precision_score
 
 from metrics_toolbox.metrics.base_metric import Metric
 from metrics_toolbox.metrics.enums import (
@@ -37,7 +36,7 @@ class PrecisionTarget(Metric):
         return self.name.value + "_" + str(self.target_name)
 
     def compute(
-        self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str] = None
+        self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str]
     ) -> MetricResult:
         """Compute precision for label classification.
 
@@ -47,7 +46,7 @@ class PrecisionTarget(Metric):
             True binary labels in one-hot encoded format.
         y_pred : array-like of shape (n_samples, n_classes)
             Predicted binary labels in one-hot encoded format.
-        column_names : list[str], optional
+        column_names : list[str]
             Class names corresponding to column indices.
 
         Returns
@@ -56,23 +55,12 @@ class PrecisionTarget(Metric):
             The computed precision metric result.
         """
 
-        # Transform 2D one-hot encoded arrays to 1D label arrays using column_names
-        y_true_label = np.array([column_names[i] for i in y_true.argmax(axis=1)])
-        y_pred_label = np.array([column_names[i] for i in y_pred.argmax(axis=1)])
+        target_index = column_names.index(self.target_name)
 
-        value = precision_score(
-            y_true_label,
-            y_pred_label,
-            average=None,
-            labels=[
-                self.target_name
-            ],  # Computes precision for all labels, and returns an array
-            zero_division=0,
-        )
+        tp_c = sum((y_pred[:, target_index] == 1) & (y_true[:, target_index] == 1))
+        fp_c = sum((y_pred[:, target_index] == 1) & (y_true[:, target_index] == 0))
+        precision_c = tp_c / (tp_c + fp_c) if (tp_c + fp_c) > 0 else 0.0
 
         return MetricResult(
-            name=self.name,
-            scope=self.scope,
-            type=self.type,
-            value=float(value[0]),  # Convert numpy float to Python float
+            name=self.name, scope=self.scope, type=self.type, value=precision_c
         )

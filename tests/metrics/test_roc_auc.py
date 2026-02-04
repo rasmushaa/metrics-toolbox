@@ -3,9 +3,9 @@ import pytest
 
 from metrics_toolbox.encoding import toolbox_binarize_labels, toolbox_binarize_probs
 from metrics_toolbox.metrics.enums import MetricNameEnum, MetricScopeEnum
-from metrics_toolbox.metrics.prob.roc_auc_macro import RocAucMacro
-from metrics_toolbox.metrics.prob.roc_auc_micro import RocAucMicro
-from metrics_toolbox.metrics.prob.roc_auc_target import RocAucTarget
+from metrics_toolbox.metrics.probability.roc_auc_macro import RocAucMacro
+from metrics_toolbox.metrics.probability.roc_auc_micro import RocAucMicro
+from metrics_toolbox.metrics.probability.roc_auc_target import RocAucTarget
 
 
 def test_roc_auc_target_compute():

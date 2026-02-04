@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.metrics import precision_score
 
 from metrics_toolbox.metrics.base_metric import Metric
 from metrics_toolbox.metrics.enums import (
@@ -10,10 +9,10 @@ from metrics_toolbox.metrics.enums import (
 from metrics_toolbox.metrics.results import MetricResult
 
 
-class PrecisionMacro(Metric):
+class PrecisionMicro(Metric):
     _name = MetricNameEnum.PRECISION
     _type = MetricTypeEnum.LABELS
-    _scope = MetricScopeEnum.MACRO
+    _scope = MetricScopeEnum.MICRO
 
     def __init__(self):
         """Initialize Precision metric for binary classification."""
@@ -38,16 +37,13 @@ class PrecisionMacro(Metric):
             The computed precision metric result.
         """
 
-        # Transform 2D one-hot encoded arrays to 1D label arrays using column_names
-        y_true_label = np.array([column_names[i] for i in y_true.argmax(axis=1)])
-        y_pred_label = np.array([column_names[i] for i in y_pred.argmax(axis=1)])
+        y_true_flat = y_true.ravel()
+        y_pred_flat = y_pred.ravel()
 
-        value = precision_score(
-            y_true_label,
-            y_pred_label,
-            average="macro",
-            zero_division=0,
-        )
+        tp = sum((y_pred_flat == 1) & (y_true_flat == 1))
+        fp = sum((y_pred_flat == 1) & (y_true_flat == 0))
+
+        value = tp / (tp + fp) if (tp + fp) > 0 else 0.0
 
         return MetricResult(
             name=self.name,

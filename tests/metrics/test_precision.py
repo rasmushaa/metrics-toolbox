@@ -2,10 +2,10 @@ import numpy as np
 import pytest
 
 from metrics_toolbox.encoding import toolbox_binarize_labels
+from metrics_toolbox.metrics.classification.precision_macro import PrecisionMacro
+from metrics_toolbox.metrics.classification.precision_micro import PrecisionMicro
+from metrics_toolbox.metrics.classification.precision_target import PrecisionTarget
 from metrics_toolbox.metrics.enums import MetricNameEnum, MetricScopeEnum
-from metrics_toolbox.metrics.label.precision_macro import PrecisionMacro
-from metrics_toolbox.metrics.label.precision_micro import PrecisionMicro
-from metrics_toolbox.metrics.label.precision_target import PrecisionTarget
 
 
 def test_precision_target_compute():

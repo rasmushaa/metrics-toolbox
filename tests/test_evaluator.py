@@ -8,9 +8,9 @@ from metrics_toolbox.metrics.base_metric import (
     MetricScopeEnum,
     MetricTypeEnum,
 )
+from metrics_toolbox.metrics.classification.accuracy import Accuracy
 from metrics_toolbox.metrics.enums import MetricNameEnum
-from metrics_toolbox.metrics.label.accuracy import Accuracy
-from metrics_toolbox.metrics.prob.roc_auc_target import RocAucTarget
+from metrics_toolbox.metrics.probability.roc_auc_target import RocAucTarget
 from metrics_toolbox.reducers.registry import ReducerEnum
 from metrics_toolbox.spec import MetricSpec
 

@@ -2,8 +2,8 @@ import numpy as np
 import pytest
 
 from metrics_toolbox.encoding import toolbox_binarize_labels
+from metrics_toolbox.metrics.classification.accuracy import Accuracy
 from metrics_toolbox.metrics.enums import MetricNameEnum, MetricScopeEnum
-from metrics_toolbox.metrics.label.accuracy import Accuracy
 
 
 def test_accuracy_compute():

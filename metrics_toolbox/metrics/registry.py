@@ -9,13 +9,13 @@ you have to use the Enumerator values as keys.
 
 from enum import Enum
 
-from .label.accuracy import Accuracy
-from .label.precision_macro import PrecisionMacro
-from .label.precision_micro import PrecisionMicro
-from .label.precision_target import PrecisionTarget
-from .prob.roc_auc_macro import RocAucMacro
-from .prob.roc_auc_micro import RocAucMicro
-from .prob.roc_auc_target import RocAucTarget
+from .classification.accuracy import Accuracy
+from .classification.precision_macro import PrecisionMacro
+from .classification.precision_micro import PrecisionMicro
+from .classification.precision_target import PrecisionTarget
+from .probability.roc_auc_macro import RocAucMacro
+from .probability.roc_auc_micro import RocAucMicro
+from .probability.roc_auc_target import RocAucTarget
 
 
 class MetricEnum(Enum):
