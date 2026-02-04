@@ -9,13 +9,13 @@ from metrics_toolbox.metrics.enums import (
 from metrics_toolbox.metrics.results import MetricResult
 
 
-class PrecisionTarget(Metric):
-    _name = MetricNameEnum.PRECISION
+class F1ScoreTarget(Metric):
+    _name = MetricNameEnum.F1_SCORE
     _type = MetricTypeEnum.LABELS
     _scope = MetricScopeEnum.TARGET
 
     def __init__(self, target_name: str):
-        """Initialize Precision metric for classification.
+        """Initialize F1 score metric for classification.
 
         Parameters
         ----------
@@ -38,7 +38,7 @@ class PrecisionTarget(Metric):
     def compute(
         self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str]
     ) -> MetricResult:
-        """Compute precision for label classification.
+        """Compute F1 score for label classification.
 
         Parameters
         ----------
@@ -52,15 +52,19 @@ class PrecisionTarget(Metric):
         Returns
         -------
         MetricResult
-            The computed precision metric result.
+            The computed F1 score metric result.
         """
 
         target_index = column_names.index(self.target_name)
 
         tp_c = sum((y_pred[:, target_index] == 1) & (y_true[:, target_index] == 1))
+        fn_c = sum((y_pred[:, target_index] == 0) & (y_true[:, target_index] == 1))
         fp_c = sum((y_pred[:, target_index] == 1) & (y_true[:, target_index] == 0))
-        precision_c = tp_c / (tp_c + fp_c) if (tp_c + fp_c) > 0 else 0.0
+
+        f1_c = (
+            2 * tp_c / (2 * tp_c + fn_c + fp_c) if (2 * tp_c + fn_c + fp_c) > 0 else 0.0
+        )
 
         return MetricResult(
-            name=self.name, scope=self.scope, type=self.type, value=precision_c
+            name=self.name, scope=self.scope, type=self.type, value=f1_c
         )

@@ -9,18 +9,18 @@ from metrics_toolbox.metrics.enums import (
 from metrics_toolbox.metrics.results import MetricResult
 
 
-class PrecisionMicro(Metric):
-    _name = MetricNameEnum.PRECISION
+class F1ScoreMacro(Metric):
+    _name = MetricNameEnum.F1_SCORE
     _type = MetricTypeEnum.LABELS
-    _scope = MetricScopeEnum.MICRO
+    _scope = MetricScopeEnum.MACRO
 
     def __init__(self):
-        """Initialize Precision metric for classification."""
+        """Initialize F1 score metric for classification."""
 
     def compute(
         self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str] = None
     ) -> MetricResult:
-        """Compute precision for label classification.
+        """Compute F1 score for label classification.
 
         Parameters
         ----------
@@ -34,16 +34,21 @@ class PrecisionMicro(Metric):
         Returns
         -------
         MetricResult
-            The computed precision metric result.
+            The computed F1 score metric result.
         """
 
-        y_true_flat = y_true.ravel()
-        y_pred_flat = y_pred.ravel()
-
-        tp = sum((y_pred_flat == 1) & (y_true_flat == 1))
-        fp = sum((y_pred_flat == 1) & (y_true_flat == 0))
-
-        value = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+        value = 0.0
+        for i in range(len(column_names)):
+            tp_c = sum((y_pred[:, i] == 1) & (y_true[:, i] == 1))
+            fn_c = sum((y_pred[:, i] == 0) & (y_true[:, i] == 1))
+            fp_c = sum((y_pred[:, i] == 1) & (y_true[:, i] == 0))
+            f1_c = (
+                2 * tp_c / (2 * tp_c + fn_c + fp_c)
+                if (2 * tp_c + fn_c + fp_c) > 0
+                else 0.0
+            )
+            value += f1_c
+        value /= len(column_names)
 
         return MetricResult(
             name=self.name,

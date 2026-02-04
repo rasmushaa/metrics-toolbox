@@ -18,13 +18,18 @@ A flexible toolbox for evaluating machine learning models with customizable metr
 - **Visualization Support**: Generate ROC curves and other visualizations
 
 ## Available Metrics
-
 | Name | Figures | Settings |
 |------|---------|----------|
 | `accuracy`        | Confusion matrix  | confusion_normalization |
 | `precision_micro` | -                 | - |
 | `precision_macro` | -                 | - |
 | `precision_target`| -                 | target_name |
+| `recall_micro`    | -                 | - |
+| `recall_macro`    | -                 | - |
+| `recall_target`   | -                 | target_name |
+| `f1_score_micro`  | -                 | - |
+| `f1_score_macro`  | -                 | - |
+| `f1_score_target` | -                 | target_name |
 | `roc_auc_micro`   | Traces            | - |
 | `roc_auc_macro`   | Traces            | - |
 | `roc_auc_target`  | Traces            | target_name |

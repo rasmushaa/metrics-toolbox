@@ -9,18 +9,18 @@ from metrics_toolbox.metrics.enums import (
 from metrics_toolbox.metrics.results import MetricResult
 
 
-class PrecisionMicro(Metric):
-    _name = MetricNameEnum.PRECISION
+class RecallMicro(Metric):
+    _name = MetricNameEnum.RECALL
     _type = MetricTypeEnum.LABELS
     _scope = MetricScopeEnum.MICRO
 
     def __init__(self):
-        """Initialize Precision metric for classification."""
+        """Initialize Recall metric for classification."""
 
     def compute(
         self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str] = None
     ) -> MetricResult:
-        """Compute precision for label classification.
+        """Compute recall for label classification.
 
         Parameters
         ----------
@@ -34,16 +34,16 @@ class PrecisionMicro(Metric):
         Returns
         -------
         MetricResult
-            The computed precision metric result.
+            The computed recall metric result.
         """
 
         y_true_flat = y_true.ravel()
         y_pred_flat = y_pred.ravel()
 
         tp = sum((y_pred_flat == 1) & (y_true_flat == 1))
-        fp = sum((y_pred_flat == 1) & (y_true_flat == 0))
+        fn = sum((y_pred_flat == 0) & (y_true_flat == 1))
 
-        value = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+        value = tp / (tp + fn) if (tp + fn) > 0 else 0.0
 
         return MetricResult(
             name=self.name,

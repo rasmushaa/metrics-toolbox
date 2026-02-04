@@ -15,7 +15,7 @@ class PrecisionMacro(Metric):
     _scope = MetricScopeEnum.MACRO
 
     def __init__(self):
-        """Initialize Precision metric for binary classification."""
+        """Initialize Precision metric for classification."""
 
     def compute(
         self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str] = None
