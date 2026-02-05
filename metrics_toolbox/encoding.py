@@ -62,3 +62,25 @@ def toolbox_binarize_probs(y_pred: np.ndarray) -> np.ndarray:
     if y_pred.ndim == 1:
         y_pred = np.column_stack([1 - y_pred, y_pred])  # [false, true] convention
     return y_pred
+
+
+def toolbox_widen_series(y: np.ndarray) -> np.ndarray:
+    """Widen regression targets to 2D array format.
+
+    Converts 1D regression target arrays to 2D format with a single column,
+    ensuring consistency across all metric computations in the toolbox.
+
+    Parameters
+    ----------
+    y : array-like of shape (n_samples,) or (n_samples, n_targets)
+        Regression target values.
+
+    Returns
+    -------
+    y_widened : ndarray of shape (n_samples, n_targets)
+        Widened regression target values.
+    """
+    y = np.asarray(y)
+    if y.ndim == 1:
+        y = y.reshape(-1, 1)  # Convert to (n_samples, 1)
+    return y

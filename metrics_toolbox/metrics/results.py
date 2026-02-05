@@ -29,3 +29,12 @@ class MetricResult:
     value: float
     metadata: Optional[Dict[str, Any]] = None
     options: Optional[Dict[str, Any]] = None
+
+    def __repr__(self) -> str:
+        return (
+            f"MetricResult(\n"
+            f"    name={self.name.value}, scope={self.scope.value}, type={self.type.value}, \n"
+            f"    value={self.value}, \n"
+            f"    metadata={self.metadata}, \n"
+            f"    options={self.options})"
+        )

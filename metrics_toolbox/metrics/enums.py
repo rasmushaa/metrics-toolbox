@@ -5,7 +5,7 @@ This module contains the:
 
 - **MetricScopeEnum:** Metric scopes (micro, macro, class).
 
-- **MetricTypeEnum:** The type of data the metric operates on (probabilities or labels).
+- **MetricTypeEnum:** The type of data the metric operates on (probabilities, labels, or scores).
 
 The metrics and their scopes are separated to allow flexible combinations,
 and easily identify the metric name and scope individually in the codebase.
@@ -22,6 +22,8 @@ class MetricNameEnum(Enum):
     ACCURACY = "accuracy"
     RECALL = "recall"
     F1_SCORE = "f1_score"
+    MSE = "mse"
+    RMSE = "rmse"
 
 
 class MetricScopeEnum(Enum):
@@ -54,7 +56,10 @@ class MetricTypeEnum(Enum):
         Metric operates on predicted probabilities 0-1.
     LABELS : str
         Metric operates on predicted class labels, string or int.
+    SCORES : str
+        Metric operates on predicted scores, e.g. regression predictions.
     """
 
     PROBS = "probs"
     LABELS = "labels"
+    SCORES = "scores"

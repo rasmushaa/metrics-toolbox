@@ -98,12 +98,12 @@ display(result['figures']['confusion_matrices'])
 ```
 
 ## Usage
-To see examples how to
-- Get help, see the [help notebook](examples/help.ipynb)
-- Use the builder pattern, see [builder examples notebook](examples/builder.ipynb)
-- Binary classification model evaluation [binary model notebook](examples/binary_classification.ipynb)
-- Multiclass classification model evaluation [multiclass model notebook](examples/mutliclass_classification.ipynb)
-- Custome model evaluaton <TODO>
+To see examples how to:
+- Get help, see the [help notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/help.ipynb)
+- Use the builder pattern, see the [builder examples notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/builder.ipynb)
+- Binary classification model evaluation, see the [binary model notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/binary_classification.ipynb)
+- Multiclass classification model evaluation, see the [multiclass model notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/mutliclass_classification.ipynb)
+- Custom model evaluation <TODO>
 
 ## Development
 
