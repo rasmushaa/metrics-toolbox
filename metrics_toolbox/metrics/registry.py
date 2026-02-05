@@ -10,6 +10,9 @@ you have to use the Enumerator values as keys.
 from enum import Enum
 
 from .classification.accuracy import Accuracy
+from .classification.f1_score_macro import F1ScoreMacro
+from .classification.f1_score_micro import F1ScoreMicro
+from .classification.f1_score_target import F1ScoreTarget
 from .classification.precision_macro import PrecisionMacro
 from .classification.precision_micro import PrecisionMicro
 from .classification.precision_target import PrecisionTarget
@@ -25,6 +28,10 @@ class MetricEnum(Enum):
     """Enumeration of available metrics."""
 
     ACCURACY = Accuracy
+
+    F1_SCORE_MICRO = F1ScoreMicro
+    F1_SCORE_MACRO = F1ScoreMacro
+    F1_SCORE_TARGET = F1ScoreTarget
 
     PRECISION_MICRO = PrecisionMicro
     PRECISION_MACRO = PrecisionMacro

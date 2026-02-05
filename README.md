@@ -1,4 +1,4 @@
-# Metrics Toolbox (readme under dev...)
+# Metrics Toolbox
 
 A flexible toolbox for evaluating machine learning models with customizable metrics and reducers.
 
@@ -55,89 +55,108 @@ pip install metrics-toolbox
 ## Quick Start
 
 ```python
-from metrics_toolbox import EvaluatorBuilder
 from sklearn.datasets import load_breast_cancer, load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+
+from metrics_toolbox import EvaluatorBuilder
 import numpy as np
 
-# Train a model with predict, and predict_proba methods
+# 1. Load dataset
 X, y = load_breast_cancer(return_X_y=True)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-model = RandomForestClassifier(n_estimators=100, random_state=42)
+# 2. Train a model
+model = RandomForestClassifier(n_estimators=2, random_state=42, max_depth=3)
 model.fit(X_train, y_train)
 
-# 2. Build evaluator with multiple metrics and reducers
+# 3. Build evaluator with multiple metrics, you can mix and match classification and probabilistic metrics
 evaluator = (
     EvaluatorBuilder()
     .add_metric("roc_auc_target", target_name=1, reducers=["mean", "std"])
     .add_metric("accuracy", reducers=["mean", "std"])
+    .add_metric("precision_target", target_name=1)
+    .add_metric("recall_target", target_name=1)
+    .add_metric("f1_score_target", target_name=1, reducers=["mean", "minmax"])
 ).build()
 
-# 3. Evaluate model directly using multiple folds
+# 4. Evaluate model directly
 evaluator.add_model_evaluation(model, X_test, y_test)
+
+# 5. Add another evaluation on training set for comparison
 evaluator.add_model_evaluation(model, X_train, y_train)
 
-# 4. Get aggregated results, history, and plots
+# 6. Get results
 result = evaluator.get_results()
-display(result)
+display(result['values'])
+display(result['steps'])
+display(result['figures'])
 
-# 5. View figures
+# 7. View figures
 display(result['figures']['roc_auc_curves'])
 display(result['figures']['confusion_matrices'])
 ```
 
 ## Usage
 To see examples how to
-- Use the builder pattern, see [builder examples notebook](examples/builder.ipynb)
 - Get help, see the [help notebook](examples/help.ipynb)
-- Use cases for model evaluation, see the [usecases notebook](examples/usecases.ipynb)
+- Use the builder pattern, see [builder examples notebook](examples/builder.ipynb)
+- Binary classification model evaluation [binary model notebook](examples/binary_classification.ipynb)
+- Multiclass classification model evaluation [multiclass model notebook](examples/mutliclass_classification.ipynb)
 - Custome model evaluaton <TODO>
 
 ## Development
 
 ### Setup
 
+This project uses [uv](https://github.com/astral-sh/uv) for dependency management.
+
 ```bash
 # Clone the repository
 git clone https://github.com/rasmushaa/metrics-toolbox.git
 cd metrics-toolbox
 
-# Install dependencies with uv
+# Install in editable mode with development dependencies
 uv pip install -e ".[dev]"
 
-# Install pre-commit hooks
+# Set up pre-commit hooks
 uv run pre-commit install
 ```
 
 ### Testing
 
+Run the test suite with coverage reporting:
+
 ```bash
-# Run tests with coverage, coverage is included in toml
 uv run pytest
 ```
 
+Coverage configuration is specified in `pyproject.toml`.
+
 ### Code Quality
 
+The project uses pre-commit hooks to maintain code quality:
+
 ```bash
-# Run pre-commit hooks on all files
+# Run all hooks on all files
 uv run pre-commit run --all-files
 
-# Run pre-commit on staged files only
+# Run hooks on staged files only
 uv run pre-commit run
 ```
 
 ### Deployment
 
-The project uses automated CI/CD:
-- **Continuous Testing**: `main` and `feature/**` branches trigger the matrix testing of supported Python version
-- **Continuous Requirements** `main` and `feature/**` branches trigger a job verifying test pipeline contains all python version listed on `pyproject.toml` *classifiers*
-- **Continuous Documentation**: Pushes to the `main` branch automatically updates the **mkdocs API** refence, and uses the Readme as the landing page.
-- **PyPI Deployment**: Create and push a version tag to main to trigger automated deployment to PyPI
+The project uses automated CI/CD workflows:
+
+- **Continuous Testing**: Matrix testing across supported Python versions on `main` and `feature/**` branches
+- **Requirements Validation**: Ensures test pipeline covers all Python versions listed in `pyproject.toml` classifiers
+- **Documentation**: Automatically updates MkDocs API reference and deploys documentation on pushes to `main`
+- **PyPI Publishing**: Automated deployment triggered by version tags
+
+To release a new version:
 
 ```bash
-# Deploy new version to PyPI
 git tag v0.1.0
 git push origin v0.1.0
 ```
