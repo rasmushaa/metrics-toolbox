@@ -2,7 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - 'feature/**'
   pull_request:
   workflow_dispatch:
 
@@ -58,8 +60,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12"]
-        deps: [latest, lowest]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
@@ -75,18 +76,9 @@ jobs:
       - name: Create virtual environment
         run: uv venv
 
-      - name: Install dependencies (latest)
-        if: matrix.deps == 'latest'
+      - name: Install dependencies
         run: |
-          echo "Installing with latest dependencies"
           uv pip install -e .[test]
-
-      - name: Install dependencies (lowest)
-        if: matrix.deps == 'lowest'
-        run: |
-          echo "Installing with lowest-direct resolution"
-          uv pip compile pyproject.toml --resolution lowest -o constraints.txt
-          uv pip install -r constraints.txt -e .[test]
 
       - name: Show environment info
         run: |
@@ -97,8 +89,8 @@ jobs:
         run: |
           uv run pytest
 
-      - name: Upload coverage to Codecov with latest Python and deps
-        if: matrix.python-version == '3.12' && matrix.deps == 'latest'
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.12'
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

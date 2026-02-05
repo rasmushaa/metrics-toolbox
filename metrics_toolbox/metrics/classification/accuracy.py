@@ -42,7 +42,7 @@ class Accuracy(Metric):
         y_pred : array-like of shape (n_samples, n_classes)
             Predicted binary labels in one-hot encoded format.
         column_names : list[str]
-            Class names corresponding to the binary labels.
+            Class names corresponding to column indices.
 
         Returns
         -------

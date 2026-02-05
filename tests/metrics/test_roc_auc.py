@@ -3,9 +3,9 @@ import pytest
 
 from metrics_toolbox.encoding import toolbox_binarize_labels, toolbox_binarize_probs
 from metrics_toolbox.metrics.enums import MetricNameEnum, MetricScopeEnum
-from metrics_toolbox.metrics.prob.roc_auc_macro import RocAucMacro
-from metrics_toolbox.metrics.prob.roc_auc_micro import RocAucMicro
-from metrics_toolbox.metrics.prob.roc_auc_target import RocAucTarget
+from metrics_toolbox.metrics.probability.roc_auc_macro import RocAucMacro
+from metrics_toolbox.metrics.probability.roc_auc_micro import RocAucMicro
+from metrics_toolbox.metrics.probability.roc_auc_target import RocAucTarget
 
 
 def test_roc_auc_target_compute():
@@ -27,10 +27,7 @@ def test_roc_auc_target_compute():
 
     assert result.name == MetricNameEnum.ROC_AUC
     assert result.scope == MetricScopeEnum.TARGET
-    assert (
-        metric.id
-        == MetricNameEnum.ROC_AUC.value + "_" + MetricScopeEnum.TARGET.value + "_1"
-    )
+    assert metric.id == MetricNameEnum.ROC_AUC.value + "_1"
     assert "fpr" in result.metadata
     assert "tpr" in result.metadata
     assert result.value == pytest.approx(0.9166, abs=0.0001)

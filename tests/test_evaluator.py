@@ -8,9 +8,12 @@ from metrics_toolbox.metrics.base_metric import (
     MetricScopeEnum,
     MetricTypeEnum,
 )
+from metrics_toolbox.metrics.classification.accuracy import Accuracy
+from metrics_toolbox.metrics.classification.f1_score_target import F1ScoreTarget
+from metrics_toolbox.metrics.classification.precision_target import PrecisionTarget
+from metrics_toolbox.metrics.classification.recall_target import RecallTarget
 from metrics_toolbox.metrics.enums import MetricNameEnum
-from metrics_toolbox.metrics.label.accuracy import Accuracy
-from metrics_toolbox.metrics.prob.roc_auc_target import RocAucTarget
+from metrics_toolbox.metrics.probability.roc_auc_target import RocAucTarget
 from metrics_toolbox.reducers.registry import ReducerEnum
 from metrics_toolbox.spec import MetricSpec
 
@@ -203,6 +206,15 @@ def test_evaluator_add_model_evaluation():
             MetricSpec(
                 Accuracy(),
             ),
+            MetricSpec(
+                PrecisionTarget(target_name=1),
+            ),
+            MetricSpec(
+                RecallTarget(target_name=1),
+            ),
+            MetricSpec(
+                F1ScoreTarget(target_name=1),
+            ),
         ]
     )
 
@@ -214,7 +226,8 @@ def test_evaluator_add_model_evaluation():
     print(results)
 
     assert results["values"]["accuracy_latest"] == pytest.approx(0.7, abs=0.0001)
-    assert results["values"]["roc_auc_target_1_latest"] == pytest.approx(
-        0.9166, abs=0.0001
-    )
+    assert results["values"]["roc_auc_1_latest"] == pytest.approx(0.9166, abs=0.0001)
     assert "roc_auc_curves" in results["figures"]
+    assert results["values"]["precision_1_latest"] == pytest.approx(0.6, abs=0.0001)
+    assert results["values"]["recall_1_latest"] == pytest.approx(0.75, abs=0.0001)
+    assert results["values"]["f1_score_1_latest"] == pytest.approx(0.66666, abs=0.0001)

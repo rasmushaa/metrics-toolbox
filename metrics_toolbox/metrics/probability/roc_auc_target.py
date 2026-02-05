@@ -34,7 +34,7 @@ class RocAucTarget(Metric):
         str
             The unique identifier.
         """
-        return f"{self.name.value}_{self.scope.value}_{self.target_name}"
+        return f"{self.name.value}_{self.target_name}"
 
     def compute(
         self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str]
