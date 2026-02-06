@@ -41,10 +41,10 @@ class RMSETarget(MSETarget):
         # Scale the MSE value to RMSE by taking the square root
         rmse_value = np.sqrt(mse_result.value)
         rmse_metadata = mse_result.metadata.copy()
-        rmse_metadata["rmse_array"] = np.sqrt(rmse_metadata["mse_array"]).tolist()
-        del rmse_metadata["mse_array"]
+        rmse_metadata["error"] = np.sqrt(rmse_metadata["error"]).tolist()
         rmse_metadata["y_true"] = mse_result.metadata["y_true"]
         rmse_metadata["y_pred"] = mse_result.metadata["y_pred"]
+        rmse_metadata["indices"] = mse_result.metadata.get("indices", None)
 
         return MetricResult(
             name=self._name,
@@ -52,4 +52,5 @@ class RMSETarget(MSETarget):
             type=self._type,
             value=rmse_value,
             metadata=rmse_metadata,
+            options=mse_result.options,
         )

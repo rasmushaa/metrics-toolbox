@@ -10,6 +10,93 @@ from sklearn.metrics import ConfusionMatrixDisplay
 from .metrics.results import MetricResult
 
 
+def plot_regression_lines(
+    regression_results: Dict[str, List[MetricResult]], pad_percent: float = 25.0
+) -> plt.Figure:
+    """Plot regression lines from regression metrics metadata.
+
+    Parameters
+    ----------
+    regression_results : Dict[str, List[MetricResult]],
+        A dictionary mapping metric names to lists of MetricResult objects.
+    pad_percent : float, optional
+        Percentage of padding to add to the y-axis limits
+        to prevent regression lines and error lines from overlapping.
+
+    Returns
+    -------
+    plt.Figure
+        The matplotlib Figure object containing the plotted regression lines. Closed to prevent display upon creation.
+    """
+    n_results = len(regression_results)
+    n_cols = 1
+    fig, ax = plt.subplots(
+        n_results, n_cols, figsize=(18 * n_cols, 4 * n_results), dpi=100
+    )
+
+    # Flatten ax array for easy indexing, even if there's only one subplot
+    if n_results == 1:
+        ax = [ax]
+    else:
+        ax = ax.flatten()
+
+    # Plot each regression line with true vs predicted values
+    for i, (_, results_list) in enumerate(regression_results.items()):
+
+        # Use ONLY the most recent result for plotting (last in history)
+        result = results_list[-1]
+
+        # Metadata values for plotting
+        metric = result.name.value
+        y_true = result.metadata["y_true"]
+        y_pred = result.metadata["y_pred"]
+        error = result.metadata.get("error", None)
+        indices = result.metadata.get("indices", None)
+        options = result.options or {}
+        target_name = options.get("target_name", f"Unknown Target {i+1}")
+
+        # Use indices for x-axis if provided, otherwise use range of y_true
+        if indices is None:
+            indices = np.arange(len(y_true))
+
+        ax[i].set_title(f"{target_name} - ({metric} = {result.value:.4f})")
+        ax[i].set_xlabel("Index")
+        ax[i].set_ylabel("Value")
+        ax[i].plot(indices, y_true, alpha=0.5, color="grey", label=f"Actual")
+        ax[i].plot(indices, y_pred, alpha=0.8, color="darkgreen", label=f"Predicted")
+
+        # Use 95th percentile to set limits and remove large outliers
+        y_combined = np.concatenate([y_true, y_pred])
+        y_min = np.percentile(y_combined, 2.5)
+        y_max = np.percentile(y_combined, 97.5)
+        y_range = y_max - y_min
+        pad_amount = y_range * (pad_percent / 100.0)
+        ax[i].set_ylim(
+            y_min - pad_amount, y_max + pad_amount * 0.01
+        )  # Add a tiny bit of extra padding to the top as well
+
+        if error is not None:
+            ax2 = ax[i].twinx()
+            ax2.plot(indices, error, alpha=0.2, color="red", label=f"Error")
+            ax2.set_ylabel(f"Error {metric}")
+
+            # Set error axis so error_max is at pad_percent of the total y-axis height
+            error_combined = np.concatenate([error])
+            error_min = np.percentile(error_combined, 2.5)
+            error_max = np.percentile(error_combined, 97.5)
+            error_range = error_max - error_min
+            upper_limit = error_min + error_range * (100.0 / pad_percent)
+            ax2.set_ylim(error_min, upper_limit)
+
+            ax2.legend(loc="upper right")
+        ax[i].legend(loc="upper left")
+        ax[i].grid(ls="--", alpha=0.5, color="gray")
+
+    plt.tight_layout()
+    plt.close(fig)
+    return fig
+
+
 def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
     """Plot confusion matrices from accuracy metrics metadata.
 

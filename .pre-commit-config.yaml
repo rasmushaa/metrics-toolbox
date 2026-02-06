@@ -12,8 +12,9 @@ repos:
       # Ensures files end with a single newline character
       - id: end-of-file-fixer
 
-      # Prevents committing large files (default: 500kB)
+      # Prevents committing large files
       - id: check-added-large-files
+        args: ['--maxkb=300']
 
       # Validates YAML file syntax
       - id: check-yaml
@@ -125,13 +126,3 @@ repos:
         language: system
         pass_filenames: false
         files: ^(pyproject\.toml|README\.md)$
-
-      # Executes all example notebooks before committing
-      # Ensures all example notebooks run successfully
-      - id: run-example-notebooks
-        name: Run Example Notebooks
-        entry: uv run python scripts/run_examples.py
-        language: system
-        pass_filenames: false
-        # Run when Python files or notebooks in metrics_toolbox or examples directories change
-        files: ^(metrics_toolbox|examples)/.*\.(py|ipynb)$

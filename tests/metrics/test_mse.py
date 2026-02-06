@@ -31,7 +31,7 @@ def test_mse_target_compute():
     assert result.value == pytest.approx(5 / 7, abs=0.0001)
     assert result.metadata["y_true"] == [1.0, -3.0, 0.0]
     assert result.metadata["y_pred"] == [2.0, -5.0, 0.0]
-    assert result.metadata["mse_array"] == [1.0, 4.0, 0.0]
+    assert result.metadata["error"] == [1.0, 4.0, 0.0]
 
 
 def test_rmse_target_compute():
@@ -58,10 +58,7 @@ def test_rmse_target_compute():
     )  # RMSE is the square root of MSE
     assert result.metadata["y_true"] == [1.0, -3.0, 0.0]
     assert result.metadata["y_pred"] == [2.0, -5.0, 0.0]
-    assert result.metadata["rmse_array"] == np.sqrt([1.0, 4.0, 0.0]).tolist()
-    assert (
-        "mse_array" not in result.metadata
-    ), "MSE array should be removed from metadata in RMSETarget compute method"
+    assert result.metadata["error"] == np.sqrt([1.0, 4.0, 0.0]).tolist()
 
 
 def test_mse_macro_compute():

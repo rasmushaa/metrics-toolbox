@@ -88,7 +88,12 @@ class MSETarget(Metric):
             metadata={
                 "y_true": y_true_sampled.tolist(),
                 "y_pred": y_pred_sampled.tolist(),
-                "mse_array": mse_array_sampled.tolist(),
+                "error": mse_array_sampled.tolist(),
+                "indices": (
+                    indices.tolist()
+                    if len(y_true) > self.metadata_series_length
+                    else None
+                ),
             },
             options={"target_name": self.target_name},
         )

@@ -103,6 +103,7 @@ To see examples how to:
 - Use the builder pattern, see the [builder examples notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/builder.ipynb)
 - Binary classification model evaluation, see the [binary model notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/binary_classification.ipynb)
 - Multiclass classification model evaluation, see the [multiclass model notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/mutliclass_classification.ipynb)
+- Multivariate regression model evaluation, see the [regression model notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/regression.ipynb)
 - Custom model evaluation <TODO>
 
 ## Development

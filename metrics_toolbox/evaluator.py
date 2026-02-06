@@ -1,11 +1,23 @@
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import numpy as np
 from matplotlib import pyplot as plt
 
-from metrics_toolbox.encoding import toolbox_binarize_labels, toolbox_binarize_probs
-from metrics_toolbox.metrics.enums import MetricNameEnum, MetricTypeEnum
-from metrics_toolbox.plots import plot_auc_curves, plot_confusion_matrix
+from metrics_toolbox.encoding import (
+    toolbox_binarize_labels,
+    toolbox_binarize_probs,
+    toolbox_widen_series,
+)
+from metrics_toolbox.metrics.enums import (
+    MetricNameEnum,
+    MetricScopeEnum,
+    MetricTypeEnum,
+)
+from metrics_toolbox.plots import (
+    plot_auc_curves,
+    plot_confusion_matrix,
+    plot_regression_lines,
+)
 from metrics_toolbox.spec import MetricSpec
 
 
@@ -53,7 +65,7 @@ class MetricEvaluator:
         self,
         y_true: np.ndarray,
         y_pred: np.ndarray,
-        column_names: List[str],
+        column_names: List[str | int],
     ):
         """Evaluate PROB metrics and add new step to history.
 
@@ -63,7 +75,7 @@ class MetricEvaluator:
             True labels. Ints or strings.
         y_pred : np.ndarray
             Predicted probabilities. Shape (n_samples, n_classes).
-        column_names : List[str],
+        column_names : List[str | int],
             The names of the columns/classes the input arrays correspond to.
         """
         y_true = np.asarray(y_true)  # Ensure numpy array, if not already
@@ -103,7 +115,7 @@ class MetricEvaluator:
         self,
         y_true: np.ndarray,
         y_pred: np.ndarray,
-        column_names: List[str],
+        column_names: List[str | int],
     ):
         """Evaluate LABEL metrics and add new step to history.
 
@@ -113,7 +125,7 @@ class MetricEvaluator:
             True labels. Ints or strings.
         y_pred : np.ndarray
             Predicted labels. Ints or strings.
-        column_names : List[str],
+        column_names : List[str | int],
             The names of the columns/classes the input arrays correspond to.
         """
         y_true = np.asarray(y_true)  # Ensure numpy array, if not already
@@ -145,10 +157,51 @@ class MetricEvaluator:
                 column_names=column_names,
             )
 
-    def add_model_evaluation(self, model, X: np.ndarray, y_true: np.ndarray):
+    def add_regression_evaluation(
+        self,
+        y_true: np.ndarray,
+        y_pred: np.ndarray,
+        column_names: List[str | int],
+    ):
+        """Evaluate SCORE metrics and add new step to history.
+
+        Parameters
+        ----------
+        y_true : np.ndarray
+            True series values. Shape (n_samples, n_targets).
+        y_pred : np.ndarray
+            Predicted series values. Shape (n_samples, n_targets).
+        column_names : List[str | int],
+            The names of the columns/classes the input arrays correspond to.
+        """
+        y_true = np.asarray(y_true)  # Ensure numpy array, if not already
+        y_pred = np.asarray(y_pred)
+
+        self.__validate_common_inputs(
+            y_true=y_true,
+            y_pred=y_pred,
+            column_names=column_names,
+        )
+
+        # Get SCORE metric specs and compute
+        score_specs = self.__get_regression_specs()
+        for spec in score_specs:
+            spec.compute(
+                y_true=y_true,
+                y_pred=y_pred,
+                column_names=column_names,
+            )
+
+    def add_model_evaluation(
+        self,
+        model,
+        X: np.ndarray,
+        y_true: np.ndarray,
+        column_names: Optional[List[str | int]] = None,
+    ):
         """Evaluate a model and all included metrics.
 
-        This method does not what your model **predict()** methods returns,
+        This method does not know what your model **predict()** method returns,
         and it is assumed you only include compatible metrics in the evaluator.
         For example, classifier and regressor have the same predict() method signature,
         but you should not mix classification and regression metrics in the same evaluator.
@@ -159,7 +212,9 @@ class MetricEvaluator:
 
         - **add_prob_evaluation()**
 
-        and you are able to inherit the Evaluator and crate your own model evaluation logic.
+        - **add_regression_evaluation()**
+
+        and you are able to inherit the Evaluator and create your own model evaluation logic.
         You can build custom evaluators using the **EvaluatorBuilder**,
         by passing your custom evaluator class to the **build()** method.
 
@@ -171,10 +226,15 @@ class MetricEvaluator:
             Input features for prediction.
         y_true : np.ndarray
             True labels. Ints or strings.
+        column_names : Optional[List[str | int]] = None
+            Optional list of column names to use for evaluation.
+            If not provided, will attempt to infer from model classes or use default indices.
         """
-        classes = self.__get_model_classes(model)
 
         if self.__get_label_specs():  # If there are LABEL metrics to evaluate
+            classes = (
+                self.__get_model_classes(model) if not column_names else column_names
+            )
             y_pred = model.predict(X)
             y_pred = toolbox_binarize_labels(y_pred, classes)
             y_true = toolbox_binarize_labels(y_true, classes)
@@ -185,6 +245,9 @@ class MetricEvaluator:
             )
 
         if self.__get_prob_specs():  # If there are PROB metrics to evaluate
+            classes = (
+                self.__get_model_classes(model) if not column_names else column_names
+            )
             y_pred = model.predict_proba(X)
             y_pred = toolbox_binarize_probs(y_pred)
             y_true = toolbox_binarize_labels(y_true, classes)
@@ -192,6 +255,19 @@ class MetricEvaluator:
                 y_true=y_true,
                 y_pred=y_pred,
                 column_names=classes,
+            )
+
+        if self.__get_regression_specs():  # If there are regression metrics to evaluate
+            column_names = (
+                list(range(y_true.shape[1])) if not column_names else column_names
+            )
+            y_pred = model.predict(X)
+            y_pred = toolbox_widen_series(y_pred)
+            y_true = toolbox_widen_series(y_true)
+            self.add_regression_evaluation(
+                y_true=y_true,
+                y_pred=y_pred,
+                column_names=column_names,
             )
 
     def get_results(self) -> Dict[str, Dict[str, float | list[float] | plt.Figure]]:
@@ -261,10 +337,27 @@ class MetricEvaluator:
                 return {"confusion_matrices": fig}
             return {}
 
+        def get_regression_plots(specs) -> Dict[str, plt.Figure]:
+            """Generate regression plots for given specs."""
+            target_regression_results = {}
+            for spec in specs:
+                if (
+                    spec.metric.type == MetricTypeEnum.SCORES
+                    and spec.metric.scope == MetricScopeEnum.TARGET
+                ):
+                    target_regression_results[spec.id] = spec.get_results_history()
+            if target_regression_results:
+                fig = plot_regression_lines(
+                    regression_results=target_regression_results,
+                )
+                return {"regression_plots": fig}
+            return {}
+
         summary["values"].update(get_reduced_values(self._metric_specs))
         summary["steps"].update(get_full_history(self._metric_specs))
         summary["figures"].update(get_roc_auc_plots(self._metric_specs))
         summary["figures"].update(get_confusion_matrix_plots(self._metric_specs))
+        summary["figures"].update(get_regression_plots(self._metric_specs))
         return summary
 
     def __validate_metric_specs(self):
@@ -276,7 +369,7 @@ class MetricEvaluator:
             seen_ids.add(spec.id)
 
     def __validate_common_inputs(
-        self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str]
+        self, y_true: np.ndarray, y_pred: np.ndarray, column_names: list[str | int]
     ):
         """Validate common inputs for both PROB and LABEL evaluations."""
         # Dimension checks - must be 2D
@@ -305,12 +398,12 @@ class MetricEvaluator:
                 f"Got column_names: {len(column_names)}, y_pred columns: {n_columns}"
             )
 
-    def __get_model_classes(self, model) -> List[str]:
+    def __get_model_classes(self, model) -> List[str | int]:
         """Get class labels from the model if available.
 
         Returns
         -------
-        List[str]
+        List[str | int]
             List of class labels.
         """
 
@@ -346,6 +439,16 @@ class MetricEvaluator:
             List of metric IDs requiring labels.
         """
         return self.__find_specs_by_type(MetricTypeEnum.LABELS)
+
+    def __get_regression_specs(self) -> List[MetricSpec]:
+        """Get the list of metric IDs that require regression outputs.
+
+        Returns
+        -------
+        List[str]
+            List of metric IDs requiring regression outputs.
+        """
+        return self.__find_specs_by_type(MetricTypeEnum.SCORES)
 
     def __find_specs_by_type(self, metric_type: MetricTypeEnum) -> List[MetricSpec]:
         """Find all MetricSpecs of a given type.
