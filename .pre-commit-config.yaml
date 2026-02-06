@@ -14,7 +14,7 @@ repos:
 
       # Prevents committing large files
       - id: check-added-large-files
-        args: ['--maxkb=300']
+        args: ['--maxkb=400']
 
       # Validates YAML file syntax
       - id: check-yaml

@@ -104,7 +104,7 @@ To see examples how to:
 - Binary classification model evaluation, see the [binary model notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/binary_classification.ipynb)
 - Multiclass classification model evaluation, see the [multiclass model notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/mutliclass_classification.ipynb)
 - Multivariate regression model evaluation, see the [regression model notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/regression.ipynb)
-- Custom model evaluation <TODO>
+- Custom Evaluator for custom model, see the [custom notebook](https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/custom.ipynb)
 
 ## Development
 
@@ -133,6 +133,8 @@ uv run pytest
 ```
 
 Coverage configuration is specified in `pyproject.toml`.
+Also the `examples` are runned automatically as tests,
+to keep those update according to the latest changes.
 
 ### Code Quality
 

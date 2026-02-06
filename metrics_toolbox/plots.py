@@ -50,7 +50,7 @@ def plot_regression_lines(
         metric = result.name.value
         y_true = result.metadata["y_true"]
         y_pred = result.metadata["y_pred"]
-        error = result.metadata.get("error", None)
+        error = result.metadata["error"]
         indices = result.metadata.get("indices", None)
         options = result.options or {}
         target_name = options.get("target_name", f"Unknown Target {i+1}")
@@ -75,20 +75,19 @@ def plot_regression_lines(
             y_min - pad_amount, y_max + pad_amount * 0.01
         )  # Add a tiny bit of extra padding to the top as well
 
-        if error is not None:
-            ax2 = ax[i].twinx()
-            ax2.plot(indices, error, alpha=0.2, color="red", label=f"Error")
-            ax2.set_ylabel(f"Error {metric}")
+        ax2 = ax[i].twinx()
+        ax2.plot(indices, error, alpha=0.2, color="red", label=f"Error")
+        ax2.set_ylabel(f"Error {metric}")
 
-            # Set error axis so error_max is at pad_percent of the total y-axis height
-            error_combined = np.concatenate([error])
-            error_min = np.percentile(error_combined, 2.5)
-            error_max = np.percentile(error_combined, 97.5)
-            error_range = error_max - error_min
-            upper_limit = error_min + error_range * (100.0 / pad_percent)
-            ax2.set_ylim(error_min, upper_limit)
+        # Set error axis so error_max is at pad_percent of the total y-axis height
+        error_combined = np.concatenate([error])
+        error_min = np.percentile(error_combined, 2.5)
+        error_max = np.percentile(error_combined, 97.5)
+        error_range = error_max - error_min
+        upper_limit = error_min + error_range * (100.0 / pad_percent)
+        ax2.set_ylim(error_min, upper_limit)
+        ax2.legend(loc="upper right")
 
-            ax2.legend(loc="upper right")
         ax[i].legend(loc="upper left")
         ax[i].grid(ls="--", alpha=0.5, color="gray")
 
