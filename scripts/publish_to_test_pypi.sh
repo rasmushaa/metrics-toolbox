@@ -49,7 +49,7 @@ cp pyproject.toml.backup pyproject.toml
 rm pyproject.toml.backup
 
 echo "Uploading to Test PyPI..."
-uv run twine upload --repository-url https://test.pypi.org/legacy/ dist/* --verbose
+uv run twine upload --repository-url https://test.pypi.org/legacy/ dist/* --username "__token__" --password "$TEST_PYPI_PASSWORD"
 
 echo "Successfully published version $NEW_VERSION to Test PyPI"
 echo "Install with: pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ metrics-toolbox==$NEW_VERSION"
