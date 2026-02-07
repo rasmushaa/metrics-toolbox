@@ -194,10 +194,17 @@ The project uses automated CI/CD workflows:
 
 To release a new version:
 
-```bash
-git tag v0.1.0
-git push origin v0.1.0
-```
+1. Update the version in `pyproject.toml`
+2. Update `CHANGELOG.md` with release notes
+3. Create a pull request to `main`
+4. Add the `release` label to the pull request
+5. Merge the pull request
+
+The automated workflow will:
+- Create and push a version tag (e.g., `v0.1.0`)
+- Trigger the PyPI publishing workflow
+- Build and publish the package to PyPI
+
 
 ## License
 

@@ -71,7 +71,7 @@ jobs:
 
           echo "Checking for version $VERSION in CHANGELOG.md"
 
-          if ! grep -q "## $VERSION" CHANGELOG.md; then
+          if ! grep -q "## \[$VERSION\]" CHANGELOG.md; then
             echo "❌ CHANGELOG.md does not contain an entry for version $VERSION"
             exit 1
           fi
