@@ -194,16 +194,9 @@ The project uses automated CI/CD workflows:
 
 To release a new version:
 
-1. Update the version in `pyproject.toml`
-2. Update `CHANGELOG.md` with release notes
-3. Create a pull request to `main`
-4. Add the `release` label to the pull request
-5. Merge the pull request
-
-The automated workflow will:
-- Create and push a version tag (e.g., `v0.1.0`)
-- Trigger the PyPI publishing workflow
-- Build and publish the package to PyPI
+1. Push a tag `v0.1.0` to the main
+2. Pipelien validates that the tag matches the current project version, and the change log is updates
+3. A new version is pushed to PyPi using twine
 
 
 ## License
