@@ -146,6 +146,8 @@ def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
             ax=ax[i], cmap="Greens", colorbar=True, im_kw=im_kw, values_format=".2f"
         )
         disp.ax_.set_title(f"Confusion Matrix (Normalize on {normalize})")
+        if issubclass(type(classes[0]), str):
+            disp.ax_.set_xticklabels(disp.ax_.get_xticklabels(), rotation=90)
 
     # Hide extra subplots if any
     for j in range(n_matrices, len(ax)):
