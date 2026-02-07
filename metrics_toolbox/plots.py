@@ -117,8 +117,8 @@ def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
 
     # Increase figure size for larger confusion matrices
     n_classes = len(accuracy_results[0].metadata["confusion_matrix"])
-    row_inch = 4 if n_classes <= 5 else 6
-    col_inch = 5 if n_classes <= 5 else 7
+    row_inch = 4 if n_classes <= 5 else 7
+    col_inch = 5 if n_classes <= 5 else 8
 
     fig, ax = plt.subplots(
         n_rows, n_cols, figsize=(col_inch * n_cols, row_inch * n_rows), dpi=120
