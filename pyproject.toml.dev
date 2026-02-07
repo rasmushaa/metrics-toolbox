@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metrics-toolbox"
+version = "0.1.0.dev1"
+description = "Configurable ML evaluation toolkit with built-in cross-validation and metric aggregation."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+  { name = "Rasmus Haapaniemi" }
+]
+keywords = ["machine learning", "metrics", "classification", "evaluation", "visualization"]
+classifiers = [
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "matplotlib~=3.6",
+    "numpy~=2.1",
+    "scikit-learn~=1.7",
+]
+
+[project.urls]
+Repository = "https://github.com/rasmushaa/metrics-toolbox"
+Changelog = "https://github.com/rasmushaa/metrics-toolbox/blob/main/CHANGELOG.md"
+Documentation = "https://rasmushaa.github.io/metrics-toolbox/"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "mkdocs-autoapi>=0.4.1",
+    "mkdocstrings-python>=2.0.1",
+    "papermill>=2.6.0",
+    "twine>=6.2.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["metrics_toolbox*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "--cov=metrics_toolbox",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+]

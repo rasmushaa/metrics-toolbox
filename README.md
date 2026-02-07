@@ -169,9 +169,13 @@ bash scripts/publish_to_test_pypi.sh
 ```
 
 This script will:
-1. Build the package distribution files
-2. Use `.env` file to get your PAT and twine user name
-3. Upload to TestPyPI (https://test.pypi.org/)
+1. Create/update `pyproject.toml.dev` with auto-incremented version (e.g., `0.1.0.dev1`, `0.1.0.dev2`, etc.)
+2. Build the package distribution files using the dev version
+3. Load credentials from `.env` file (PAT and twine username)
+4. Upload to TestPyPI (https://test.pypi.org/)
+5. Keep your main `pyproject.toml` unchanged
+
+The script automatically increments the `.dev<N>` suffix on each run, allowing unlimited test uploads without manual version management.
 
 To install from TestPyPI for testing:
 
