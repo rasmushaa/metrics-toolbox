@@ -1,6 +1,6 @@
 # Metrics Toolbox
 
-A flexible toolbox for evaluating machine learning models with customizable metrics and reducers.
+Configurable ML evaluation toolkit with built-in cross-validation and metric aggregation.
 
 [![Tests](https://github.com/rasmushaa/metrics-toolbox/actions/workflows/test.yaml/badge.svg)](https://github.com/rasmushaa/metrics-toolbox/actions/workflows/test.yaml)
 [![Coverage](https://codecov.io/gh/rasmushaa/metrics-toolbox/branch/main/graph/badge.svg)](https://codecov.io/gh/rasmushaa/metrics-toolbox)
@@ -13,11 +13,11 @@ A flexible toolbox for evaluating machine learning models with customizable metr
 - **Flexible Metric Configuration**: Add and configure metrics using enums, strings, or dictionaries
 - **Type-Safe**: Leverage enums for type safety while maintaining flexibility with string names
 - **Multiple Reducers**: Track metrics over time with various aggregation strategies (mean, min, max, std, etc.)
-- **Built-in Metrics**: Pre-configured metrics for propability, label, and regression tasks on target, micro, and macro scopes
+- **Built-in Metrics**: Pre-configured metrics for probability, label, and regression tasks on target, micro, and macro scopes
 - **Chainable Builder Pattern**: Intuitive API for constructing metric evaluators
 - **Visualization Support**: Generate ROC curves and other visualizations
 
-## Available Metrics
+## Available Classification Metrics
 | Name | Figures | Settings |
 |------|---------|----------|
 | `accuracy`        | Confusion matrix  | confusion_normalization |
@@ -30,9 +30,21 @@ A flexible toolbox for evaluating machine learning models with customizable metr
 | `f1_score_micro`  | -                 | - |
 | `f1_score_macro`  | -                 | - |
 | `f1_score_target` | -                 | target_name |
+
+## Available Probability Metrics
+| Name | Figures | Settings |
+|------|---------|----------|
 | `roc_auc_micro`   | Traces            | - |
 | `roc_auc_macro`   | Traces            | - |
 | `roc_auc_target`  | Traces            | target_name |
+
+## Available Regression Metrics
+| Name | Figures | Settings |
+|------|---------|----------|
+| `mse_target`      | True, Pred, Error | target_name, metadata_series_length |
+| `mse_macro`       | -                 | - |
+| `rmse_target`     | True, Pred, Error | target_name, metadata_series_length |
+| `rmse_macro`      | -                 | - |
 
 ## Available Reducers
 
@@ -146,6 +158,25 @@ uv run pre-commit run --all-files
 
 # Run hooks on staged files only
 uv run pre-commit run
+```
+
+### Test Deployment
+
+Before publishing to the main PyPI repository, you can test the deployment process using TestPyPI:
+
+```bash
+bash scripts/publish_to_test_pypi.sh
+```
+
+This script will:
+1. Build the package distribution files
+2. Use `.env` file to get your PAT and twine user name
+3. Upload to TestPyPI (https://test.pypi.org/)
+
+To install from TestPyPI for testing:
+
+```bash
+pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ metrics-toolbox
 ```
 
 ### Deployment
