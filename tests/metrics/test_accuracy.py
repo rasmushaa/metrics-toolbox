@@ -19,7 +19,7 @@ def test_accuracy_compute():
     print(y_true_bin)
     print(y_pred_bin)
 
-    metric = Accuracy(confusion_normalization="true")
+    metric = Accuracy(opt_confusion_normalization="true")
     result = metric.compute(y_true_bin, y_pred_bin, column_names=[0, 1])
     print(result)
 
@@ -48,7 +48,7 @@ def test_accuracy_compute_no_normalization():
     print(y_true_bin)
     print(y_pred_bin)
 
-    metric = Accuracy(confusion_normalization=None)
+    metric = Accuracy(opt_confusion_normalization=None)
     result = metric.compute(y_true_bin, y_pred_bin, column_names=[0, 1])
     print(result)
 

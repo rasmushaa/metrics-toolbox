@@ -69,6 +69,9 @@ class RocAucTarget(Metric):
             scope=self.scope,
             type=self.type,
             value=value,
-            metadata={"fpr": fpr.tolist(), "tpr": tpr.tolist()},
-            options={"target_name": self.target_name},
+            metadata={
+                "fpr": fpr.tolist(),
+                "tpr": tpr.tolist(),
+                "target_name": self.target_name,
+            },
         )

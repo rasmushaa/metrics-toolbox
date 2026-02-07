@@ -50,20 +50,11 @@ def test_evaluator_builder_add_metric_with_params():
 def test_evaluator_builder_from_dict():
     """Test that from_dict correctly builds MetricSpecs."""
     cfg = {
-        "metrics": [
-            {
-                "name": "ROC_AUC_TARGET",
-                # No reducers or class_name
-                "target_name": 1,
-            },
-            {
-                "name": "rOC_AUC_mAcRO",
-                "reducers": ["MiN", "mInMaX"],
-            },
-            {"name": "roc_auc_target", "target_name": "B"},
-            {"name": "accuRacy"},
-            {"name": "precision_macro"},
-        ]
+        "ROC_AUC_TARGET": {"target_name": 1},
+        "rOC_AUC_mAcRO": {"reducers": ["MiN", "mInMaX"]},
+        "roc_auc_target": {"target_name": "B"},
+        "accuRacy": {},
+        "precision_macro": {},
     }
 
     # Create builder from dict, and chain add_metric
@@ -116,18 +107,9 @@ def test_evaluator_builder_add_metric_with_unsuported_params():
     with pytest.raises(TypeError, match="Valid parameters are"):
         builder.add_metric(MetricEnum.ROC_AUC_TARGET, non_existing_param=True)
     with pytest.raises(ValueError):
-        conf = {"metrics": [{"name": "non_existing_metric"}]}
-        builder.from_dict(conf)
-
-    # Missing name key
-    with pytest.raises(KeyError):
-        conf = {"metrics": [{"reducers": ["mean"]}]}
+        conf = {"non_existing_metric": {}}
         builder.from_dict(conf)
 
     with pytest.raises(ValueError):
-        conf = {
-            "metrics": [
-                {"name": "ROC_AUC_TARGET", "reducers": "should_be_a_list"}  # Wrong type
-            ]
-        }
+        conf = {"ROC_AUC_TARGET": {"reducers": ["should_be_a_list"]}}  # Wrong type
         builder.from_dict(conf)

@@ -15,15 +15,15 @@ class Accuracy(Metric):
     _type = MetricTypeEnum.LABELS
     _scope = MetricScopeEnum.MICRO
 
-    def __init__(self, confusion_normalization: str = "true"):
+    def __init__(self, opt_confusion_normalization: str = "true"):
         """Initialize Accuracy metric.
 
         Parameters
         ----------
-        confusion_normalization : str, optional
+        opt_confusion_normalization : str, optional
             Normalization mode for the confusion matrix. Can be 'true', 'pred', 'all', or None for no normalization.
         """
-        self.confusion_normalization = confusion_normalization
+        self.opt_confusion_normalization = opt_confusion_normalization
 
     @property
     def id(self) -> str:
@@ -60,7 +60,7 @@ class Accuracy(Metric):
             y_true_label,
             y_pred_label,
             labels=column_names,
-            normalize=self.confusion_normalization,
+            normalize=self.opt_confusion_normalization,
         )
 
         return MetricResult(
@@ -70,7 +70,7 @@ class Accuracy(Metric):
             value=value,
             metadata={
                 "confusion_matrix": cm,
-                "confusion_normalization": self.confusion_normalization,
+                "opt_confusion_normalization": self.opt_confusion_normalization,
                 "class_names": column_names,
             },
         )

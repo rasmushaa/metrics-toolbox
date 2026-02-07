@@ -55,10 +55,10 @@ class MetricEvaluator:
         self.__validate_metric_specs()
 
     def __repr__(self) -> str:
-        val = "MetricEvaluator(\nmetric_specs=[\n"
+        val = "MetricEvaluator(\n"
         for spec in self._metric_specs:
             val += "  " + repr(spec) + ",\n"
-        val += "])"
+        val += ")"
         return val
 
     def add_prob_evaluation(

@@ -19,8 +19,6 @@ class MetricResult:
     - value: The computed metric value.
 
     - metadata: Optional additional information about the computation.
-
-    - options: Optional dictionary of options used during computation.
     """
 
     name: MetricNameEnum
@@ -28,13 +26,11 @@ class MetricResult:
     type: MetricTypeEnum
     value: float
     metadata: Optional[Dict[str, Any]] = None
-    options: Optional[Dict[str, Any]] = None
 
     def __repr__(self) -> str:
         return (
             f"MetricResult(\n"
             f"    name={self.name.value}, scope={self.scope.value}, type={self.type.value}, \n"
             f"    value={self.value}, \n"
-            f"    metadata={self.metadata}, \n"
-            f"    options={self.options})"
+            f"    metadata={self.metadata}\n"
         )

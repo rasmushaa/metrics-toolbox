@@ -52,5 +52,4 @@ class RMSETarget(MSETarget):
             type=self._type,
             value=rmse_value,
             metadata=rmse_metadata,
-            options=mse_result.options,
         )

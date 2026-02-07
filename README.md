@@ -20,7 +20,7 @@ Configurable ML evaluation toolkit with built-in cross-validation and metric agg
 ## Available Classification Metrics
 | Name | Figures | Settings |
 |------|---------|----------|
-| `accuracy`        | Confusion matrix  | confusion_normalization |
+| `accuracy`        | Confusion matrix  | opt_confusion_normalization |
 | `precision_micro` | -                 | - |
 | `precision_macro` | -                 | - |
 | `precision_target`| -                 | target_name |
@@ -41,9 +41,9 @@ Configurable ML evaluation toolkit with built-in cross-validation and metric agg
 ## Available Regression Metrics
 | Name | Figures | Settings |
 |------|---------|----------|
-| `mse_target`      | True, Pred, Error | target_name, metadata_series_length |
+| `mse_target`      | True, Pred, Error | target_name, opt_metadata_series_length |
 | `mse_macro`       | -                 | - |
-| `rmse_target`     | True, Pred, Error | target_name, metadata_series_length |
+| `rmse_target`     | True, Pred, Error | target_name, opt_metadata_series_length |
 | `rmse_macro`      | -                 | - |
 
 ## Available Reducers
@@ -169,9 +169,13 @@ bash scripts/publish_to_test_pypi.sh
 ```
 
 This script will:
-1. Build the package distribution files
-2. Use `.env` file to get your PAT and twine user name
-3. Upload to TestPyPI (https://test.pypi.org/)
+1. Create/update `pyproject.toml.dev` with auto-incremented version (e.g., `0.1.0.dev1`, `0.1.0.dev2`, etc.)
+2. Build the package distribution files using the dev version
+3. Load credentials from `.env` file (PAT and twine username)
+4. Upload to TestPyPI (https://test.pypi.org/)
+5. Keep your main `pyproject.toml` unchanged
+
+The script automatically increments the `.dev<N>` suffix on each run, allowing unlimited test uploads without manual version management.
 
 To install from TestPyPI for testing:
 
@@ -190,10 +194,17 @@ The project uses automated CI/CD workflows:
 
 To release a new version:
 
-```bash
-git tag v0.1.0
-git push origin v0.1.0
-```
+1. Update the version in `pyproject.toml`
+2. Update `CHANGELOG.md` with release notes
+3. Create a pull request to `main`
+4. Add the `release` label to the pull request
+5. Merge the pull request
+
+The automated workflow will:
+- Create and push a version tag (e.g., `v0.1.0`)
+- Trigger the PyPI publishing workflow
+- Build and publish the package to PyPI
+
 
 ## License
 

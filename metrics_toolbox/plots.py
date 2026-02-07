@@ -51,9 +51,8 @@ def plot_regression_lines(
         y_true = result.metadata["y_true"]
         y_pred = result.metadata["y_pred"]
         error = result.metadata["error"]
-        indices = result.metadata.get("indices", None)
-        options = result.options or {}
-        target_name = options.get("target_name", f"Unknown Target {i+1}")
+        indices = result.metadata["indices"]
+        target_name = result.metadata["target_name"]
 
         # Use indices for x-axis if provided, otherwise use range of y_true
         if indices is None:
@@ -116,7 +115,14 @@ def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
     )  # From 1 to <max> columns, depending on number of matrices
     n_rows = (n_matrices + n_cols - 1) // n_cols  # Rows as needed to fit all matrices
 
-    fig, ax = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows), dpi=120)
+    # Increase figure size for larger confusion matrices
+    n_classes = len(accuracy_results[0].metadata["confusion_matrix"])
+    row_inch = 4 if n_classes <= 5 else 7
+    col_inch = 5 if n_classes <= 5 else 8
+
+    fig, ax = plt.subplots(
+        n_rows, n_cols, figsize=(col_inch * n_cols, row_inch * n_rows), dpi=120
+    )
 
     # Flatten ax array for easy indexing, even if there's only one subplot
     if n_matrices == 1:
@@ -127,7 +133,7 @@ def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
     for i, result in enumerate(accuracy_results):
         cm = result.metadata["confusion_matrix"]
         classes = result.metadata.get("class_names", np.arange(len(cm)))
-        normalize = result.metadata.get("confusion_normalization", None)
+        normalize = result.metadata.get("opt_confusion_normalization", None)
 
         # Set colorbar limits if normalized
         im_kw = {}
@@ -140,6 +146,8 @@ def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
             ax=ax[i], cmap="Greens", colorbar=True, im_kw=im_kw, values_format=".2f"
         )
         disp.ax_.set_title(f"Confusion Matrix (Normalize on {normalize})")
+        if issubclass(type(classes[0]), str):
+            disp.ax_.set_xticklabels(disp.ax_.get_xticklabels(), rotation=90)
 
     # Hide extra subplots if any
     for j in range(n_matrices, len(ax)):
