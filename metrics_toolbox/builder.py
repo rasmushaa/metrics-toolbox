@@ -85,7 +85,6 @@ class EvaluatorBuilder:
         ----------
         cfg : dict
             The configuration dictionary.
-            Must contain a "metrics" key with a list of metric specifications.
 
         Returns
         -------
@@ -95,19 +94,11 @@ class EvaluatorBuilder:
         Examples
         --------
         >>> cfg = {
-        ...     "metrics": [
-        ...         {
-        ...             "name": "roc_auc_class",
-        ...             "reducers": ["mean", "min"],
-        ...             "class_name": "A"
-        ...         },
-        ...     ]
+        ...     "<metric name>": {"reducers": ["mean", "min"], <metric specific kwargs>: ...},
         ... }
         >>> builder = EvaluatorBuilder().from_dict(cfg)
         """
-        for args in cfg["metrics"]:
-            metric_name = args["name"]
-            kwargs = {k: v for k, v in args.items() if k != "name"}
+        for metric_name, kwargs in cfg.items():
             self.add_metric(metric_name, **kwargs)
         return self
 
