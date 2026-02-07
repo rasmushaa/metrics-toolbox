@@ -1,4 +1,4 @@
-# Metrics Toolbox
+# Metrics Toolbox v0.1.0
 
 Configurable ML evaluation toolkit with built-in cross-validation and metric aggregation.
 
