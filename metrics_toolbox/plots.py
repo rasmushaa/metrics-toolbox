@@ -115,7 +115,14 @@ def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
     )  # From 1 to <max> columns, depending on number of matrices
     n_rows = (n_matrices + n_cols - 1) // n_cols  # Rows as needed to fit all matrices
 
-    fig, ax = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows), dpi=120)
+    # Increase figure size for larger confusion matrices
+    n_classes = len(accuracy_results[0].metadata["confusion_matrix"])
+    row_inch = 4 if n_classes <= 5 else 6
+    col_inch = 5 if n_classes <= 5 else 7
+
+    fig, ax = plt.subplots(
+        n_rows, n_cols, figsize=(col_inch * n_cols, row_inch * n_rows), dpi=120
+    )
 
     # Flatten ax array for easy indexing, even if there's only one subplot
     if n_matrices == 1:
