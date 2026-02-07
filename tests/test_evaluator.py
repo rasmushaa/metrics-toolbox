@@ -14,6 +14,7 @@ from metrics_toolbox.metrics.classification.precision_target import PrecisionTar
 from metrics_toolbox.metrics.classification.recall_target import RecallTarget
 from metrics_toolbox.metrics.enums import MetricNameEnum
 from metrics_toolbox.metrics.probability.roc_auc_target import RocAucTarget
+from metrics_toolbox.metrics.regression.mse_target import MSETarget
 from metrics_toolbox.reducers.registry import ReducerEnum
 from metrics_toolbox.spec import MetricSpec
 
@@ -161,7 +162,7 @@ def test_evaluator_add_label_evaluation():
     assert results["steps"]["accuracy_target_steps"] == [0.8, 0.85, 0.9]
 
 
-def test_evaluator_add_model_evaluation():
+def test_evaluator_add_model_evaluation_classification():
     """Test that MetricEvaluator correctly evaluates a model using both predict and
     predict_proba methods."""
 
@@ -227,7 +228,52 @@ def test_evaluator_add_model_evaluation():
 
     assert results["values"]["accuracy_latest"] == pytest.approx(0.7, abs=0.0001)
     assert results["values"]["roc_auc_1_latest"] == pytest.approx(0.9166, abs=0.0001)
-    assert "roc_auc_curves" in results["figures"]
     assert results["values"]["precision_1_latest"] == pytest.approx(0.6, abs=0.0001)
     assert results["values"]["recall_1_latest"] == pytest.approx(0.75, abs=0.0001)
     assert results["values"]["f1_score_1_latest"] == pytest.approx(0.66666, abs=0.0001)
+    assert "roc_auc_curves" in results["figures"]
+    assert "confusion_matrices" in results["figures"]
+
+
+def test_evaluator_add_model_evaluation_regression():
+    """Test that MetricEvaluator correctly evaluates a model using regression
+    metrics."""
+
+    y_true = np.array([1.0, 2.0, 3.0, -3.0, -2.0, -1.0, 0.0])
+    y_pred = np.array([2.0, 2.0, 3.0, -5.0, -2.0, -1.0, 0.0])
+
+    class MockModel:
+        """A mock model that returns predefined predictions."""
+
+        def __init__(self, label_predictions):
+            self.label_predictions = label_predictions
+            self.predict_call_count = 0
+
+        def predict(self, X):
+            """Return predefined label predictions."""
+            result = self.label_predictions[self.predict_call_count]
+            self.predict_call_count += 1
+            return result
+
+    # Create mock model with 1 sets of predictions
+    mock_model = MockModel(
+        label_predictions=[y_pred],
+    )
+
+    evaluator = MetricEvaluator(
+        metric_specs=[
+            MetricSpec(
+                MSETarget(target_name="test_target"),
+            ),
+        ]
+    )
+
+    X = np.zeros((10, 5))  # Mock feature data (not used by MockModel)
+    evaluator.add_model_evaluation(mock_model, X, y_true, column_names=["test_target"])
+    results = evaluator.get_results()
+    print(results)
+
+    assert results["values"]["mse_test_target_latest"] == pytest.approx(
+        5 / 7, abs=0.0001
+    )
+    assert "regression_plots" in results["figures"]

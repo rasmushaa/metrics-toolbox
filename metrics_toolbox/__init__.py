@@ -10,14 +10,15 @@ It automatically imports all necessary modules and classes for easy access:
 
 Users can directly import from this package to utilize the metrics toolbox functionalities.
 
-The API reference and readme can be found at:https://rasmushaa.github.io/metrics-toolbox/
+The API reference and readme can be found at: https://rasmushaa.github.io/metrics-toolbox/
 or using the __docs_url__ variable.
 
-Example
--------
->>> import metrics_toolbox
-... from metrics_toolbox import MetricEnum, ReducerEnum, EvaluatorBuilder
-... url = metrics_toolbox.__docs_url__
+Example:
+    ```python
+    import metrics_toolbox
+    from metrics_toolbox import MetricEnum, ReducerEnum, EvaluatorBuilder
+    url = metrics_toolbox.__docs_url__
+    ```
 """
 
 __docs_url__ = "https://rasmushaa.github.io/metrics-toolbox/"

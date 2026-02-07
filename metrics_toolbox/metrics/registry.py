@@ -22,6 +22,10 @@ from .classification.recall_target import RecallTarget
 from .probability.roc_auc_macro import RocAucMacro
 from .probability.roc_auc_micro import RocAucMicro
 from .probability.roc_auc_target import RocAucTarget
+from .regression.mse_macro import MSEMacro
+from .regression.mse_target import MSETarget
+from .regression.rmse_macro import RMSEMacro
+from .regression.rmse_target import RMSETarget
 
 
 class MetricEnum(Enum):
@@ -44,3 +48,8 @@ class MetricEnum(Enum):
     ROC_AUC_MICRO = RocAucMicro
     ROC_AUC_MACRO = RocAucMacro
     ROC_AUC_TARGET = RocAucTarget
+
+    MSE_TARGET = MSETarget
+    MSE_MACRO = MSEMacro
+    RMSE_TARGET = RMSETarget
+    RMSE_MACRO = RMSEMacro
