@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://rasmushaa.github.io/metrics-toolbox/autoapi/metrics_toolbox/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>metrics_toolbox - Metrics Toolbox</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "metrics_toolbox";
+        var mkdocs_page_input_path = "autoapi/metrics_toolbox/index.md";
+        var mkdocs_page_url = "/metrics-toolbox/autoapi/metrics_toolbox/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Metrics Toolbox
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../changes/">Changes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">metrics_toolbox</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="builder/">builder</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="encoding/">encoding</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="evaluator/">evaluator</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="metrics/">metrics</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="metrics/base_metric/">base_metric</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="metrics/classification/">classification</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/accuracy/">accuracy</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/f1_score_macro/">f1_score_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/f1_score_micro/">f1_score_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/f1_score_target/">f1_score_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/precision_macro/">precision_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/precision_micro/">precision_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/precision_target/">precision_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/recall_macro/">recall_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/recall_micro/">recall_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/classification/recall_target/">recall_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="metrics/enums/">enums</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="metrics/probability/">probability</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/probability/roc_auc_macro/">roc_auc_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/probability/roc_auc_micro/">roc_auc_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/probability/roc_auc_target/">roc_auc_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="metrics/registry/">registry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="metrics/regression/">regression</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/regression/mse_macro/">mse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/regression/mse_target/">mse_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/regression/rmse_macro/">rmse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="metrics/regression/rmse_target/">rmse_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="metrics/results/">results</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="plots/">plots</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="reducers/">reducers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="reducers/reducers/">reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="reducers/registry/">registry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="spec/">spec</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="utils/">utils</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Metrics Toolbox</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+      <li class="breadcrumb-item active">metrics_toolbox</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/home/runner/work/metrics-toolbox/metrics-toolbox/metrics_toolbox/__init__.py">Edit on rasmushaa/metrics-toolbox</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="doc doc-object doc-module">
+
+
+
+<a id="metrics_toolbox"></a>
+    <div class="doc doc-contents first">
+
+        <p>This is the main package for the metrics toolbox.</p>
+<p>It automatically imports all necessary modules and classes for easy access:</p>
+<ul>
+<li>
+<p><strong>MetricEnum:</strong> Enumeration of available metrics.</p>
+</li>
+<li>
+<p><strong>ReducerEnum:</strong> Enumeration of available reducers.</p>
+</li>
+<li>
+<p><strong>EvaluatorBuilder:</strong> Class to build evaluators using specified metrics and reducers.</p>
+</li>
+</ul>
+<p>Users can directly import from this package to utilize the metrics toolbox functionalities.</p>
+<p>The API reference and readme can be found at: https://rasmushaa.github.io/metrics-toolbox/
+or using the <strong>docs_url</strong> variable.</p>
+<p>Example:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">metrics_toolbox</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">metrics_toolbox</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricEnum</span><span class="p">,</span> <span class="n">ReducerEnum</span><span class="p">,</span> <span class="n">EvaluatorBuilder</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">url</span> <span class="o">=</span> <span class="n">metrics_toolbox</span><span class="o">.</span><span class="n">__docs_url__</span>
+</code></pre></div></p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../changes/" class="btn btn-neutral float-left" title="Changes"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="builder/" class="btn btn-neutral float-right" title="builder">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/rasmushaa/metrics-toolbox" class="fa fa-code-fork" style="color: #fcfcfc"> rasmushaa/metrics-toolbox</a>
+        </span>
+    
+    
+      <span><a href="../../changes/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="builder/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

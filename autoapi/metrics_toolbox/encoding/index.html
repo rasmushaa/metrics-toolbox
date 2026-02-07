@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://rasmushaa.github.io/metrics-toolbox/autoapi/metrics_toolbox/encoding/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>encoding - Metrics Toolbox</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "encoding";
+        var mkdocs_page_input_path = "autoapi/metrics_toolbox/encoding.md";
+        var mkdocs_page_url = "/metrics-toolbox/autoapi/metrics_toolbox/encoding/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Metrics Toolbox
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../changes/">Changes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="../">metrics_toolbox</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../builder/">builder</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">encoding</a>
+    <ul class="current">
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../evaluator/">evaluator</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../metrics/">metrics</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/base_metric/">base_metric</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/classification/">classification</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/accuracy/">accuracy</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/f1_score_macro/">f1_score_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/f1_score_micro/">f1_score_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/f1_score_target/">f1_score_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/precision_macro/">precision_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/precision_micro/">precision_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/precision_target/">precision_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/recall_macro/">recall_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/recall_micro/">recall_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/recall_target/">recall_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/enums/">enums</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/probability/">probability</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/probability/roc_auc_macro/">roc_auc_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/probability/roc_auc_micro/">roc_auc_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/probability/roc_auc_target/">roc_auc_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/registry/">registry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/regression/">regression</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/regression/mse_macro/">mse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/regression/mse_target/">mse_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/regression/rmse_macro/">rmse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/regression/rmse_target/">rmse_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/results/">results</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../plots/">plots</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../reducers/">reducers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reducers/reducers/">reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reducers/registry/">registry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../spec/">spec</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../utils/">utils</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Metrics Toolbox</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item"><a href="../">metrics_toolbox</a></li>
+      <li class="breadcrumb-item active">encoding</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/home/runner/work/metrics-toolbox/metrics-toolbox/metrics_toolbox/encoding.py">Edit on rasmushaa/metrics-toolbox</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="doc doc-object doc-module">
+
+
+
+<a id="metrics_toolbox.encoding"></a>
+    <div class="doc doc-contents first">
+
+        <p>This module provides functions for encoding target labels and metrcics-toolbox-
+specific utilities.</p>
+<p>The toolbox expects 2D arrays for all classification tasks, including binary
+classification. However, sklearn's label_binarize returns a 1D array for binary
+classification. This module includes a fix to ensure consistent 2D output shape.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="metrics_toolbox.encoding.toolbox_binarize_labels" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">toolbox_binarize_labels</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">classes</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Binarize target labels.</p>
+<p>Uses sklearn's label_binarize under the hood,
+with a fix for binary case. Sklearn's label_binarize returns (N, 1)
+shape for binary classification, while the toolbox expects always 2D arrays,
+to align metrics compute methods to work consistently for binary, multi-class and regression tasks.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>y</code></b>
+                  (<code>array-like of shape (n_samples,)</code>)
+              –
+              <div class="doc-md-description">
+                <p>Target labels.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>classes</code></b>
+                  (<code>array-like of shape (n_classes,)</code>)
+              –
+              <div class="doc-md-description">
+                <p>List of all classes from model.classes_.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>Y</code></b>(                  <code>ndarray of shape (n_samples, n_classes)</code>
+)              –
+              <div class="doc-md-description">
+                <p>Binarized target labels.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>metrics_toolbox/encoding.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">toolbox_binarize_labels</span><span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Binarize target labels.</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="sd">    Uses sklearn&#39;s label_binarize under the hood,</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="sd">    with a fix for binary case. Sklearn&#39;s label_binarize returns (N, 1)</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="sd">    shape for binary classification, while the toolbox expects always 2D arrays,</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="sd">    to align metrics compute methods to work consistently for binary, multi-class and regression tasks.</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">    Parameters</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="sd">    ----------</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">    y : array-like of shape (n_samples,)</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="sd">        Target labels.</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">    classes : array-like of shape (n_classes,)</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">        List of all classes from model.classes_.</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">    Returns</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">    -------</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">    Y : ndarray of shape (n_samples, n_classes)</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="sd">        Binarized target labels.</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="n">Y</span> <span class="o">=</span> <span class="n">label_binarize</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="c1"># Fix binary case: convert (N,1) → (N,2)</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="c1"># Sklearn uses [false, true] convention for binary case</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="c1"># and this has to match with predicted probabilities</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="k">if</span> <span class="n">Y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>        <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Y</span><span class="p">])</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="k">return</span> <span class="n">Y</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="metrics_toolbox.encoding.toolbox_binarize_probs" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">toolbox_binarize_probs</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Binarize predicted probabilities for binary classification.</p>
+<p>Ensures that predicted probabilities are in 2D array format.
+If input is 1D, converts it to 2D with two columns: [false, true],
+aligning with sklearn's convention. Already 2D inputs are returned unchanged.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>y_pred</code></b>
+                  (<code>array-like of shape (n_samples,) or (n_samples, n_classes)</code>)
+              –
+              <div class="doc-md-description">
+                <p>Predicted probabilities.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>y_pred_binarized</code></b>(                  <code>ndarray of shape (n_samples, n_classes)</code>
+)              –
+              <div class="doc-md-description">
+                <p>Binarized predicted probabilities.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>metrics_toolbox/encoding.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#__codelineno-0-64">64</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="k">def</span><span class="w"> </span><span class="nf">toolbox_binarize_probs</span><span class="p">(</span><span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Binarize predicted probabilities for binary classification.</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">    Ensures that predicted probabilities are in 2D array format.</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    If input is 1D, converts it to 2D with two columns: [false, true],</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">    aligning with sklearn&#39;s convention. Already 2D inputs are returned unchanged.</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">    Parameters</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">    ----------</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="sd">    y_pred : array-like of shape (n_samples,) or (n_samples, n_classes)</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="sd">        Predicted probabilities.</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="sd">    Returns</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">    -------</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">    y_pred_binarized : ndarray of shape (n_samples, n_classes)</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">        Binarized predicted probabilities.</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="k">if</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">])</span>  <span class="c1"># [false, true] convention</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="k">return</span> <span class="n">y_pred</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="metrics_toolbox.encoding.toolbox_widen_series" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">toolbox_widen_series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Widen regression targets to 2D array format.</p>
+<p>Converts 1D regression target arrays to 2D format with a single column,
+ensuring consistency across all metric computations in the toolbox.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>y</code></b>
+                  (<code>array-like of shape (n_samples,) or (n_samples, n_targets)</code>)
+              –
+              <div class="doc-md-description">
+                <p>Regression target values.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+<b><code>y_widened</code></b>(                  <code>ndarray of shape (n_samples, n_targets)</code>
+)              –
+              <div class="doc-md-description">
+                <p>Widened regression target values.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>metrics_toolbox/encoding.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#__codelineno-0-69">69</a></span>
+<span class="normal"><a href="#__codelineno-0-70">70</a></span>
+<span class="normal"><a href="#__codelineno-0-71">71</a></span>
+<span class="normal"><a href="#__codelineno-0-72">72</a></span>
+<span class="normal"><a href="#__codelineno-0-73">73</a></span>
+<span class="normal"><a href="#__codelineno-0-74">74</a></span>
+<span class="normal"><a href="#__codelineno-0-75">75</a></span>
+<span class="normal"><a href="#__codelineno-0-76">76</a></span>
+<span class="normal"><a href="#__codelineno-0-77">77</a></span>
+<span class="normal"><a href="#__codelineno-0-78">78</a></span>
+<span class="normal"><a href="#__codelineno-0-79">79</a></span>
+<span class="normal"><a href="#__codelineno-0-80">80</a></span>
+<span class="normal"><a href="#__codelineno-0-81">81</a></span>
+<span class="normal"><a href="#__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span>
+<span class="normal"><a href="#__codelineno-0-86">86</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-67" name="__codelineno-0-67"></a><span class="k">def</span><span class="w"> </span><span class="nf">toolbox_widen_series</span><span class="p">(</span><span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Widen regression targets to 2D array format.</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a><span class="sd">    Converts 1D regression target arrays to 2D format with a single column,</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a><span class="sd">    ensuring consistency across all metric computations in the toolbox.</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a><span class="sd">    Parameters</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">    ----------</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">    y : array-like of shape (n_samples,) or (n_samples, n_targets)</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="sd">        Regression target values.</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">    Returns</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a><span class="sd">    -------</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a><span class="sd">    y_widened : ndarray of shape (n_samples, n_targets)</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a><span class="sd">        Widened regression target values.</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>    <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a>        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Convert to (n_samples, 1)</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">return</span> <span class="n">y</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../builder/" class="btn btn-neutral float-left" title="builder"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../evaluator/" class="btn btn-neutral float-right" title="evaluator">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/rasmushaa/metrics-toolbox" class="fa fa-code-fork" style="color: #fcfcfc"> rasmushaa/metrics-toolbox</a>
+        </span>
+    
+    
+      <span><a href="../builder/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../evaluator/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

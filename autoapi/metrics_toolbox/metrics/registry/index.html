@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://rasmushaa.github.io/metrics-toolbox/autoapi/metrics_toolbox/metrics/registry/" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>registry - Metrics Toolbox</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "registry";
+        var mkdocs_page_input_path = "autoapi/metrics_toolbox/metrics/registry.md";
+        var mkdocs_page_url = "/metrics-toolbox/autoapi/metrics_toolbox/metrics/registry/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Metrics Toolbox
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../changes/">Changes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="../../">metrics_toolbox</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../builder/">builder</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../encoding/">encoding</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../evaluator/">evaluator</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="../">metrics</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../base_metric/">base_metric</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../classification/">classification</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/accuracy/">accuracy</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/f1_score_macro/">f1_score_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/f1_score_micro/">f1_score_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/f1_score_target/">f1_score_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/precision_macro/">precision_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/precision_micro/">precision_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/precision_target/">precision_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/recall_macro/">recall_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/recall_micro/">recall_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../classification/recall_target/">recall_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../enums/">enums</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../probability/">probability</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../probability/roc_auc_macro/">roc_auc_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../probability/roc_auc_micro/">roc_auc_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../probability/roc_auc_target/">roc_auc_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">registry</a>
+    <ul class="current">
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../regression/">regression</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../regression/mse_macro/">mse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../regression/mse_target/">mse_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../regression/rmse_macro/">rmse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../regression/rmse_target/">rmse_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../results/">results</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../plots/">plots</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../reducers/">reducers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../reducers/reducers/">reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../reducers/registry/">registry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../spec/">spec</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../utils/">utils</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Metrics Toolbox</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item"><a href="../../">metrics_toolbox</a></li>
+          <li class="breadcrumb-item"><a href="../">metrics</a></li>
+      <li class="breadcrumb-item active">registry</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/home/runner/work/metrics-toolbox/metrics-toolbox/metrics_toolbox/metrics/registry.py">Edit on rasmushaa/metrics-toolbox</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="doc doc-object doc-module">
+
+
+
+<a id="metrics_toolbox.metrics.registry"></a>
+    <div class="doc doc-contents first">
+
+        <p>This module contains the:</p>
+<ul>
+<li><strong>MetricEnum:</strong> The main end user enumeration for metrics.</li>
+</ul>
+<p>To build a MetricEvaluator from a configuration,
+you have to use the Enumerator values as keys.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.metrics.registry.MetricEnum" class="doc doc-heading">
+            <code>MetricEnum</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="enum.Enum">Enum</span></code></p>
+
+
+
+        <p>Enumeration of available metrics.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/metrics/registry.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="k">class</span><span class="w"> </span><span class="nc">MetricEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumeration of available metrics.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="n">ACCURACY</span> <span class="o">=</span> <span class="n">Accuracy</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="n">F1_SCORE_MICRO</span> <span class="o">=</span> <span class="n">F1ScoreMicro</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="n">F1_SCORE_MACRO</span> <span class="o">=</span> <span class="n">F1ScoreMacro</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="n">F1_SCORE_TARGET</span> <span class="o">=</span> <span class="n">F1ScoreTarget</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="n">PRECISION_MICRO</span> <span class="o">=</span> <span class="n">PrecisionMicro</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="n">PRECISION_MACRO</span> <span class="o">=</span> <span class="n">PrecisionMacro</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>    <span class="n">PRECISION_TARGET</span> <span class="o">=</span> <span class="n">PrecisionTarget</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>    <span class="n">RECALL_MICRO</span> <span class="o">=</span> <span class="n">RecallMicro</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>    <span class="n">RECALL_MACRO</span> <span class="o">=</span> <span class="n">RecallMacro</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="n">RECALL_TARGET</span> <span class="o">=</span> <span class="n">RecallTarget</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="n">ROC_AUC_MICRO</span> <span class="o">=</span> <span class="n">RocAucMicro</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>    <span class="n">ROC_AUC_MACRO</span> <span class="o">=</span> <span class="n">RocAucMacro</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>    <span class="n">ROC_AUC_TARGET</span> <span class="o">=</span> <span class="n">RocAucTarget</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="n">MSE_TARGET</span> <span class="o">=</span> <span class="n">MSETarget</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="n">MSE_MACRO</span> <span class="o">=</span> <span class="n">MSEMacro</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="n">RMSE_TARGET</span> <span class="o">=</span> <span class="n">RMSETarget</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="n">RMSE_MACRO</span> <span class="o">=</span> <span class="n">RMSEMacro</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../probability/roc_auc_target/" class="btn btn-neutral float-left" title="roc_auc_target"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../regression/" class="btn btn-neutral float-right" title="regression">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/rasmushaa/metrics-toolbox" class="fa fa-code-fork" style="color: #fcfcfc"> rasmushaa/metrics-toolbox</a>
+        </span>
+    
+    
+      <span><a href="../probability/roc_auc_target/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../regression/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
