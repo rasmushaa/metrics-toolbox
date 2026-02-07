@@ -20,7 +20,7 @@ Configurable ML evaluation toolkit with built-in cross-validation and metric agg
 ## Available Classification Metrics
 | Name | Figures | Settings |
 |------|---------|----------|
-| `accuracy`        | Confusion matrix  | confusion_normalization |
+| `accuracy`        | Confusion matrix  | opt_confusion_normalization |
 | `precision_micro` | -                 | - |
 | `precision_macro` | -                 | - |
 | `precision_target`| -                 | target_name |
@@ -41,9 +41,9 @@ Configurable ML evaluation toolkit with built-in cross-validation and metric agg
 ## Available Regression Metrics
 | Name | Figures | Settings |
 |------|---------|----------|
-| `mse_target`      | True, Pred, Error | target_name, metadata_series_length |
+| `mse_target`      | True, Pred, Error | target_name, opt_metadata_series_length |
 | `mse_macro`       | -                 | - |
-| `rmse_target`     | True, Pred, Error | target_name, metadata_series_length |
+| `rmse_target`     | True, Pred, Error | target_name, opt_metadata_series_length |
 | `rmse_macro`      | -                 | - |
 
 ## Available Reducers

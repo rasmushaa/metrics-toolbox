@@ -14,19 +14,19 @@ class MSETarget(Metric):
     _scope = MetricScopeEnum.TARGET
     _type = MetricTypeEnum.SCORES
 
-    def __init__(self, target_name: str, metadata_series_length: int = 1000):
+    def __init__(self, target_name: str, opt_metadata_series_length: int = 1000):
         """Initialize the Mean Squared Error metric for a specific class.
 
         Parameters
         ----------
         target_name : str
             The class/column for which to compute the Mean Squared Error.
-        metadata_series_length : int, optional
+        opt_metadata_series_length : int, optional
             The length to which the original series values and predicted series values
             will be down sampled in the metadata of the MetricResult.
         """
         self.target_name = target_name
-        self.metadata_series_length = metadata_series_length
+        self.opt_metadata_series_length = opt_metadata_series_length
 
     @property
     def id(self) -> str:
@@ -68,9 +68,9 @@ class MSETarget(Metric):
         value = mse_array.mean()
 
         # Down sample the original series values and predicted series values for metadata
-        if len(y_true) > self.metadata_series_length:
+        if len(y_true) > self.opt_metadata_series_length:
             indices = np.linspace(
-                0, len(y_true) - 1, self.metadata_series_length, dtype=int
+                0, len(y_true) - 1, self.opt_metadata_series_length, dtype=int
             )
             y_true_sampled = y_true[indices, class_index]
             y_pred_sampled = y_pred[indices, class_index]
@@ -86,14 +86,14 @@ class MSETarget(Metric):
             type=self.type,
             value=value,
             metadata={
+                "target_name": self.target_name,
                 "y_true": y_true_sampled.tolist(),
                 "y_pred": y_pred_sampled.tolist(),
                 "error": mse_array_sampled.tolist(),
                 "indices": (
                     indices.tolist()
-                    if len(y_true) > self.metadata_series_length
+                    if len(y_true) > self.opt_metadata_series_length
                     else None
                 ),
             },
-            options={"target_name": self.target_name},
         )

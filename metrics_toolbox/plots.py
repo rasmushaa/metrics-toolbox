@@ -51,9 +51,8 @@ def plot_regression_lines(
         y_true = result.metadata["y_true"]
         y_pred = result.metadata["y_pred"]
         error = result.metadata["error"]
-        indices = result.metadata.get("indices", None)
-        options = result.options or {}
-        target_name = options.get("target_name", f"Unknown Target {i+1}")
+        indices = result.metadata["indices"]
+        target_name = result.metadata["target_name"]
 
         # Use indices for x-axis if provided, otherwise use range of y_true
         if indices is None:
@@ -127,7 +126,7 @@ def plot_confusion_matrix(accuracy_results: List[MetricResult]) -> plt.Figure:
     for i, result in enumerate(accuracy_results):
         cm = result.metadata["confusion_matrix"]
         classes = result.metadata.get("class_names", np.arange(len(cm)))
-        normalize = result.metadata.get("confusion_normalization", None)
+        normalize = result.metadata.get("opt_confusion_normalization", None)
 
         # Set colorbar limits if normalized
         im_kw = {}

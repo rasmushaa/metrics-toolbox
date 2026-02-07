@@ -21,7 +21,7 @@ def test_mse_target_compute():
     y_true_2d = toolbox_widen_series(y_true)
     y_pred_2d = toolbox_widen_series(y_pred)
 
-    metric = MSETarget(target_name="test_target", metadata_series_length=3)
+    metric = MSETarget(target_name="test_target", opt_metadata_series_length=3)
     result = metric.compute(y_true_2d, y_pred_2d, column_names=["test_target"])
     print(result)
 
@@ -46,7 +46,7 @@ def test_rmse_target_compute():
     y_true_2d = toolbox_widen_series(y_true)
     y_pred_2d = toolbox_widen_series(y_pred)
 
-    metric = RMSETarget(target_name="test_target", metadata_series_length=3)
+    metric = RMSETarget(target_name="test_target", opt_metadata_series_length=3)
     result = metric.compute(y_true_2d, y_pred_2d, column_names=["test_target"])
     print(result)
 
