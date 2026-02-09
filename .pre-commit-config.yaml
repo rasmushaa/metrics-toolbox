@@ -126,3 +126,10 @@ repos:
         language: system
         pass_filenames: false
         files: ^(pyproject\.toml|README\.md)$
+
+      # Updates README title with current version from pyproject.toml
+      - id: update-readme-version
+        name: Update README Version
+        entry: uv run python scripts/update_readme_version.py
+        language: system
+        pass_filenames: false

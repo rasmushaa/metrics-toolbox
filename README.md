@@ -1,4 +1,4 @@
-# Metrics Toolbox
+# Metrics Toolbox v0.1.0
 
 Configurable ML evaluation toolkit with built-in cross-validation and metric aggregation.
 
@@ -16,6 +16,36 @@ Configurable ML evaluation toolkit with built-in cross-validation and metric agg
 - **Built-in Metrics**: Pre-configured metrics for probability, label, and regression tasks on target, micro, and macro scopes
 - **Chainable Builder Pattern**: Intuitive API for constructing metric evaluators
 - **Visualization Support**: Generate ROC curves and other visualizations
+
+## Three reasons to use metrics-toolbox
+### 1. You can buid it
+```
+evaluator = (
+    EvaluatorBuilder()
+    .add_metric("roc_auc_target", target_name="true")
+    .add_metric("accuracy", reducers=["mean", "std"])
+    .add_metric("precision_target", target_name="true")
+).build()
+```
+### 2. You can config it
+```
+config = {
+    "roc_auc_macro": {
+        "reducers": ["mean", "min"]
+    },
+    "accuracy"": {
+        "reducers": ["mean", "std"],
+    }
+}
+evaluator = EvaluatorBuilder().from_json(config).build()
+```
+### 3. Native cross validation
+```
+for y, fold in kfolds:
+    evaluator.add_model_evaluation(model, fold, y)
+```
+
+
 
 ## Available Classification Metrics
 | Name | Figures | Settings |
