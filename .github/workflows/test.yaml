@@ -83,16 +83,12 @@ jobs:
           codecov_line = None
 
           with open(".github/workflows/test.yaml") as f:
-              for i, line in enumerate(f, 1):
+              lines = f.readlines()
+              for i, line in enumerate(lines):
                   if "Upload coverage to Codecov" in line:
-                      # Find the next YAML 'if:' line (must start with spaces)
-                      for next_line in f:
-                          stripped = next_line.strip()
-                          if stripped.startswith("if: matrix.python-version =="):
-                              codecov_line = stripped
-                              break
-                      break
-
+                      # Check only the next 3 lines for the if statement
+                      for j in range(i+1, min(i+4, len(lines))):
+                          stripped = lines[j].strip()
           if codecov_line:
               expected_version = f"matrix.python-version == '{last_version}'"
               if expected_version not in codecov_line:
