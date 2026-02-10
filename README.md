@@ -1,4 +1,4 @@
-# Metrics Toolbox v0.1.0
+# Metrics Toolbox v0.1.1
 
 Configurable ML evaluation toolkit with built-in cross-validation and metric aggregation.
 
@@ -7,6 +7,13 @@ Configurable ML evaluation toolkit with built-in cross-validation and metric agg
 [![Python Version](https://img.shields.io/badge/python-3.10%E2%80%933.13-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Docs](https://img.shields.io/badge/docs-mkdocs-blue.svg)](https://rasmushaa.github.io/metrics-toolbox/)
+
+## Requirements
+
+- matplotlib~=3.6
+- numpy>=1.24
+- scikit-learn~=1.1
+
 
 ## Features
 
@@ -39,7 +46,7 @@ config = {
 }
 evaluator = EvaluatorBuilder().from_json(config).build()
 ```
-### 3. Native cross validation
+### 3. You can cross validate
 ```
 for y, fold in kfolds:
     evaluator.add_model_evaluation(model, fold, y)
@@ -85,7 +92,7 @@ for y, fold in kfolds:
 | `std` | Computes the standard deviation of metric values |
 | `max` | Returns the maximum metric value |
 | `min` | Returns the minimum metric value |
-| `minmax` | Returns both minimum and maximum metric values |
+| `minmax` | Returns the difference between min and max metric values |
 
 
 ## Installation
@@ -218,7 +225,7 @@ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://
 The project uses automated CI/CD workflows:
 
 - **Continuous Testing**: Matrix testing across supported Python versions on `main` and `feature/**` branches
-- **Requirements Validation**: Ensures test pipeline covers all Python versions listed in `pyproject.toml` classifiers
+- **Python & Dependency Validation**: All Python versions from `pyproject.toml` classifiers are automatically validated in CI/CD. The oldest Python version (first in matrix) is additionally tested with lowest-direct dependencies to ensure minimum version compatibility, and the CI/CD workflow validates that this oldest version is correctly specified
 - **Documentation**: Automatically updates MkDocs API reference and deploys documentation on pushes to `main`
 - **PyPI Publishing**: Automated deployment triggered by version tags
 
