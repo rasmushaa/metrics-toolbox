@@ -61,10 +61,11 @@ jobs:
           with open(".github/workflows/test.yaml") as f:
               for i, line in enumerate(f, 1):
                   if "Test dependencies (oldest compatible versions)" in line:
-                      # Find the next 'if:' line
+                      # Find the next YAML 'if:' line (must start with spaces)
                       for next_line in f:
-                          if "if: matrix.python-version ==" in next_line:
-                              lowest_deps_line = next_line.strip()
+                          stripped = next_line.strip()
+                          if stripped.startswith("if: matrix.python-version =="):
+                              lowest_deps_line = stripped
                               break
                       break
 
