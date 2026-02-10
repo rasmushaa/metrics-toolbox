@@ -225,7 +225,7 @@ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://
 The project uses automated CI/CD workflows:
 
 - **Continuous Testing**: Matrix testing across supported Python versions on `main` and `feature/**` branches
-- **Requirements Validation**: Ensures test pipeline covers all Python versions listed in `pyproject.toml` classifiers
+- **Python & Dependency Validation**: All Python versions from `pyproject.toml` classifiers are automatically validated in CI/CD. The oldest Python version (first in matrix) is additionally tested with lowest-direct dependencies to ensure minimum version compatibility, and the CI/CD workflow validates that this oldest version is correctly specified
 - **Documentation**: Automatically updates MkDocs API reference and deploys documentation on pushes to `main`
 - **PyPI Publishing**: Automated deployment triggered by version tags
 
