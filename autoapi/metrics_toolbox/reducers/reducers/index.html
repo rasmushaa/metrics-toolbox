@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://rasmushaa.github.io/metrics-toolbox/autoapi/metrics_toolbox/reducers/reducers/" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>reducers - Metrics Toolbox</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "reducers";
+        var mkdocs_page_input_path = "autoapi/metrics_toolbox/reducers/reducers.md";
+        var mkdocs_page_url = "/metrics-toolbox/autoapi/metrics_toolbox/reducers/reducers/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Metrics Toolbox
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../changes/">Changes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="../../">metrics_toolbox</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../builder/">builder</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../encoding/">encoding</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../evaluator/">evaluator</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../metrics/">metrics</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../metrics/base_metric/">base_metric</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../metrics/classification/">classification</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/accuracy/">accuracy</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/f1_score_macro/">f1_score_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/f1_score_micro/">f1_score_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/f1_score_target/">f1_score_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/precision_macro/">precision_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/precision_micro/">precision_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/precision_target/">precision_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/recall_macro/">recall_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/recall_micro/">recall_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/classification/recall_target/">recall_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../metrics/enums/">enums</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../metrics/probability/">probability</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/probability/roc_auc_macro/">roc_auc_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/probability/roc_auc_micro/">roc_auc_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/probability/roc_auc_target/">roc_auc_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../metrics/registry/">registry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../metrics/regression/">regression</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/regression/mse_macro/">mse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/regression/mse_target/">mse_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/regression/rmse_macro/">rmse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../metrics/regression/rmse_target/">rmse_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../metrics/results/">results</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../plots/">plots</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="../">reducers</a>
+    <ul class="current">
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">reducers</a>
+    <ul class="current">
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../registry/">registry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../spec/">spec</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../utils/">utils</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Metrics Toolbox</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item"><a href="../../">metrics_toolbox</a></li>
+          <li class="breadcrumb-item"><a href="../">reducers</a></li>
+      <li class="breadcrumb-item active">reducers</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/home/runner/work/metrics-toolbox/metrics-toolbox/metrics_toolbox/reducers/reducers.py">Edit on rasmushaa/metrics-toolbox</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="doc doc-object doc-module">
+
+
+
+<a id="metrics_toolbox.reducers.reducers"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.reducers.reducers.LatestReducer" class="doc doc-heading">
+            <code>LatestReducer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="MetricReducer (metrics_toolbox.reducers.reducers.MetricReducer)" href="#metrics_toolbox.reducers.reducers.MetricReducer">MetricReducer</a></code></p>
+
+
+
+        <p>Reducer that returns the latest value from the list.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/reducers/reducers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="k">class</span><span class="w"> </span><span class="nc">LatestReducer</span><span class="p">(</span><span class="n">MetricReducer</span><span class="p">):</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Reducer that returns the latest value from the list.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a>        <span class="k">return</span> <span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.reducers.reducers.MaxReducer" class="doc doc-heading">
+            <code>MaxReducer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="MetricReducer (metrics_toolbox.reducers.reducers.MetricReducer)" href="#metrics_toolbox.reducers.reducers.MetricReducer">MetricReducer</a></code></p>
+
+
+
+        <p>Reducer that returns the maximum value from the list.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/reducers/reducers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="k">class</span><span class="w"> </span><span class="nc">MaxReducer</span><span class="p">(</span><span class="n">MetricReducer</span><span class="p">):</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Reducer that returns the maximum value from the list.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.reducers.reducers.MeanReducer" class="doc doc-heading">
+            <code>MeanReducer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="MetricReducer (metrics_toolbox.reducers.reducers.MetricReducer)" href="#metrics_toolbox.reducers.reducers.MetricReducer">MetricReducer</a></code></p>
+
+
+
+        <p>Reducer that returns the mean of the values.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/reducers/reducers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="k">class</span><span class="w"> </span><span class="nc">MeanReducer</span><span class="p">(</span><span class="n">MetricReducer</span><span class="p">):</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Reducer that returns the mean of the values.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.reducers.reducers.MetricReducer" class="doc doc-heading">
+            <code>MetricReducer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="abc.ABC">ABC</span></code></p>
+
+
+
+        <p>A common interface for metric reducers.</p>
+<p>Reducers take a list of float values and reduce them to a single float value, by
+calling the apply method.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/reducers/reducers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">MetricReducer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;A common interface for metric reducers.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="sd">    Reducers take a list of float values and reduce them to a single float value, by</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">    calling the apply method.</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>    <span class="nd">@abstractmethod</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>        <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.reducers.reducers.MinMaxReducer" class="doc doc-heading">
+            <code>MinMaxReducer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="MetricReducer (metrics_toolbox.reducers.reducers.MetricReducer)" href="#metrics_toolbox.reducers.reducers.MetricReducer">MetricReducer</a></code></p>
+
+
+
+        <p>Reducer that returns the difference between the maximum and minimum values.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/reducers/reducers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="k">class</span><span class="w"> </span><span class="nc">MinMaxReducer</span><span class="p">(</span><span class="n">MetricReducer</span><span class="p">):</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Reducer that returns the difference between the maximum and minimum values.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.reducers.reducers.MinReducer" class="doc doc-heading">
+            <code>MinReducer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="MetricReducer (metrics_toolbox.reducers.reducers.MetricReducer)" href="#metrics_toolbox.reducers.reducers.MetricReducer">MetricReducer</a></code></p>
+
+
+
+        <p>Reducer that returns the minimum value from the list.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/reducers/reducers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="k">class</span><span class="w"> </span><span class="nc">MinReducer</span><span class="p">(</span><span class="n">MetricReducer</span><span class="p">):</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Reducer that returns the minimum value from the list.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.reducers.reducers.StdReducer" class="doc doc-heading">
+            <code>StdReducer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="MetricReducer (metrics_toolbox.reducers.reducers.MetricReducer)" href="#metrics_toolbox.reducers.reducers.MetricReducer">MetricReducer</a></code></p>
+
+
+
+        <p>Reducer that returns the standard deviation of the values.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/reducers/reducers.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="k">class</span><span class="w"> </span><span class="nc">StdReducer</span><span class="p">(</span><span class="n">MetricReducer</span><span class="p">):</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Reducer that returns the standard deviation of the values.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="reducers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../registry/" class="btn btn-neutral float-right" title="registry">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/rasmushaa/metrics-toolbox" class="fa fa-code-fork" style="color: #fcfcfc"> rasmushaa/metrics-toolbox</a>
+        </span>
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../registry/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

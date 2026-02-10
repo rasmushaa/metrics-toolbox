@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://rasmushaa.github.io/metrics-toolbox/autoapi/metrics_toolbox/spec/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>spec - Metrics Toolbox</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "spec";
+        var mkdocs_page_input_path = "autoapi/metrics_toolbox/spec.md";
+        var mkdocs_page_url = "/metrics-toolbox/autoapi/metrics_toolbox/spec/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Metrics Toolbox
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../changes/">Changes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="../">metrics_toolbox</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../builder/">builder</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../encoding/">encoding</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../evaluator/">evaluator</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../metrics/">metrics</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/base_metric/">base_metric</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/classification/">classification</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/accuracy/">accuracy</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/f1_score_macro/">f1_score_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/f1_score_micro/">f1_score_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/f1_score_target/">f1_score_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/precision_macro/">precision_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/precision_micro/">precision_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/precision_target/">precision_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/recall_macro/">recall_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/recall_micro/">recall_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/classification/recall_target/">recall_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/enums/">enums</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/probability/">probability</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/probability/roc_auc_macro/">roc_auc_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/probability/roc_auc_micro/">roc_auc_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/probability/roc_auc_target/">roc_auc_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/registry/">registry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/regression/">regression</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/regression/mse_macro/">mse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/regression/mse_target/">mse_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/regression/rmse_macro/">rmse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../metrics/regression/rmse_target/">rmse_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../metrics/results/">results</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../plots/">plots</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../reducers/">reducers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../reducers/reducers/">reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reducers/registry/">registry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">spec</a>
+    <ul class="current">
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../utils/">utils</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Metrics Toolbox</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">API Reference</li>
+          <li class="breadcrumb-item"><a href="../">metrics_toolbox</a></li>
+      <li class="breadcrumb-item active">spec</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/home/runner/work/metrics-toolbox/metrics-toolbox/metrics_toolbox/spec.py">Edit on rasmushaa/metrics-toolbox</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="doc doc-object doc-module">
+
+
+
+<a id="metrics_toolbox.spec"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="metrics_toolbox.spec.MetricSpec" class="doc doc-heading">
+            <code>MetricSpec</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+
+
+        <p>A specification for a metric to be computed in the evaluator.</p>
+<p>Contains the instantiated Metric class,
+the reducers to apply to the metric results,
+and the history of computed MetricResults.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>metric_cls_instantiated</code></b>
+                  (<code><a class="autorefs autorefs-internal" title="Metric (metrics_toolbox.metrics.base_metric.Metric)" href="../metrics/base_metric/#metrics_toolbox.metrics.base_metric.Metric">Metric</a></code>)
+              –
+              <div class="doc-md-description">
+                <p>The instantiated Metric to compute.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>reducers</code></b>
+                  (<code><span title="typing.Sequence">Sequence</span>[<a class="autorefs autorefs-internal" title="ReducerEnum (metrics_toolbox.reducers.registry.ReducerEnum)" href="../reducers/registry/#metrics_toolbox.reducers.registry.ReducerEnum">ReducerEnum</a>]</code>, default:
+                      <code>(<span title="metrics_toolbox.reducers.registry.ReducerEnum.LATEST">LATEST</span>,)</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The reducers to apply to the metric results.
+Default is (ReducerEnum.LATEST,).</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>metrics_toolbox/spec.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-12"> 12</a></span>
+<span class="normal"><a href="#__codelineno-0-13"> 13</a></span>
+<span class="normal"><a href="#__codelineno-0-14"> 14</a></span>
+<span class="normal"><a href="#__codelineno-0-15"> 15</a></span>
+<span class="normal"><a href="#__codelineno-0-16"> 16</a></span>
+<span class="normal"><a href="#__codelineno-0-17"> 17</a></span>
+<span class="normal"><a href="#__codelineno-0-18"> 18</a></span>
+<span class="normal"><a href="#__codelineno-0-19"> 19</a></span>
+<span class="normal"><a href="#__codelineno-0-20"> 20</a></span>
+<span class="normal"><a href="#__codelineno-0-21"> 21</a></span>
+<span class="normal"><a href="#__codelineno-0-22"> 22</a></span>
+<span class="normal"><a href="#__codelineno-0-23"> 23</a></span>
+<span class="normal"><a href="#__codelineno-0-24"> 24</a></span>
+<span class="normal"><a href="#__codelineno-0-25"> 25</a></span>
+<span class="normal"><a href="#__codelineno-0-26"> 26</a></span>
+<span class="normal"><a href="#__codelineno-0-27"> 27</a></span>
+<span class="normal"><a href="#__codelineno-0-28"> 28</a></span>
+<span class="normal"><a href="#__codelineno-0-29"> 29</a></span>
+<span class="normal"><a href="#__codelineno-0-30"> 30</a></span>
+<span class="normal"><a href="#__codelineno-0-31"> 31</a></span>
+<span class="normal"><a href="#__codelineno-0-32"> 32</a></span>
+<span class="normal"><a href="#__codelineno-0-33"> 33</a></span>
+<span class="normal"><a href="#__codelineno-0-34"> 34</a></span>
+<span class="normal"><a href="#__codelineno-0-35"> 35</a></span>
+<span class="normal"><a href="#__codelineno-0-36"> 36</a></span>
+<span class="normal"><a href="#__codelineno-0-37"> 37</a></span>
+<span class="normal"><a href="#__codelineno-0-38"> 38</a></span>
+<span class="normal"><a href="#__codelineno-0-39"> 39</a></span>
+<span class="normal"><a href="#__codelineno-0-40"> 40</a></span>
+<span class="normal"><a href="#__codelineno-0-41"> 41</a></span>
+<span class="normal"><a href="#__codelineno-0-42"> 42</a></span>
+<span class="normal"><a href="#__codelineno-0-43"> 43</a></span>
+<span class="normal"><a href="#__codelineno-0-44"> 44</a></span>
+<span class="normal"><a href="#__codelineno-0-45"> 45</a></span>
+<span class="normal"><a href="#__codelineno-0-46"> 46</a></span>
+<span class="normal"><a href="#__codelineno-0-47"> 47</a></span>
+<span class="normal"><a href="#__codelineno-0-48"> 48</a></span>
+<span class="normal"><a href="#__codelineno-0-49"> 49</a></span>
+<span class="normal"><a href="#__codelineno-0-50"> 50</a></span>
+<span class="normal"><a href="#__codelineno-0-51"> 51</a></span>
+<span class="normal"><a href="#__codelineno-0-52"> 52</a></span>
+<span class="normal"><a href="#__codelineno-0-53"> 53</a></span>
+<span class="normal"><a href="#__codelineno-0-54"> 54</a></span>
+<span class="normal"><a href="#__codelineno-0-55"> 55</a></span>
+<span class="normal"><a href="#__codelineno-0-56"> 56</a></span>
+<span class="normal"><a href="#__codelineno-0-57"> 57</a></span>
+<span class="normal"><a href="#__codelineno-0-58"> 58</a></span>
+<span class="normal"><a href="#__codelineno-0-59"> 59</a></span>
+<span class="normal"><a href="#__codelineno-0-60"> 60</a></span>
+<span class="normal"><a href="#__codelineno-0-61"> 61</a></span>
+<span class="normal"><a href="#__codelineno-0-62"> 62</a></span>
+<span class="normal"><a href="#__codelineno-0-63"> 63</a></span>
+<span class="normal"><a href="#__codelineno-0-64"> 64</a></span>
+<span class="normal"><a href="#__codelineno-0-65"> 65</a></span>
+<span class="normal"><a href="#__codelineno-0-66"> 66</a></span>
+<span class="normal"><a href="#__codelineno-0-67"> 67</a></span>
+<span class="normal"><a href="#__codelineno-0-68"> 68</a></span>
+<span class="normal"><a href="#__codelineno-0-69"> 69</a></span>
+<span class="normal"><a href="#__codelineno-0-70"> 70</a></span>
+<span class="normal"><a href="#__codelineno-0-71"> 71</a></span>
+<span class="normal"><a href="#__codelineno-0-72"> 72</a></span>
+<span class="normal"><a href="#__codelineno-0-73"> 73</a></span>
+<span class="normal"><a href="#__codelineno-0-74"> 74</a></span>
+<span class="normal"><a href="#__codelineno-0-75"> 75</a></span>
+<span class="normal"><a href="#__codelineno-0-76"> 76</a></span>
+<span class="normal"><a href="#__codelineno-0-77"> 77</a></span>
+<span class="normal"><a href="#__codelineno-0-78"> 78</a></span>
+<span class="normal"><a href="#__codelineno-0-79"> 79</a></span>
+<span class="normal"><a href="#__codelineno-0-80"> 80</a></span>
+<span class="normal"><a href="#__codelineno-0-81"> 81</a></span>
+<span class="normal"><a href="#__codelineno-0-82"> 82</a></span>
+<span class="normal"><a href="#__codelineno-0-83"> 83</a></span>
+<span class="normal"><a href="#__codelineno-0-84"> 84</a></span>
+<span class="normal"><a href="#__codelineno-0-85"> 85</a></span>
+<span class="normal"><a href="#__codelineno-0-86"> 86</a></span>
+<span class="normal"><a href="#__codelineno-0-87"> 87</a></span>
+<span class="normal"><a href="#__codelineno-0-88"> 88</a></span>
+<span class="normal"><a href="#__codelineno-0-89"> 89</a></span>
+<span class="normal"><a href="#__codelineno-0-90"> 90</a></span>
+<span class="normal"><a href="#__codelineno-0-91"> 91</a></span>
+<span class="normal"><a href="#__codelineno-0-92"> 92</a></span>
+<span class="normal"><a href="#__codelineno-0-93"> 93</a></span>
+<span class="normal"><a href="#__codelineno-0-94"> 94</a></span>
+<span class="normal"><a href="#__codelineno-0-95"> 95</a></span>
+<span class="normal"><a href="#__codelineno-0-96"> 96</a></span>
+<span class="normal"><a href="#__codelineno-0-97"> 97</a></span>
+<span class="normal"><a href="#__codelineno-0-98"> 98</a></span>
+<span class="normal"><a href="#__codelineno-0-99"> 99</a></span>
+<span class="normal"><a href="#__codelineno-0-100">100</a></span>
+<span class="normal"><a href="#__codelineno-0-101">101</a></span>
+<span class="normal"><a href="#__codelineno-0-102">102</a></span>
+<span class="normal"><a href="#__codelineno-0-103">103</a></span>
+<span class="normal"><a href="#__codelineno-0-104">104</a></span>
+<span class="normal"><a href="#__codelineno-0-105">105</a></span>
+<span class="normal"><a href="#__codelineno-0-106">106</a></span>
+<span class="normal"><a href="#__codelineno-0-107">107</a></span>
+<span class="normal"><a href="#__codelineno-0-108">108</a></span>
+<span class="normal"><a href="#__codelineno-0-109">109</a></span>
+<span class="normal"><a href="#__codelineno-0-110">110</a></span>
+<span class="normal"><a href="#__codelineno-0-111">111</a></span>
+<span class="normal"><a href="#__codelineno-0-112">112</a></span>
+<span class="normal"><a href="#__codelineno-0-113">113</a></span>
+<span class="normal"><a href="#__codelineno-0-114">114</a></span>
+<span class="normal"><a href="#__codelineno-0-115">115</a></span>
+<span class="normal"><a href="#__codelineno-0-116">116</a></span>
+<span class="normal"><a href="#__codelineno-0-117">117</a></span>
+<span class="normal"><a href="#__codelineno-0-118">118</a></span>
+<span class="normal"><a href="#__codelineno-0-119">119</a></span>
+<span class="normal"><a href="#__codelineno-0-120">120</a></span>
+<span class="normal"><a href="#__codelineno-0-121">121</a></span>
+<span class="normal"><a href="#__codelineno-0-122">122</a></span>
+<span class="normal"><a href="#__codelineno-0-123">123</a></span>
+<span class="normal"><a href="#__codelineno-0-124">124</a></span>
+<span class="normal"><a href="#__codelineno-0-125">125</a></span>
+<span class="normal"><a href="#__codelineno-0-126">126</a></span>
+<span class="normal"><a href="#__codelineno-0-127">127</a></span>
+<span class="normal"><a href="#__codelineno-0-128">128</a></span>
+<span class="normal"><a href="#__codelineno-0-129">129</a></span>
+<span class="normal"><a href="#__codelineno-0-130">130</a></span>
+<span class="normal"><a href="#__codelineno-0-131">131</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="k">class</span><span class="w"> </span><span class="nc">MetricSpec</span><span class="p">:</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;A specification for a metric to be computed in the evaluator.</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="sd">    Contains the instantiated Metric class,</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="sd">    the reducers to apply to the metric results,</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="sd">    and the history of computed MetricResults.</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="sd">    Parameters</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="sd">    ----------</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">    metric_cls_instantiated : Metric</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="sd">        The instantiated Metric to compute.</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">    reducers : Sequence[ReducerEnum], optional</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="sd">        The reducers to apply to the metric results.</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">        Default is (ReducerEnum.LATEST,).</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>        <span class="bp">self</span><span class="p">,</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>        <span class="n">metric_cls_instantiated</span><span class="p">:</span> <span class="n">Metric</span><span class="p">,</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>        <span class="n">reducers</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ReducerEnum</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ReducerEnum</span><span class="o">.</span><span class="n">LATEST</span><span class="p">,),</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>    <span class="p">):</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__metric_cls</span> <span class="o">=</span> <span class="n">metric_cls_instantiated</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__reducers</span> <span class="o">=</span> <span class="n">reducers</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>        <span class="n">reducer_names</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reducers</span><span class="p">])</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;MetricSpec(cls=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__metric_cls</span><span class="si">}</span><span class="s2">, reducers=(</span><span class="si">{</span><span class="n">reducer_names</span><span class="si">}</span><span class="s2">))&quot;</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the metric using the specified options.</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">        Calls the compute method of the Metric class</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">        with all provided **kwargs options.</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="sd">        Appends the result to the Spec history.</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">        Parameters</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">        ----------</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">        y_true : np.ndarray</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">            True values.</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">        y_pred : np.ndarray</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="sd">            Predicted values.</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="sd">        **kwargs : Any</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="sd">            Additional options to pass to the Metric&#39;s compute method.</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="sd">            Supported options depend on the specific Metric. See the Metric documentation for details.</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">            Extra options are allowed even if not used by the Metric.</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">            Metrics themselves will not support unknown options, and will raise errors if unsupported options are passed.</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>        <span class="c1"># Get the signature of the metric&#39;s compute method</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>        <span class="n">compute_sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__metric_cls</span><span class="o">.</span><span class="n">compute</span><span class="p">)</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>        <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>            <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">compute_sig</span><span class="o">.</span><span class="n">parameters</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>        <span class="p">}</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__metric_cls</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span> <span class="o">**</span><span class="n">filtered_kwargs</span><span class="p">)</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>        <span class="p">)</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_reduced_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the reduced values for the metric using the specified reducers.</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">        Returns</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">        -------</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="sd">        Dict[str, float]</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a><span class="sd">            A dictionary mapping reducer names to their reduced values.</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>        <span class="n">reduced_values</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>        <span class="k">for</span> <span class="n">reducer_enum</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reducers</span><span class="p">:</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a>            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">reducer_enum</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a>            <span class="n">value</span> <span class="o">=</span> <span class="n">reducer_enum</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_values_history</span><span class="p">())</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>            <span class="n">reduced_values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>        <span class="k">return</span> <span class="n">reduced_values</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">]:</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the history of MetricResults computed by this spec.</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="sd">        Returns</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="sd">        -------</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a><span class="sd">        List[MetricResult]</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a><span class="sd">            The list of MetricResults.</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__history</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_values_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the history of metric values computed by this spec.</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>
+<a id="__codelineno-0-99" name="__codelineno-0-99"></a><span class="sd">        Returns</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100"></a><span class="sd">        -------</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101"></a><span class="sd">        List[float]</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102"></a><span class="sd">            The list of metric values.</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-104" name="__codelineno-0-104"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__history</span><span class="p">]</span>
+<a id="__codelineno-0-105" name="__codelineno-0-105"></a>
+<a id="__codelineno-0-106" name="__codelineno-0-106"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">clear_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear the history of MetricResults.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-108" name="__codelineno-0-108"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__history</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-109" name="__codelineno-0-109"></a>
+<a id="__codelineno-0-110" name="__codelineno-0-110"></a>    <span class="nd">@property</span>
+<a id="__codelineno-0-111" name="__codelineno-0-111"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">reducers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ReducerEnum</span><span class="p">]:</span>
+<a id="__codelineno-0-112" name="__codelineno-0-112"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;The reducers applied to this metric spec.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-113" name="__codelineno-0-113"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reducers</span>
+<a id="__codelineno-0-114" name="__codelineno-0-114"></a>
+<a id="__codelineno-0-115" name="__codelineno-0-115"></a>    <span class="nd">@property</span>
+<a id="__codelineno-0-116" name="__codelineno-0-116"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">metric</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Metric</span><span class="p">:</span>
+<a id="__codelineno-0-117" name="__codelineno-0-117"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;The Metric instance of this metric spec.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-118" name="__codelineno-0-118"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__metric_cls</span>
+<a id="__codelineno-0-119" name="__codelineno-0-119"></a>
+<a id="__codelineno-0-120" name="__codelineno-0-120"></a>    <span class="nd">@property</span>
+<a id="__codelineno-0-121" name="__codelineno-0-121"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-122" name="__codelineno-0-122"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A unique identifier for the metric spec.</span>
+<a id="__codelineno-0-123" name="__codelineno-0-123"></a>
+<a id="__codelineno-0-124" name="__codelineno-0-124"></a><span class="sd">        Note, the same Metrics with different reducers will have the same id.</span>
+<a id="__codelineno-0-125" name="__codelineno-0-125"></a>
+<a id="__codelineno-0-126" name="__codelineno-0-126"></a><span class="sd">        Returns</span>
+<a id="__codelineno-0-127" name="__codelineno-0-127"></a><span class="sd">        -------</span>
+<a id="__codelineno-0-128" name="__codelineno-0-128"></a><span class="sd">        str</span>
+<a id="__codelineno-0-129" name="__codelineno-0-129"></a><span class="sd">            The unique identifier.</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__metric_cls</span><span class="o">.</span><span class="n">id</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="metrics_toolbox.spec.MetricSpec.id" class="doc doc-heading">
+            <code class="highlight language-python"><span class="nb">id</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>A unique identifier for the metric spec.</p>
+<p>Note, the same Metrics with different reducers will have the same id.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="str">str</span></code>
+              –
+              <div class="doc-md-description">
+                <p>The unique identifier.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="metrics_toolbox.spec.MetricSpec.metric" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">metric</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>The Metric instance of this metric spec.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="metrics_toolbox.spec.MetricSpec.reducers" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">reducers</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>The reducers applied to this metric spec.</p>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="metrics_toolbox.spec.MetricSpec.clear_history" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">clear_history</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Clear the history of MetricResults.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>metrics_toolbox/spec.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-106">106</a></span>
+<span class="normal"><a href="#__codelineno-0-107">107</a></span>
+<span class="normal"><a href="#__codelineno-0-108">108</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-106" name="__codelineno-0-106"></a><span class="k">def</span><span class="w"> </span><span class="nf">clear_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Clear the history of MetricResults.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-108" name="__codelineno-0-108"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">__history</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="metrics_toolbox.spec.MetricSpec.compute" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">compute</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Compute the metric using the specified options.</p>
+<p>Calls the compute method of the Metric class
+with all provided **kwargs options.
+Appends the result to the Spec history.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>y_true</code></b>
+                  (<code><span title="numpy.ndarray">ndarray</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>True values.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>y_pred</code></b>
+                  (<code><span title="numpy.ndarray">ndarray</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>Predicted values.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>**kwargs</code></b>
+                  (<code><span title="Any">Any</span></code>, default:
+                      <code>{}</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Additional options to pass to the Metric's compute method.
+Supported options depend on the specific Metric. See the Metric documentation for details.
+Extra options are allowed even if not used by the Metric.
+Metrics themselves will not support unknown options, and will raise errors if unsupported options are passed.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>metrics_toolbox/spec.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#__codelineno-0-64">64</a></span>
+<span class="normal"><a href="#__codelineno-0-65">65</a></span>
+<span class="normal"><a href="#__codelineno-0-66">66</a></span>
+<span class="normal"><a href="#__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#__codelineno-0-69">69</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the metric using the specified options.</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">    Calls the compute method of the Metric class</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">    with all provided **kwargs options.</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="sd">    Appends the result to the Spec history.</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    Parameters</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">    ----------</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">    y_true : np.ndarray</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">        True values.</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">    y_pred : np.ndarray</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="sd">        Predicted values.</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="sd">    **kwargs : Any</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="sd">        Additional options to pass to the Metric&#39;s compute method.</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="sd">        Supported options depend on the specific Metric. See the Metric documentation for details.</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">        Extra options are allowed even if not used by the Metric.</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">        Metrics themselves will not support unknown options, and will raise errors if unsupported options are passed.</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="c1"># Get the signature of the metric&#39;s compute method</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="n">compute_sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__metric_cls</span><span class="o">.</span><span class="n">compute</span><span class="p">)</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>    <span class="n">filtered_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>        <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">compute_sig</span><span class="o">.</span><span class="n">parameters</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>    <span class="p">}</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">__history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__metric_cls</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span> <span class="o">**</span><span class="n">filtered_kwargs</span><span class="p">)</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="metrics_toolbox.spec.MetricSpec.get_reduced_values" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_reduced_values</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get the reduced values for the metric using the specified reducers.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="float">float</span>]</code>
+              –
+              <div class="doc-md-description">
+                <p>A dictionary mapping reducer names to their reduced values.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>metrics_toolbox/spec.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-71">71</a></span>
+<span class="normal"><a href="#__codelineno-0-72">72</a></span>
+<span class="normal"><a href="#__codelineno-0-73">73</a></span>
+<span class="normal"><a href="#__codelineno-0-74">74</a></span>
+<span class="normal"><a href="#__codelineno-0-75">75</a></span>
+<span class="normal"><a href="#__codelineno-0-76">76</a></span>
+<span class="normal"><a href="#__codelineno-0-77">77</a></span>
+<span class="normal"><a href="#__codelineno-0-78">78</a></span>
+<span class="normal"><a href="#__codelineno-0-79">79</a></span>
+<span class="normal"><a href="#__codelineno-0-80">80</a></span>
+<span class="normal"><a href="#__codelineno-0-81">81</a></span>
+<span class="normal"><a href="#__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#__codelineno-0-84">84</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-71" name="__codelineno-0-71"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_reduced_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the reduced values for the metric using the specified reducers.</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">    Returns</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">    -------</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="sd">    Dict[str, float]</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a><span class="sd">        A dictionary mapping reducer names to their reduced values.</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>    <span class="n">reduced_values</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>    <span class="k">for</span> <span class="n">reducer_enum</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reducers</span><span class="p">:</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a>        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">reducer_enum</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a>        <span class="n">value</span> <span class="o">=</span> <span class="n">reducer_enum</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_values_history</span><span class="p">())</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>        <span class="n">reduced_values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>    <span class="k">return</span> <span class="n">reduced_values</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="metrics_toolbox.spec.MetricSpec.get_results_history" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_results_history</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get the history of MetricResults computed by this spec.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="MetricResult
+
+
+  
+      dataclass
+   (metrics_toolbox.metrics.results.MetricResult)" href="../metrics/results/#metrics_toolbox.metrics.results.MetricResult">MetricResult</a>]</code>
+              –
+              <div class="doc-md-description">
+                <p>The list of MetricResults.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>metrics_toolbox/spec.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-86">86</a></span>
+<span class="normal"><a href="#__codelineno-0-87">87</a></span>
+<span class="normal"><a href="#__codelineno-0-88">88</a></span>
+<span class="normal"><a href="#__codelineno-0-89">89</a></span>
+<span class="normal"><a href="#__codelineno-0-90">90</a></span>
+<span class="normal"><a href="#__codelineno-0-91">91</a></span>
+<span class="normal"><a href="#__codelineno-0-92">92</a></span>
+<span class="normal"><a href="#__codelineno-0-93">93</a></span>
+<span class="normal"><a href="#__codelineno-0-94">94</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-86" name="__codelineno-0-86"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_results_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">]:</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the history of MetricResults computed by this spec.</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="sd">    Returns</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a><span class="sd">    -------</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a><span class="sd">    List[MetricResult]</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a><span class="sd">        The list of MetricResults.</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__history</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="metrics_toolbox.spec.MetricSpec.get_values_history" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_values_history</span><span class="p">()</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get the history of metric values computed by this spec.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="typing.List">List</span>[<span title="float">float</span>]</code>
+              –
+              <div class="doc-md-description">
+                <p>The list of metric values.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>metrics_toolbox/spec.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-96"> 96</a></span>
+<span class="normal"><a href="#__codelineno-0-97"> 97</a></span>
+<span class="normal"><a href="#__codelineno-0-98"> 98</a></span>
+<span class="normal"><a href="#__codelineno-0-99"> 99</a></span>
+<span class="normal"><a href="#__codelineno-0-100">100</a></span>
+<span class="normal"><a href="#__codelineno-0-101">101</a></span>
+<span class="normal"><a href="#__codelineno-0-102">102</a></span>
+<span class="normal"><a href="#__codelineno-0-103">103</a></span>
+<span class="normal"><a href="#__codelineno-0-104">104</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-96" name="__codelineno-0-96"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_values_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the history of metric values computed by this spec.</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>
+<a id="__codelineno-0-99" name="__codelineno-0-99"></a><span class="sd">    Returns</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100"></a><span class="sd">    -------</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101"></a><span class="sd">    List[float]</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102"></a><span class="sd">        The list of metric values.</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-104" name="__codelineno-0-104"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__history</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../reducers/registry/" class="btn btn-neutral float-left" title="registry"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../utils/" class="btn btn-neutral float-right" title="utils">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/rasmushaa/metrics-toolbox" class="fa fa-code-fork" style="color: #fcfcfc"> rasmushaa/metrics-toolbox</a>
+        </span>
+    
+    
+      <span><a href="../reducers/registry/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../utils/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="A flexible toolbox for evaluating machine learning models" /><link rel="canonical" href="https://rasmushaa.github.io/metrics-toolbox/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Metrics Toolbox</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/metrics-toolbox/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Metrics Toolbox
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#features">Features</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#three-reasons-to-use-metrics-toolbox">Three reasons to use metrics-toolbox</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-you-can-buid-it">1. You can buid it</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-you-can-config-it">2. You can config it</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-you-can-cross-validate">3. You can cross validate</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#available-classification-metrics">Available Classification Metrics</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#available-probability-metrics">Available Probability Metrics</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#available-regression-metrics">Available Regression Metrics</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#available-reducers">Available Reducers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#development">Development</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code-quality">Code Quality</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-deployment">Test Deployment</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#deployment">Deployment</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="changes/">Changes</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="autoapi/metrics_toolbox/">metrics_toolbox</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="autoapi/metrics_toolbox/builder/">builder</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="autoapi/metrics_toolbox/encoding/">encoding</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="autoapi/metrics_toolbox/evaluator/">evaluator</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/">metrics</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/base_metric/">base_metric</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/">classification</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/accuracy/">accuracy</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/f1_score_macro/">f1_score_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/f1_score_micro/">f1_score_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/f1_score_target/">f1_score_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/precision_macro/">precision_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/precision_micro/">precision_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/precision_target/">precision_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/recall_macro/">recall_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/recall_micro/">recall_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/classification/recall_target/">recall_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/enums/">enums</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/probability/">probability</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/probability/roc_auc_macro/">roc_auc_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/probability/roc_auc_micro/">roc_auc_micro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/probability/roc_auc_target/">roc_auc_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/registry/">registry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/regression/">regression</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/regression/mse_macro/">mse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/regression/mse_target/">mse_target</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/regression/rmse_macro/">rmse_macro</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/regression/rmse_target/">rmse_target</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/metrics/results/">results</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="autoapi/metrics_toolbox/plots/">plots</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="autoapi/metrics_toolbox/reducers/">reducers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/reducers/reducers/">reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="autoapi/metrics_toolbox/reducers/registry/">registry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="autoapi/metrics_toolbox/spec/">spec</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="autoapi/metrics_toolbox/utils/">utils</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Metrics Toolbox</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Home</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/rasmushaa/metrics-toolbox/edit/master/docs/index.md">Edit on rasmushaa/metrics-toolbox</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="metrics-toolbox-v011">Metrics Toolbox v0.1.1</h1>
+<p>Configurable ML evaluation toolkit with built-in cross-validation and metric aggregation.</p>
+<p><a href="https://github.com/rasmushaa/metrics-toolbox/actions/workflows/test.yaml"><img alt="Tests" src="https://github.com/rasmushaa/metrics-toolbox/actions/workflows/test.yaml/badge.svg" /></a>
+<a href="https://codecov.io/gh/rasmushaa/metrics-toolbox"><img alt="Coverage" src="https://codecov.io/gh/rasmushaa/metrics-toolbox/branch/main/graph/badge.svg" /></a>
+<a href="https://www.python.org/downloads/"><img alt="Python Version" src="https://img.shields.io/badge/python-3.10%E2%80%933.13-blue.svg" /></a>
+<a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-green.svg" /></a>
+<a href="https://rasmushaa.github.io/metrics-toolbox/"><img alt="Docs" src="https://img.shields.io/badge/docs-mkdocs-blue.svg" /></a></p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>matplotlib~=3.6</li>
+<li>numpy&gt;=1.24</li>
+<li>scikit-learn~=1.1</li>
+</ul>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Flexible Metric Configuration</strong>: Add and configure metrics using enums, strings, or dictionaries</li>
+<li><strong>Type-Safe</strong>: Leverage enums for type safety while maintaining flexibility with string names</li>
+<li><strong>Multiple Reducers</strong>: Track metrics over time with various aggregation strategies (mean, min, max, std, etc.)</li>
+<li><strong>Built-in Metrics</strong>: Pre-configured metrics for probability, label, and regression tasks on target, micro, and macro scopes</li>
+<li><strong>Chainable Builder Pattern</strong>: Intuitive API for constructing metric evaluators</li>
+<li><strong>Visualization Support</strong>: Generate ROC curves and other visualizations</li>
+</ul>
+<h2 id="three-reasons-to-use-metrics-toolbox">Three reasons to use metrics-toolbox</h2>
+<h3 id="1-you-can-buid-it">1. You can buid it</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>evaluator = (
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    EvaluatorBuilder()
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    .add_metric(&quot;roc_auc_target&quot;, target_name=&quot;true&quot;)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    .add_metric(&quot;accuracy&quot;, reducers=[&quot;mean&quot;, &quot;std&quot;])
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    .add_metric(&quot;precision_target&quot;, target_name=&quot;true&quot;)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>).build()
+</code></pre></div>
+<h3 id="2-you-can-config-it">2. You can config it</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>config = {
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    &quot;roc_auc_macro&quot;: {
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        &quot;reducers&quot;: [&quot;mean&quot;, &quot;min&quot;]
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    },
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    &quot;accuracy&quot;&quot;: {
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        &quot;reducers&quot;: [&quot;mean&quot;, &quot;std&quot;],
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    }
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>}
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>evaluator = EvaluatorBuilder().from_json(config).build()
+</code></pre></div>
+<h3 id="3-you-can-cross-validate">3. You can cross validate</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>for y, fold in kfolds:
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    evaluator.add_model_evaluation(model, fold, y)
+</code></pre></div>
+<h2 id="available-classification-metrics">Available Classification Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Figures</th>
+<th>Settings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>accuracy</code></td>
+<td>Confusion matrix</td>
+<td>opt_confusion_normalization</td>
+</tr>
+<tr>
+<td><code>precision_micro</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>precision_macro</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>precision_target</code></td>
+<td>-</td>
+<td>target_name</td>
+</tr>
+<tr>
+<td><code>recall_micro</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>recall_macro</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>recall_target</code></td>
+<td>-</td>
+<td>target_name</td>
+</tr>
+<tr>
+<td><code>f1_score_micro</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>f1_score_macro</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>f1_score_target</code></td>
+<td>-</td>
+<td>target_name</td>
+</tr>
+</tbody>
+</table>
+<h2 id="available-probability-metrics">Available Probability Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Figures</th>
+<th>Settings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>roc_auc_micro</code></td>
+<td>Traces</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>roc_auc_macro</code></td>
+<td>Traces</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>roc_auc_target</code></td>
+<td>Traces</td>
+<td>target_name</td>
+</tr>
+</tbody>
+</table>
+<h2 id="available-regression-metrics">Available Regression Metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Figures</th>
+<th>Settings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mse_target</code></td>
+<td>True, Pred, Error</td>
+<td>target_name, opt_metadata_series_length</td>
+</tr>
+<tr>
+<td><code>mse_macro</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>rmse_target</code></td>
+<td>True, Pred, Error</td>
+<td>target_name, opt_metadata_series_length</td>
+</tr>
+<tr>
+<td><code>rmse_macro</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="available-reducers">Available Reducers</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>latest</code></td>
+<td>Returns the most recent metric value</td>
+</tr>
+<tr>
+<td><code>mean</code></td>
+<td>Calculates the average of all metric values</td>
+</tr>
+<tr>
+<td><code>std</code></td>
+<td>Computes the standard deviation of metric values</td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td>Returns the maximum metric value</td>
+</tr>
+<tr>
+<td><code>min</code></td>
+<td>Returns the minimum metric value</td>
+</tr>
+<tr>
+<td><code>minmax</code></td>
+<td>Returns the difference between min and max metric values</td>
+</tr>
+</tbody>
+</table>
+<h2 id="installation">Installation</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>metrics-toolbox
+</code></pre></div>
+<h2 id="quick-start">Quick Start</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_breast_cancer</span><span class="p">,</span> <span class="n">load_iris</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">metrics_toolbox</span><span class="w"> </span><span class="kn">import</span> <span class="n">EvaluatorBuilder</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># 1. Load dataset</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># 2. Train a model</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="c1"># 3. Build evaluator with multiple metrics, you can mix and match classification and probabilistic metrics</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="n">evaluator</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    <span class="n">EvaluatorBuilder</span><span class="p">()</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="s2">&quot;roc_auc_target&quot;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reducers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">])</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="n">reducers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">])</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="s2">&quot;precision_target&quot;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="s2">&quot;recall_target&quot;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="o">.</span><span class="n">add_metric</span><span class="p">(</span><span class="s2">&quot;f1_score_target&quot;</span><span class="p">,</span> <span class="n">target_name</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reducers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;minmax&quot;</span><span class="p">])</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="c1"># 4. Evaluate model directly</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">add_model_evaluation</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="c1"># 5. Add another evaluation on training set for comparison</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">add_model_evaluation</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="c1"># 6. Get results</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="n">result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="n">display</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">])</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="n">display</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">])</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="n">display</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;figures&#39;</span><span class="p">])</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="c1"># 7. View figures</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="n">display</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;figures&#39;</span><span class="p">][</span><span class="s1">&#39;roc_auc_curves&#39;</span><span class="p">])</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="n">display</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;figures&#39;</span><span class="p">][</span><span class="s1">&#39;confusion_matrices&#39;</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="usage">Usage</h2>
+<p>To see examples how to:
+- Get help, see the <a href="https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/help.ipynb">help notebook</a>
+- Use the builder pattern, see the <a href="https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/builder.ipynb">builder examples notebook</a>
+- Binary classification model evaluation, see the <a href="https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/binary_classification.ipynb">binary model notebook</a>
+- Multiclass classification model evaluation, see the <a href="https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/mutliclass_classification.ipynb">multiclass model notebook</a>
+- Multivariate regression model evaluation, see the <a href="https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/regression.ipynb">regression model notebook</a>
+- Custom Evaluator for custom model, see the <a href="https://github.com/rasmushaa/metrics-toolbox/blob/main/examples/custom.ipynb">custom notebook</a></p>
+<h2 id="development">Development</h2>
+<h3 id="setup">Setup</h3>
+<p>This project uses <a href="https://github.com/astral-sh/uv">uv</a> for dependency management.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Clone the repository</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rasmushaa/metrics-toolbox.git
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">cd</span><span class="w"> </span>metrics-toolbox
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># Install in editable mode with development dependencies</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># Set up pre-commit hooks</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install
+</code></pre></div>
+<h3 id="testing">Testing</h3>
+<p>Run the test suite with coverage reporting:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest
+</code></pre></div>
+<p>Coverage configuration is specified in <code>pyproject.toml</code>.
+Also the <code>examples</code> are runned automatically as tests,
+to keep those update according to the latest changes.</p>
+<h3 id="code-quality">Code Quality</h3>
+<p>The project uses pre-commit hooks to maintain code quality:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Run all hooks on all files</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Run hooks on staged files only</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>run
+</code></pre></div>
+<h3 id="test-deployment">Test Deployment</h3>
+<p>Before publishing to the main PyPI repository, you can test the deployment process using TestPyPI:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>bash<span class="w"> </span>scripts/publish_to_test_pypi.sh
+</code></pre></div>
+<p>This script will:
+1. Create/update <code>pyproject.toml.dev</code> with auto-incremented version (e.g., <code>0.1.0.dev1</code>, <code>0.1.0.dev2</code>, etc.)
+2. Build the package distribution files using the dev version
+3. Load credentials from <code>.env</code> file (PAT and twine username)
+4. Upload to TestPyPI (https://test.pypi.org/)
+5. Keep your main <code>pyproject.toml</code> unchanged</p>
+<p>The script automatically increments the <code>.dev&lt;N&gt;</code> suffix on each run, allowing unlimited test uploads without manual version management.</p>
+<p>To install from TestPyPI for testing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pip<span class="w"> </span>install<span class="w"> </span>--index-url<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.org/simple/<span class="w"> </span>metrics-toolbox
+</code></pre></div>
+<h3 id="deployment">Deployment</h3>
+<p>The project uses automated CI/CD workflows:</p>
+<ul>
+<li><strong>Continuous Testing</strong>: Matrix testing across supported Python versions on <code>main</code> and <code>feature/**</code> branches</li>
+<li><strong>Python &amp; Dependency Validation</strong>: All Python versions from <code>pyproject.toml</code> classifiers are automatically validated in CI/CD. The oldest Python version (first in matrix) is additionally tested with lowest-direct dependencies to ensure minimum version compatibility, and the CI/CD workflow validates that this oldest version is correctly specified</li>
+<li><strong>Documentation</strong>: Automatically updates MkDocs API reference and deploys documentation on pushes to <code>main</code></li>
+<li><strong>PyPI Publishing</strong>: Automated deployment triggered by version tags</li>
+</ul>
+<p>To release a new version:</p>
+<ol>
+<li>Push a tag <code>v0.1.0</code> to the main</li>
+<li>Pipelien validates that the tag matches the current project version, and the change log is updates</li>
+<li>A new version is pushed to PyPi using twine</li>
+</ol>
+<h2 id="license">License</h2>
+<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome! Please feel free to submit a Pull Request.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="changes/" class="btn btn-neutral float-right" title="Changes">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/rasmushaa/metrics-toolbox" class="fa fa-code-fork" style="color: #fcfcfc"> rasmushaa/metrics-toolbox</a>
+        </span>
+    
+    
+    
+      <span><a href="changes/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-02-10 19:21:02.371802+00:00
+-->
