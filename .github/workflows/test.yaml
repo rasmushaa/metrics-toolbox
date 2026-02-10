@@ -53,6 +53,29 @@ jobs:
               exit(1)
 
           print(f"✓ Python versions match: {sorted(matrix_versions)}")
+
+          # Verify that the lowest-deps test uses the first python version
+          first_version = sorted(matrix_versions)[0]
+          lowest_deps_line = None
+
+          with open(".github/workflows/test.yaml") as f:
+              for i, line in enumerate(f, 1):
+                  if "Test dependencies (oldest compatible versions)" in line:
+                      # Find the next 'if:' line
+                      for next_line in f:
+                          if "if: matrix.python-version ==" in next_line:
+                              lowest_deps_line = next_line.strip()
+                              break
+                      break
+
+          if lowest_deps_line:
+              expected = f"if: matrix.python-version == '{first_version}'"
+              if expected not in lowest_deps_line:
+                  print(f"❌ Lowest deps test should use first Python version: {first_version}")
+                  print(f"   Found: {lowest_deps_line}")
+                  print(f"   Expected: {expected}")
+                  exit(1)
+              print(f"✓ Lowest deps test uses first Python version: {first_version}")
           EOF
 
   verify-changelog:
