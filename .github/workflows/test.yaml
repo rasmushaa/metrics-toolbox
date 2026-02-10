@@ -99,17 +99,20 @@ jobs:
       - name: Create virtual environment
         run: uv venv
 
-      - name: Install dependencies
+      - name: Test dependencies (latest version)
         run: |
           uv pip install -e .[test]
-
-      - name: Show environment info
-        run: |
           python --version
           uv pip list
+          uv run pytest
 
-      - name: Run tests
+      - name: Test dependencies (oldest compatible versions)
+        if: matrix.python-version == '3.10'
         run: |
+          uv pip compile pyproject.toml --resolution lowest-direct -o constraints.txt
+          uv pip install -r constraints.txt -e .[test]
+          python --version
+          uv pip list
           uv run pytest
 
       - name: Upload coverage to Codecov
